@@ -38,7 +38,7 @@ namespace Codestetic.Core.Domain.Documents
         /// <summary>
         /// Gets or sets the document type id 
         /// </summary>
-        public virtual Guid TypeId { get; set; } // ???
+        public int BaseDocumentId { get; set; }
 
         /// <summary>
         /// Gets or sets a value Region identifier (City, Provance)
@@ -64,11 +64,6 @@ namespace Codestetic.Core.Domain.Documents
         ///  Gets or sets a value indicating whether the entity has been deleted (status document - Active, Deleted)
         /// </summary>
         public int StatusId { get; set; }
-
-        /// <summary>
-        /// Gets or sets a value status document (Active, Deleted)
-        /// </summary>
-        public object Pattern { get; set; } // ???
         #endregion Properties
 
         #region Navigation properties

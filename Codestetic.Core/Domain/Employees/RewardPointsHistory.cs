@@ -1,5 +1,5 @@
 ﻿using System;
-using Codestetic.Core.Domain.Document;
+using Codestetic.Core.Domain.Documents;
 using Codestetic.Core.Domain.Common;
 
 namespace Codestetic.Core.Domain.Employees

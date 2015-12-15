@@ -145,19 +145,17 @@ namespace Codestetic.Core.Domain.Employees
 
         #region Reward points
 
-        public void AddRewardPointsHistoryEntry(int points, string message = "",
+        public void AddRewardPointsHistoryEntry(string message = "",
             Document documentId = null, decimal usedAmount = 0M)
         {
-            int newPointsBalance = this.GetRewardPointsBalance() + points;
-
             var rewardPointsHistory = new RewardPointsHistory()
             {
                 Employee = this,
                 TypeUserId = TypeUser.Employee,
                 Amount = usedAmount,
                 Message = message,
-                CreatedOnUtc = DateTime.UtcNow;
-                DocumentId = documentId;
+                CreatedOnUtc = DateTime.UtcNow,
+                DocumentId = documentId
             };
 
             this.RewardPointsHistory.Add(rewardPointsHistory);
