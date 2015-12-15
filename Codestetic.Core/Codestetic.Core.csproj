@@ -68,6 +68,10 @@
     <Compile Include="Domain\Customers\Customer.cs" />
     <Compile Include="Domain\Directory\Country.cs" />
     <Compile Include="Domain\Directory\StateProvince.cs" />
+    <Compile Include="Domain\Documents\Document.cs" />
+    <Compile Include="Domain\Documents\DocumentDetails.cs" />
+    <Compile Include="Domain\Documents\DocumentStatus.cs" />
+    <Compile Include="Domain\Documents\Fields.cs" />
     <Compile Include="Domain\Employees\CategoryRepair.cs" />
     <Compile Include="Domain\Employees\EmployeeNameFormat.cs" />
     <Compile Include="Domain\Employees\EmployeeRole.cs" />
