@@ -1,0 +1,134 @@
+﻿@{
+    Layout = "";
+    ViewBag.Title = "Home Page";
+}    
+<!-- http://css-tricks.com/well-rounded-compound-shapes-css/  -->
+<!-- header width:100% position:fixed (z:100) -->
+<link href="~/Content/TestPage.css" type="text/css" rel="stylesheet" />
+<header class="header-top">
+    <!-- match .page-wrap width, padding, etc. -
+    :before fills in padding-to-window gap on left - can also extend all the way left (see .header-bg below) -->
+    <div class="header-wrap">
+    <!-- OPTIONAL, if differentiating header and body bg - :before extends taller bg all the way left -->
+            <!--<div class="header-bg"></div>-->
+            <!-- oveflow:hidden to crop shadows (why we need extra div) -
+                 :before adds taller "overhang" on left (z:-1) -
+                 :after adds rounded corner under left side (z:-1) -->
+            <div class="header-content">
+
+                <div class="header-logo">
+                    <h1><a href="#top">Logo</a></h1> <!-- (z:2) -->
+                    <h2>Tagline</h2> <!-- (z:2) -->
+                </div>
+
+                <!-- oveflow:hidden to crop shadows -
+                     :after overlays rounded corner -->
+                <div class="header-logo-patch"></div>
+
+                <!-- :after adds corner R (z:-1)-->
+                <nav class="nav-main horizontal-nav">
+
+                    <!-- :before adds dropshadow (z:-2) -
+                    :after adds corner under L (z:-1)-->
+                    <ul>
+                        <li>
+                            <!--big button (z:1)-->
+                            <a class="big-btn" href="#"><span>Sign Up</span></a>
+                        </li>
+                        <li><a href="#"><span>About</span></a></li>
+                        <li><a href="#"><span>Team</span></a></li>
+                        <li><a href="#"><span>Store</span></a></li>
+                        <li><a href="#"><span>Contact</span></a></li>
+                    </ul>
+                </nav> <!-- end .nav-main -->
+
+                <div class="header-social">
+                    <nav class="nav-social horizontal-nav">
+                        <!--(z:1)-->
+                        <ul>
+                            <li>
+                                <a class="icon-twitter-sign" href="#"><span class="screen-reader-text" twitter</span></a>
+                            </li>
+                            <li>
+                                <a class="icon-facebook-sign" href="#"><span class="screen-reader-text">Facebook</span></a>
+                            </li>
+                        </ul>
+                    </nav> <!-- end .nav-social -->
+                </div> <!-- end .header-social -->
+
+            </div> <!-- end .header-content -->
+        </div> <!-- end .header-wrap -->
+
+</header>
+
+    <!-- #top link here, not in fixed header -->
+    <div id="top" class="page-wrap">
+
+        <!-- :before adds "well" shadow L (z:99) -
+        :after adds "well" shadow R (z:99)-->
+        <section class="main well-sides column-1">
+
+            <!-- SCROLLING CONTENT, EXAMPLE HTML -->
+
+            <h2>Well Rounded: Compound Shapes <span class="nobr">in CSS</span></h2>
+            <p>Here's the full layout. There's also a CodePen with <a href="http://codepen.io/parkerbennett/pen/tjiou" target="_blank">just the gist</a> (right-click to open in new tab).
+            <pre rel="HTML"><code class="language-html">
+<i>&lt;!-- header width:100% position:fixed --></i>
+&lt;header class="header-top"> <i>&lt;!--<span>(z:100)</span>--></i>
+                <i>&lt;!-- match .page-wrap width, padding, etc. - 
+  :before fills padding-to-window gap left --></i>
+  &lt;div class="header-wrap"> 
+                <i>&lt;!-- oveflow:hidden to crop shadows - 
+    :before adds "overhang" on left <span>(z:-1)</span> - 
+    :after adds round corner left <span>(z:-1)</span>--></i>
+    &lt;div class="header-content">
+      &lt;div class="header-logo">
+        &lt;h1>Logo&lt;/h1> <i>&lt;!--<span>(z:2)</span>--></i>
+      &lt;/div>
+  
+                <i>&lt;!-- oveflow:hidden to crop shadows - 
+      :after overlays rounded corner --></i>
+      &lt;div class="header-logo-patch">&lt;/div> <span class="nobr"><i>&lt;!--<span>(z:1)</span>--></i></span>
+ 
+                <i>&lt;!-- :after adds corner R <span>(z:-1)</span>--></i>
+      &lt;nav class="nav-main">
+                <i>&lt;!-- :before adds dropshadow <span>(z:-2)</span> -
+        :after adds corner under L <span>(z:-1)</span>--></i>
+        &lt;ul>
+          &lt;li>
+            &lt;a class="big-btn" href="#">Sign Up&lt;/a> <span class="nobr"><i>&lt;!--<span>(z:1)</span>--></i></span>
+          &lt;/li>
+          &lt;li>&lt;a href="#">About&lt;/a>&lt;/li>
+                <i>&lt;!-- etc... --></i>
+        &lt;/ul>
+      &lt;/nav> <i>&lt;!-- end .nav-main --></i> 
+    
+      &lt;div class="header-social">
+        &lt;nav class="nav-social"> <i>&lt;!--<span>(z:1)</span>--></i>
+          &lt;ul>
+            &lt;li>&lt;a class="icon-twitter-sign" href="#">
+    &lt;span class="screen-reader-text">Twitter&lt;/span>&lt;/a>&lt;/li>
+            &lt;li>&lt;a class="icon-facebook-sign" href="#">
+    &lt;span class="screen-reader-text">Facebook&lt;/span>&lt;/a>&lt;/li>
+          &lt;/ul>
+        &lt;/nav> <i>&lt;!-- end .nav-social --></i>
+      &lt;/div> <i>&lt;!-- end .header-social --></i>
+    
+    &lt;/div> <i>&lt;!-- end .header-content --></i>
+  &lt;/div> <i>&lt;!-- end .header-wrap --></i>
+&lt;/header>
+  
+<i>&lt;!-- #top link here, not in fixed header --></i>
+&lt;div id="top" class="page-wrap">
+                <i>&lt;!-- :before adds "well" shadow L <span>(z:99)</span> - 
+  :after adds "well" shadow R <span>(z:99)</span>--></i>
+  &lt;section class="main well-sides">
+  &lt;/section> <i>&lt;!-- end .main --></i>
+&lt;/div> <i>&lt;!-- end .page-wrap --></i>
+</code></pre>
+
+                <a href="#top">Back to top</a>
+        </section>
+
+    </div> <!-- end .page-wrap -->
+

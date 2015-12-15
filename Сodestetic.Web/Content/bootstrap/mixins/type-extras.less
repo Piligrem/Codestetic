@@ -1,0 +1,39 @@
+﻿/* Typo Extras
+----------------------------------------*/
+
+// all based on 14px 20px size
+
+.small() {
+	line-height: @baseLineHeight * 0.9; 
+}
+
+.small(@min: 13px) when (round(@baseFontSize * 0.9) >= @min) {
+	font-size: round(@baseFontSize * 0.9); 
+}
+
+.small(@min: 13px) when (round(@baseFontSize * 0.9) < @min) {
+	// guard against too small font-size
+	font-size: @min; 
+}
+
+.smaller() {
+	line-height: @baseLineHeight * 0.85; 
+}
+
+.smaller(@min: 12px) when (round(@baseFontSize * 0.85) >= @min) {
+	font-size: round(@baseFontSize * 0.85); 
+}
+
+.smaller(@min: 12px) when (round(@baseFontSize * 0.85) < @min) {
+	// guard against too small font-size
+	font-size: @min; 
+}
+
+.btn-text-shadow(@shadowColor) when (@shadowColor = #fff) {
+	text-shadow: 0 1px 1px rgba(255,255,255, .75);
+}
+
+.btn-text-shadow(@shadowColor) when (@shadowColor = #000) {
+	text-shadow: 0 -1px 0 rgba(0,0,0, .25);
+}
+

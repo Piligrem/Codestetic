@@ -1,0 +1,63 @@
+﻿@model UserModel
+@{
+    Layout = "~/Area/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    ViewBag.Title = T("Admin.Users.EditDetails").Text;
+    ViewBag.Model = "Admin.Users";
+    ViewBag.Action = "Edit";
+    ViewBag.Subtitle = Model.LastName + " " + Model.FirstName;
+    ViewBag.BackToList = true;
+    ViewBag.Type = "user";
+    ViewBag.SendMail = true;
+}
+<div class="admin-content align-center">
+    <div class="admin-row-content">
+        @using (Html.BeginForm())
+        {
+            @Html.Partial("_SectionHeader")
+            @Html.Partial("_CreateOrUpdate", Model)
+        }
+        @Html.DeleteConfirmation("user-delete")
+        @*send email form*@
+        @{Html.TabSite().Window()
+        .Initiator("user-sendmail")
+        .Name("sendemail-window")
+        .Title(T("Admin.Users.SendEmail").Text)
+        .Width(360)
+        .Height(460)
+        .Modal(true)
+        .Visible(false)
+        .ShowAnimation(new VisualEffect() { Effect = EnumEffect.clip, Delay = 300 })
+        .HideAnimation(new VisualEffect() { Effect = EnumEffect.explode, Delay = 300 })
+        .Buttons(new List<Button>() {
+            new Button() { Title = @T("Common.Button.Close").Text, Action = EnumActions.Close },
+            new Button() { Title = @T("Common.Button.SendEmail").Text, Action = EnumActions.Submit },
+        })
+        .Content(@<text>
+            @using (Html.BeginForm("SendEmail", "User", new { id = Model.Id }))
+            {
+                <table style="text-align: left;">
+                    <tr>
+                        <td class="adminTitle">
+                            @Html.SpecterLabelFor(model => model.SendEmail.Subject)
+                        </td>
+                        <td class="adminData">
+                            @Html.EditorFor(model => model.SendEmail.Subject)
+                            @Html.ValidationMessageFor(model => model.SendEmail.Subject)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="adminTitle">
+                            @Html.SpecterLabelFor(model => model.SendEmail.Body)
+                        </td>
+                        <td class="adminData">
+                            @Html.TextAreaFor(model => model.SendEmail.Body, new { style = "Width: 250px; Height: 296px;" })
+                            @Html.ValidationMessageFor(model => model.SendEmail.Body)
+                        </td>
+                    </tr>
+                </table>
+            }
+        </text>)
+        .Render();
+        }
+    </div>
+</div>

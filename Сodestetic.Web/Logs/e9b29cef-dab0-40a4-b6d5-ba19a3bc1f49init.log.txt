@@ -1,0 +1,32 @@
+SignalR.ReflectedHubDescriptorProvider Warning: 0 : Some of the classes from assembly "Autofac.Integration.WebApi, Version=3.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da" could Not be loaded when searching for Hubs. [C:\Windows\Microsoft.NET\Framework64\v4.0.30319\Temporary ASP.NET Files\root\9b08638e\dcee6195\assembly\dl3\d9fed28e\b19e084a_ab9acf01\Autofac.Integration.WebApi.dll]
+Original exception type: ReflectionTypeLoadException
+Original exception message: Не удается загрузить один или более запрошенных типов. Обратитесь к свойству LoaderExceptions для получения дополнительных сведений.
+
+SignalR.ReflectedHubDescriptorProvider Warning: 0 : Some of the classes from assembly "Autofac.Integration.SignalR, Version=3.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da" could Not be loaded when searching for Hubs. [C:\Windows\Microsoft.NET\Framework64\v4.0.30319\Temporary ASP.NET Files\root\9b08638e\dcee6195\assembly\dl3\3187c472\1aabc8e3_559bcf01\Autofac.Integration.SignalR.dll]
+Original exception type: ReflectionTypeLoadException
+Original exception message: Не удается загрузить один или более запрошенных типов. Обратитесь к свойству LoaderExceptions для получения дополнительных сведений.
+
+SignalR.ReflectedHubDescriptorProvider Warning: 0 : Some of the classes from assembly "Microsoft.AspNet.SignalR.SqlServer, Version=2.1.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" could Not be loaded when searching for Hubs. [C:\Windows\Microsoft.NET\Framework64\v4.0.30319\Temporary ASP.NET Files\root\9b08638e\dcee6195\assembly\dl3\6f03d405\52b81e95_dcdccf01\Microsoft.AspNet.SignalR.SqlServer.dll]
+Original exception type: ReflectionTypeLoadException
+Original exception message: Не удается загрузить один или более запрошенных типов. Обратитесь к свойству LoaderExceptions для получения дополнительных сведений.
+
+SignalR.ReflectedHubDescriptorProvider Warning: 0 : Some of the classes from assembly "Microsoft.Owin.Security.OAuth, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" could Not be loaded when searching for Hubs. [C:\Windows\Microsoft.NET\Framework64\v4.0.30319\Temporary ASP.NET Files\root\9b08638e\dcee6195\assembly\dl3\662a5c1d\352af7f9_10dbcf01\Microsoft.Owin.Security.OAuth.dll]
+Original exception type: ReflectionTypeLoadException
+Original exception message: Не удается загрузить один или более запрошенных типов. Обратитесь к свойству LoaderExceptions для получения дополнительных сведений.
+
+SignalR.ReflectedHubDescriptorProvider Warning: 0 : Some of the classes from assembly "Microsoft.AspNet.SignalR.SystemWeb, Version=2.1.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" could Not be loaded when searching for Hubs. [C:\Windows\Microsoft.NET\Framework64\v4.0.30319\Temporary ASP.NET Files\root\9b08638e\dcee6195\assembly\dl3\0d2b8649\aea522a5_3ddccf01\Microsoft.AspNet.SignalR.SystemWeb.dll]
+Original exception type: ReflectionTypeLoadException
+Original exception message: Не удается загрузить один или более запрошенных типов. Обратитесь к свойству LoaderExceptions для получения дополнительных сведений.
+
+SignalR.ReflectedHubDescriptorProvider Warning: 0 : Some of the classes from assembly "WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35" could Not be loaded when searching for Hubs. [C:\Windows\Microsoft.NET\Framework64\v4.0.30319\Temporary ASP.NET Files\root\9b08638e\dcee6195\assembly\dl3\49a7f2da\f7f0771c_11dbcf01\WebGrease.dll]
+Original exception type: ReflectionTypeLoadException
+Original exception message: Не удается загрузить один или более запрошенных типов. Обратитесь к свойству LoaderExceptions для получения дополнительных сведений.
+
+SignalR.ReflectedHubDescriptorProvider Warning: 0 : Some of the classes from assembly "Microsoft.Owin.Security.Cookies, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" could Not be loaded when searching for Hubs. [C:\Windows\Microsoft.NET\Framework64\v4.0.30319\Temporary ASP.NET Files\root\9b08638e\dcee6195\assembly\dl3\4c8c0c94\325400fc_10dbcf01\Microsoft.Owin.Security.Cookies.dll]
+Original exception type: ReflectionTypeLoadException
+Original exception message: Не удается загрузить один или более запрошенных типов. Обратитесь к свойству LoaderExceptions для получения дополнительных сведений.
+
+SignalR.ReflectedHubDescriptorProvider Warning: 0 : Some of the classes from assembly "Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" could Not be loaded when searching for Hubs. [C:\Windows\Microsoft.NET\Framework64\v4.0.30319\Temporary ASP.NET Files\root\9b08638e\dcee6195\assembly\dl3\a1ec905d\687ee9f5_10dbcf01\Microsoft.AspNet.Identity.Owin.dll]
+Original exception type: ReflectionTypeLoadException
+Original exception message: Не удается загрузить один или более запрошенных типов. Обратитесь к свойству LoaderExceptions для получения дополнительных сведений.
+

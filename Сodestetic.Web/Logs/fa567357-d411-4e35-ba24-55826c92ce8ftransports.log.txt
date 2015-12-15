@@ -1,0 +1,15 @@
+SignalR.Transports.TransportHeartBeat Information: 0 : Connection c03f9bfa-7c58-451b-9ec2-57ad75368e2e is New.
+SignalR.Transports.TransportHeartBeat Information: 0 : Connection e3cc9307-9e3b-4f09-8d3b-41cc093fa69b is New.
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(c03f9bfa-7c58-451b-9ec2-57ad75368e2e)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(e3cc9307-9e3b-4f09-8d3b-41cc093fa69b)
+SignalR.Transports.TransportHeartBeat Information: 0 : Dispose(). Closing all connections
+SignalR.Transports.WebSocketTransport Information: 0 : End(c03f9bfa-7c58-451b-9ec2-57ad75368e2e)
+SignalR.Transports.WebSocketTransport Information: 0 : End(e3cc9307-9e3b-4f09-8d3b-41cc093fa69b)
+SignalR.Transports.WebSocketTransport Verbose: 0 : Cancel(c03f9bfa-7c58-451b-9ec2-57ad75368e2e)
+SignalR.Transports.WebSocketTransport Verbose: 0 : Cancel(e3cc9307-9e3b-4f09-8d3b-41cc093fa69b)
+SignalR.Transports.WebSocketTransport Verbose: 0 : DrainWrites(e3cc9307-9e3b-4f09-8d3b-41cc093fa69b)
+SignalR.Transports.WebSocketTransport Verbose: 0 : DrainWrites(c03f9bfa-7c58-451b-9ec2-57ad75368e2e)
+SignalR.Transports.WebSocketTransport Information: 0 : CompleteRequest (c03f9bfa-7c58-451b-9ec2-57ad75368e2e)
+SignalR.Transports.WebSocketTransport Information: 0 : CompleteRequest (e3cc9307-9e3b-4f09-8d3b-41cc093fa69b)
+SignalR.Transports.WebSocketTransport Information: 0 : CloseSocket(e3cc9307-9e3b-4f09-8d3b-41cc093fa69b)
+SignalR.Transports.WebSocketTransport Information: 0 : CloseSocket(c03f9bfa-7c58-451b-9ec2-57ad75368e2e)

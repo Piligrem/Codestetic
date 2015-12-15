@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="generator" content="Specter 1.0.0.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jquery-ui")
+    @*@Scripts.Render("~/bundles/specter.eventbroker")*@
+    <script type="text/javascript">$(document.body).attr('unselectable', 'on')</script>
+</head>
+<body>
+    @Html.Partial("_Logo")
+    <header role="banner">
+        <nav role="navigation">
+            @Html.Action("Header", "Common")
+        </nav>
+    </header>
+    <nav role="navigation" class="general-menu-panel">
+        <div class="menu-panel-background"></div>
+        @Html.Action("MenuPanel", "Common")
+    </nav>
+    <div class="wrap">
+        <div class="wrap-left"></div>
+        <div class="wrap-container">
+            @* body-content">*@
+            @*@Html.Partial("_Notifications")*@
+            @RenderBody()
+        </div>
+    </div>
+    @*<section id="footer" class="footer title">
+        @Html.Partial("Footer", "Common")
+    </section>*@
+
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

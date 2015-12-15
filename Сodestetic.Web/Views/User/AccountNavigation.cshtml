@@ -1,0 +1,67 @@
+﻿@model UserNavigationModel           
+@using Specter.Web.Models.User;
+@*IE6 hack here. maybe move to a stylesheet file with IE6 hacks?*@
+<!--[if lt IE 7]>
+<STYLE type="text/css">
+   .block-account-navigation a{white-space:normal!important;}
+ </STYLE>
+<![endif]-->
+<div class="navigation-block">
+    <div class="navigation-block-title">
+        @T("Account.Navigation")
+    </div>
+    <div class="navigation-block-listbox">
+        <ul>
+            @Html.Widget("account_navigation_before")
+            @if (!Model.HideInfo)
+            {
+                <li><a href="@Url.RouteUrl("UserInfo")" class="@if (Model.SelectedTab == UserNavigationEnum.Info)
+                        {<text>active</text>}
+                    else
+                        {<text>inactive</text>}">@T("Account.UserInfo")</a>
+                </li>
+            }
+            @if (!Model.HideAddresses)
+            {
+                <li><a href="@Url.RouteUrl("UserAddresses")" class="@if (Model.SelectedTab == UserNavigationEnum.Addresses)
+                        {<text>active</text>}
+                    else
+                        {<text>inactive</text>}">@T("Account.UserAddresses")</a>
+                </li>
+            }
+            @if (!Model.HideOrders)
+            {
+                <li><a href="@Url.RouteUrl("UserOrders")" class="@if (Model.SelectedTab == UserNavigationEnum.Orders)
+                        {<text>active</text>}
+                    else
+                        {<text>inactive</text>}">@T("Account.UserOrders")</a>
+                </li>
+            }
+            @if (!Model.HideChangePassword)
+            {
+                <li><a href="@Url.RouteUrl("UserChangePassword")" class="@if (Model.SelectedTab == UserNavigationEnum.ChangePassword)
+                        {<text>active</text>}
+                    else
+                        {<text>inactive</text>}">@T("Account.ChangePassword")</a>
+                </li>
+            }
+            @if (!Model.HideAvatar)
+            {
+                <li><a href="@Url.RouteUrl("UserAvatar")" class="@if (Model.SelectedTab == UserNavigationEnum.Avatar)
+                        {<text>active</text>}
+                    else
+                        {<text>inactive</text>}">@T("Account.Avatar")</a>
+                </li>
+            }
+            @if (!Model.HideForumSubscriptions)
+            {
+                <li><a href="@Url.RouteUrl("UserForumSubscriptions")" class="@if (Model.SelectedTab == UserNavigationEnum.ForumSubscriptions)
+                        {<text>active</text>}
+                    else
+                        {<text>inactive</text>}">@T("Account.ForumSubscriptions")</a>
+                </li>
+            }
+            @Html.Widget("account_navigation_after")
+        </ul>
+    </div>
+</div>

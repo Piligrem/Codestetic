@@ -1,0 +1,8 @@
+// Opacity
+
+.opacity(@opacity) {
+  opacity: @opacity / 100;
+  // IE8 filter
+  @opacity-ie: (@opacity);
+  filter: ~"alpha(opacity=@{opacity-ie})";
+}

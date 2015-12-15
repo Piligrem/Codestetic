@@ -1,0 +1,91 @@
+﻿@model PermissionsMenu
+<ul class="menu-panel menu-animation">
+    @if (Request.IsAuthenticated && (Model.IsAdmin || Model.IsSuperAdmin))
+    {
+        <li>@Html.LinkTable(T("Menu.Admin.Dashboard"), T("Menu.Admin.Dashboard.Tooltip"), "Index", "Dashboard", new { area = "Admin" }, null)</li>
+        <li>
+            @Html.LinkTable(T("Menu.Admin.User"), T("Menu.Admin.User.Tooltip"), null, null)
+            <div>
+                <ul>
+                    <li>@Html.ActionLink(@T("Menu.Admin.User.New"), "Create", "User", new { area = "Admin" }, null)</li>
+                    <li>@Html.ActionLink(@T("Menu.Admin.User.List"), "List", "User", new { area = "Admin" }, null)</li>
+                </ul>
+            </div>
+        </li>
+        <li>
+            @Html.LinkTable(T("Menu.Admin.Device"), T("Menu.Admin.Device.Tooltip"), null, null)
+            <div>
+                <ul>
+                    <li>@Html.ActionLink(@T("Menu.Admin.Device.New"), "Create", "Device", new { area = "Admin" }, null)</li>
+                    <li>@Html.ActionLink(@T("Menu.Admin.Device.List"), "List", "Device", new { area = "Admin" }, null)</li>
+                    <li class="divider"></li>
+                    <li>@Html.ActionLink(@T("Menu.Admin.Device.Type.New"), "Create", "DeviceType", new { area = "Admin" }, null)</li>
+                    <li>@Html.ActionLink(@T("Menu.Admin.Device.Type.List"), "List", "DeviceType", new { area = "Admin" }, null)</li>
+                </ul>
+            </div>
+        </li>
+        <li>
+            @Html.LinkTable(T("Menu.Admin.Report"), T("Menu.Admin.Report.Tooltip"), null, null)
+        </li>
+        <li>
+            @Html.LinkTable(T("Menu.Admin.Configuration"), T("Menu.Admin.Configuration.Tooltip"), null, null)
+            <div>
+                <ul>
+                    <li>
+                        @Html.LinkTable(T("Menu.Admin.Configuration.Settings"), null, null, null)
+                        <ul class="sub-menu">
+                            <li>@Html.ActionLink(@T("Menu.Admin.Configuration.Settings.GeneralMisc"), "GeneralCommon", "Setting", new { area = "Admin" }, null)</li>
+                            <li>@Html.ActionLink(@T("Menu.Admin.Configuration.Settings.Media"), "Media", "Setting", new { area = "Admin" }, null)</li>
+                            <li>@Html.ActionLink(@T("Menu.Admin.Configuration.Settings.Markers"), "Markers", "Media", new { area = "Admin" }, null)</li>
+                            <li>@Html.ActionLink(@T("Menu.Admin.Configuration.Settings.All"), "AllSettings", "Setting", new { area = "Admin" }, null)</li>
+                        </ul>
+                    </li>
+                    <li>@Html.ActionLink(@T("Menu.Admin.Configuration.Languages"), "List", "Language", new { area = "Admin" }, null)</li>
+                    <li>@Html.ActionLink(@T("Menu.Admin.Configuration.EmailAccounts"), "List", "EmailAccount", new { area = "Admin" }, null)</li>
+                    <li class="divider"></li>
+                    <li>@Html.ActionLink(@T("Menu.Admin.Configuration.Plugins"), "EditDevices", "Admin", new { area = "Admin" }, null)</li>
+                </ul>
+            </div>
+        </li>
+        <li>
+            @Html.LinkTable(T("Menu.Admin.System"), T("Menu.Admin.System.Tooltip"), null, null)
+            <div>
+                <ul>
+                    <li>@Html.ActionLink(@T("Menu.Admin.System.Log"), "List", "Log", new { area = "Admin" }, null)</li>
+                    <li>@Html.ActionLink(@T("Menu.Admin.System.QueuedEmail"), "List", "QueuedEmail", new { area = "Admin" }, null)</li>
+                    <li>@Html.ActionLink(@T("Menu.Admin.System.Maintenance"), "Maintenance", "Common", new { area = "Admin" }, null)</li>
+                    <li>@Html.ActionLink(@T("Menu.Admin.System.ScheduleTask"), "List", "ScheduleTask", new { area = "Admin" }, null)</li>
+                    <li>@Html.ActionLink(@T("Menu.Admin.System.Warning"), "Warnings", "Common", new { area = "Admin" }, null)</li>
+                    <li>@Html.ActionLink(@T("Menu.Admin.System.SystemInformation"), "SystemInfo", "Common", new { area = "Admin" }, null)</li>
+                </ul>
+            </div>
+        </li>
+    }
+    else
+    {
+        @*<li>
+            <div class="menu-panel-header">
+                <div class="header-title">
+                    <span class="icon-cog2 menu-panel-setings"></span>
+                </div>
+                <div class="menu-panel-photo">
+                    <img src="~/Content/Images/Photo-Test.jpg" />
+                </div>
+            </div>
+        </li>*@
+        <li class="splitter"></li>
+        <li>@Html.LinkTable(T("Menu.Home"), "icon-home", null, "Index", "Home")</li>
+        if (Request.IsAuthenticated && Model.IsRegistered)
+        {
+            @*<li>@Html.LinkTable(T("Menu.Map"), T("Menu.Map.Tooltip"), "Map", "Home")</li>*@
+            <li>@Html.LinkTable(T("Menu.Map"), "icon-earth", null, "Map", "Map")</li>
+            <li>@Html.LinkTable(T("Menu.Devices"), "icon-mobile", null, "Info", "Device")</li>
+        }
+        <li>@Html.LinkTable(T("Menu.About"), "icon-users", null,"About", "Home")</li>
+        <li>@Html.LinkTable(T("Menu.Contact"), "icon-phone", null, "Contact", "Home")</li>
+        @*<li>@Html.LinkTable("Test", "test", "TestPage", "Common")</li>*@
+    }
+    @Html.Partial("_LoginPartial", Model)
+</ul>
+
+

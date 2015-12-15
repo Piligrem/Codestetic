@@ -1,0 +1,34 @@
+﻿/* Function for draw panels*/
+.draw-panel-shadow {
+    padding: 3px;
+    background: url("../Content/Images/texture-darker.png");
+    //-moz-box-shadow: 0 0 20px #000;
+    //-webkit-box-shadow: 0 0 20px #000;
+    box-shadow: 0 0 20px #000;
+}
+.draw-panel-top
+{
+    .draw-panel-shadow;
+    border-bottom: 1px solid rgba(255,255,255,.2);
+}
+.draw-panel-buttom
+{
+    .draw-panel-shadow;
+    border-top: 1px solid rgba(255,255,255,.2);
+}
+.draw-panel (@padding: 3px, @borderalfa: 0.2, @boxalpha1: 0.1, @boxalpha1: 0.6) {
+    padding: @padding;
+    white-space: nowrap;
+    /*border: 1px solid #555;*/
+    border: 1px solid rgba(255, 255, 255, @borderalfa);
+    background: url("../Content/Images/texture-darker.png");
+    -webkit-box-shadow: inset 0 0 100px rgba(255, 255, 255, @boxalpha1), 0 0 10px rgba(0, 0, 0, @boxalpha1);
+    -moz-box-shadow: inset 0 0 100px rgba(255, 255, 255, @boxalpha1), 0 0 10px rgba(0, 0, 0, @boxalpha1);
+    box-shadow: inset 0 0 100px rgba(255, 255, 255, @boxalpha1), 0 0 10px rgba(0, 0, 0, @boxalpha1);
+}
+.draw-inset-panel 
+{
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.9);
+}
+
+/* --- Function for draw panels --- */

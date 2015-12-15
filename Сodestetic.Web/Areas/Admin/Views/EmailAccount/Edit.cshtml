@@ -1,0 +1,18 @@
+﻿@model EmailAccountModel
+@{
+    //page title
+    //ViewBag.Title = T("Admin.Configuration.EmailAccounts.EditEmailAccountDetails").Text;
+
+    ViewBag.Model = "Admin.Configuration.EmailAccounts";
+    ViewBag.Action = "Edit";
+    ViewBag.BackToList = true;
+    ViewBag.Type = "emailAccount";
+}
+<div class="admin-content align-center">
+    @using (Html.BeginForm())
+    {
+        @Html.Partial("_SectionHeader")
+        @Html.Partial("_CreateOrUpdate", Model)
+    }
+    @Html.DeleteConfirmation((string)ViewBag.Type + "-delete")
+</div>

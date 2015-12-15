@@ -1,0 +1,32 @@
+SignalR.Transports.TransportHeartBeat Information: 0 : Connection 87807a06-aafa-4365-ae9b-d1b23218c6dc is New.
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(87807a06-aafa-4365-ae9b-d1b23218c6dc)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(87807a06-aafa-4365-ae9b-d1b23218c6dc)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(87807a06-aafa-4365-ae9b-d1b23218c6dc)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(87807a06-aafa-4365-ae9b-d1b23218c6dc)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(87807a06-aafa-4365-ae9b-d1b23218c6dc)
+SignalR.Transports.TransportHeartBeat Information: 0 : Dispose(). Closing all connections
+SignalR.Transports.WebSocketTransport Information: 0 : End(87807a06-aafa-4365-ae9b-d1b23218c6dc)
+SignalR.Transports.WebSocketTransport Verbose: 0 : Cancel(87807a06-aafa-4365-ae9b-d1b23218c6dc)
+SignalR.Transports.WebSocketTransport Error: 0 : OnError(87807a06-aafa-4365-ae9b-d1b23218c6dc, System.Net.WebSockets.WebSocketException (0x800703E3): Операция ввода/вывода была прервана из-за завершения потока команд или по запросу приложения
+   в System.Web.WebSockets.WebSocketPipe.<>c__DisplayClass7.<ReadFragmentAsync>b__6(Int32 hrError, Int32 cbIO, Boolean fUtf8Encoded, Boolean fFinalFragment, Boolean fClose)
+--- Конец трассировка стека из предыдущего расположения, где возникло исключение ---
+   в System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   в System.Web.WebSockets.AspNetWebSocket.<DoWork>d__2d`1.MoveNext()
+--- Конец трассировка стека из предыдущего расположения, где возникло исключение ---
+   в System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   в System.Web.WebSockets.AspNetWebSocket.<>c__DisplayClass1a.<<ReceiveAsyncImpl>b__18>d__1c.MoveNext()
+--- Конец трассировка стека из предыдущего расположения, где возникло исключение ---
+   в System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   в System.Runtime.CompilerServices.ConfiguredTaskAwaitable`1.ConfiguredTaskAwaiter.GetResult()
+   в Microsoft.AspNet.SignalR.WebSockets.WebSocketMessageReader.<ReadMessageAsync>d__0.MoveNext() в e:\Projects\Specter.GPS.Server\Web\Libraries\SignalR\Microsoft.AspNet.SignalR.Core\Owin\WebSockets\WebSocketMessageReader.cs:строка 33
+--- Конец трассировка стека из предыдущего расположения, где возникло исключение ---
+   в System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   в Microsoft.AspNet.SignalR.WebSockets.WebSocketHandler.<ProcessWebSocketRequestAsync>d__e.MoveNext() в e:\Projects\Specter.GPS.Server\Web\Libraries\SignalR\Microsoft.AspNet.SignalR.Core\Owin\WebSockets\WebSocketHandler.cs:строка 164)
+SignalR.Transports.WebSocketTransport Verbose: 0 : DrainWrites(87807a06-aafa-4365-ae9b-d1b23218c6dc)
+SignalR.Transports.WebSocketTransport Information: 0 : CloseSocket(87807a06-aafa-4365-ae9b-d1b23218c6dc)
+SignalR.Transports.WebSocketTransport Information: 0 : CompleteRequest (87807a06-aafa-4365-ae9b-d1b23218c6dc)

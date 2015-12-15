@@ -1,0 +1,21 @@
+﻿<ul>
+    <li>
+        @Html.LinkTable(T("Menu.Tools"), T("Menu.Tools.Tooltip"), null, null)
+        <div>
+            <ul>
+                <li>
+                    <a href="@Url.Action("ClearCache", "Common", new { previousUrl = Request.RawUrl, area = "Admin" })">
+                        <i class="icon-trash"></i>
+                        @T("Admin.Header.ClearCache")
+                    </a>
+                </li>
+                <li>
+                    <a id="restart-application" href="#" data-url="@Url.Action("RestartApplication", "Common", new { previousUrl = Request.RawUrl, area = "Admin" })">
+                        <i class="icon-power-off"></i>
+                        @T("Admin.Header.RestartApplication")
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </li>
+</ul>

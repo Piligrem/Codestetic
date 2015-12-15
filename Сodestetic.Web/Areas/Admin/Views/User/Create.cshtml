@@ -1,0 +1,25 @@
+﻿@model UserModel
+@{
+    Layout = "~/Area/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    ViewBag.Title = T("Admin.User.AddNew").Text;
+}
+<div class="admin-content align-center">
+    @using (Html.BeginForm())
+    {
+        <div class="section-header">
+            <div class="title">@ViewBag.Title</div>
+            <div class="options">
+                <button type="submit" name="save" value="save" class="btn btn-primary"><i class="icon-ok icon-white"></i>&nbsp;@T("Admin.Common.Save")</button>
+                <button type="submit" name="save" value="continueEditing" class="btn btn-primary">@T("Admin.Common.SaveContinue")</button>
+            </div>
+        </div>
+        @Html.Partial("_CreateOrUpdate", Model)
+    }
+</div>
+<script>
+    $(document).ready(function () {
+        $(".options button[value=save-continue]").click(function () {
+            $("form").append('<input type="hidden" name="save-continue" value="true" />');
+        });
+    });
+</script>

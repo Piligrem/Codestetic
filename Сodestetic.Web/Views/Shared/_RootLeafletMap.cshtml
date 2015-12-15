@@ -1,0 +1,107 @@
+﻿@{
+    var workContext = EngineContext.Current.Resolve<Specter.Web.Core.IWorkContext>();
+    var currentLanguage = workContext.WorkingLanguage.LanguageCulture;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" lang="@currentLanguage" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" id="Leaflet">
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" href="~/Content/leaflet.css" />
+    <link rel="stylesheet" href="~/Content/specter-map.css" type="text/css" />
+    @Scripts.Render("~/bundles/loaders")
+    @*@Styles.Render("~/Content/css")*@
+</head>
+<body> @* class="page-map">*@
+    @*<div id="wrapper">*@
+    @*<div class="container-wrapper">*@
+    @*<section id="header" class="navbar-map navbar-fixed-top">*@
+    @*@Html.Action("ShopBar", "Common")*@
+    @*@Html.Action("Header", "Common", new { @class = "brand" })*@
+    @*@Html.Action("MegaMenu", "Catalog", new { currentCategoryId = this.CurrentCategoryId, currentProductId = this.CurrentProductId })*@
+    @*</section>*@
+    @RenderBody()
+    @*<section id="footer" class="footer-map title">
+            @Html.Partial("Footer", "Common")
+        </section>*@
+    @*</div>*@
+    @*</div>*@
+</body>
+</html>
+@Scripts.Render("~/bundles/modernizr")
+@Scripts.Render("~/bundles/language")
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/leaflet")
+@Scripts.Render("~/bundles/jquery-ui")
+@Scripts.Render("~/bundles/jquery-notify")
+@Scripts.Render("~/bundles/jquery-nicescroll")
+@Scripts.Render("~/bundles/leaflet.core")
+@Scripts.Render("~/bundles/specter.signalr")
+@Scripts.Render("~/bundles/leaflet.controlpanel.notify.map")
+@Scripts.Render("~/bundles/specter.controls")
+
+@Scripts.Render("~/bundles/jquery.datetimepicker")
+@Scripts.Render("~/bundles/moment")
+
+<script>
+    $(document).ready(
+        function () {
+            $(document.body).attr('unselectable', 'on');
+            $("#x-grid").niceScroll({ cursorcolor: "#232322", cursorborder: "1px solid #636262", cursorborderradius: 0, railoffset: { top: 0, left: 11 } });
+            dialogs.Add('SettingControl', {
+                title: '@T("SettingControl")',
+                shiftVertical: 50,
+                saveButton: '@T("Common.Button.Save")',
+                cancelButton: '@T("Common.Button.Cancel")',
+                open: '@Url.Action("SettingControl", "ControlPanel")',
+                save: '@Url.Action("SaveSettingControl", "ControlPanel")'
+            });
+            dialogs.Add('GeoZoneControl', {
+                title: '@T("GeoZoneControl")',
+                shiftVertical: 50,
+                saveButton: '@T("Common.Button.Save")',
+                cancelButton: '@T("Common.Button.Cancel")',
+                open: '@Url.Action("GeoZoneControl", "ControlPanel")',
+                save: '@Url.Action("SaveGeoZoneControl", "ControlPanel")',
+            });
+            dialogs.Add('TrackControl', {
+                title: '@T("TrackControl")',
+                shiftVertical: 50,
+                cancelButton: '@T("Common.Button.Close")',
+                open: '@Url.Action("TrackControl", "ControlPanel")'
+            });
+        }
+    );
+</script>
+<script src="~/Scripts/fileupload/jquery.ui.widget.js" type="text/javascript"></script>
+<script src="~/Scripts/fileupload/jquery.fileupload.js" type="text/javascript"></script>
+<script src="~/Scripts/specter.iscroll.js" type="text/javascript"></script>
+<script src="~/Scripts/specter.panel.actions.js" type="text/javascript"></script>
+<script src="~/Scripts/specter.colorpicker.js" type="text/javascript"></script>
+<script src="~/Scripts/specter.markerselector.js" type="text/javascript"></script>
+<script src="~/Scripts/specter.spinner.js" type="text/javascript"></script>
+<script src="~/Scripts/specter.togglebutton.js" type="text/javascript"></script>
+<script src="~/Scripts/specter.titletooltip.js" type="text/javascript"></script>
+<script src="~/Scripts/plugins/leaflet/laeflet.contextmenu.js" type="text/javascript"></script>
+<!-- Leaftle Draw -->
+<script src="~/Scripts/plugins/leaflet/leaflet.draw.js" type="text/javascript"></script>
+<script src="~/Scripts/plugins/leaflet/toolbar.js" type="text/javascript"></script>
+<script src="~/Scripts/plugins/leaflet/tooltip.js" type="text/javascript"></script>
+<script src="~/Scripts/plugins/leaflet/ext/geometry.util.js" type="text/javascript"></script>
+<script src="~/Scripts/plugins/leaflet/ext/latlng.util.js" type="text/javascript"></script>
+<script src="~/Scripts/plugins/leaflet/ext/line.util.intersect.js" type="text/javascript"></script>
+<script src="~/Scripts/plugins/leaflet/ext/polygon.intersect.js" type="text/javascript"></script>
+<script src="~/Scripts/plugins/leaflet/ext/polyline.intersect.js" type="text/javascript"></script>
+<script src="~/Scripts/plugins/leaflet/draw/handler/draw.feature.js" type="text/javascript"></script>
+<script src="~/Scripts/plugins/leaflet/draw/handler/draw.simpleshape.js" type="text/javascript"></script>
+<script src="~/Scripts/plugins/leaflet/draw/handler/draw.polyline.js" type="text/javascript"></script>
+<script src="~/Scripts/plugins/leaflet/draw/handler/draw.polygon.js" type="text/javascript"></script>
+<script src="~/Scripts/plugins/leaflet/draw/handler/draw.rectangle.js" type="text/javascript"></script>
+<script src="~/Scripts/plugins/leaflet/draw/handler/draw.circle.js" type="text/javascript"></script>
+<script src="~/Scripts/plugins/leaflet/edit/edit.toolbar.js" type="text/javascript"></script>
+<script src="~/Scripts/plugins/leaflet/edit/handler/edit.simpleShape.js" type="text/javascript"></script>
+<script src="~/Scripts/plugins/leaflet/edit/handler/edit.poly.js" type="text/javascript"></script>
+<script src="~/Scripts/plugins/leaflet/edit/handler/edit.rectangle.js" type="text/javascript"></script>
+<script src="~/Scripts/plugins/leaflet/edit/handler/edit.circle.js" type="text/javascript"></script>
+<!-- end Leaftle Draw -->

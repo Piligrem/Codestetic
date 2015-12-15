@@ -1,0 +1,56 @@
+﻿@model long?
+@using Specter.Web.Core;
+@using Specter.Web.Framework.UI;
+@using Specter.Web.Utilities;
+@using Specter.Web.Core.Domain.Media;
+@using Kendo.Mvc.UI;
+@{
+    //other variables
+    var random = CommonHelper.GenerateRandomInteger();
+    var deviceId = "icon" + random;
+    var pictureService = EngineContext.Current.Resolve<Specter.Web.Services.Media.IPictureService>();
+    var iconId = Model.HasValue ? Model.Value : 0;
+}
+<div id="@deviceId" class="icon-slider" style="display: inline-block;">
+    @Html.HiddenFor(x => x, new { @class = "hidden icon-user" })
+    <div class="container">
+        <img src="@(pictureService.GetPictureUrl(iconId, 0, true, PictureType.Marker))" class="item-icon stick-none" />
+        @Html.Kendo().Button().Name("nextMarker").Icon("icon-ok");
+        <div class="iconbuttons">
+            <input type="button" id="nextMarker" class="fileinput-button" style="width: 100%;" value=@(((char)0x3e).ToString())>
+        </div>
+    </div>
+</div>
+<script>
+    $("iconbuttons").button({
+        icons: {
+            primary: "ui-icon-pencil"
+        },
+        text: false
+    });
+    $("#nextMarker").bind("click", function () {
+        var el = $('#@deviceId'),
+            img = el.find('img'),
+            elMarker = el.find('.icon-user'),
+            elRemove = el.find('.remove');
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("GetNextSystemMarker", "Media", new { area = "" })',
+            data: JSON.stringify({
+                iconId: elMarker.val()
+            }),
+            async: true, // изменил - было false
+            dataType: "json",
+            contentType: "application/json",
+            traditional: true,
+            success: function (data) {
+                img.attr("src", data.src);
+                elMarker.val(data.iconId);
+            },
+            error: function (xhr) {
+                $.log("Error: {0}, Message: {1}".format(xhr.error, xhr.statusText), "/Media/GetNextSystemMarker");
+            }
+        });
+    });
+</script>

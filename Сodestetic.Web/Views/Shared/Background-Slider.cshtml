@@ -1,0 +1,33 @@
+﻿<ul class="cb-slideshow dark-background">
+    <li><span>Image 01</span><div><h3>Be Calm for Your<br />Family</h3></div></li>
+    <li><span>Image 02</span><div><h3>Don’t Worry about Your<br />Employees</h3></div></li>
+    <li><span>Image 03</span><div><h3>«Спектрум» - это интерактивная, информативная, интегрируемая платформа телеметрии<br />для отслеживания местоположения и перемещения удаленных объектов<br />(транспортных средств, сотрудников и различных объектов) по ГЛОНАСС/GPS,<br />с возможностью доступа к архиву и выгрузке отчетов о состоянии объектов мониторинга.<br />«Спектрум» легко интегрируется с внешними системами,<br />имеет много дополнительных возможностей по масштабированию, удобству и функциям.<br />Интерфейс серверного и диспетчерского ПО,<br />а также архитектура системы отвечают требованиям для создания крупнейших диспетчерских центров<br />для мониторинга десятков тысяч транспортных средств.</h3></div></li>
+    <li><span>Image 04</span><div><h3>Message 4</h3></div></li>
+    <li><span>Image 05</span><div><h3>Message 5</h3></div></li>
+    <li><span>Image 06</span><div><h3>Message 6</h3></div></li>
+</ul>
+<script>
+    var animations = document.getElementsByTagName("span"),
+        pfx = ["webkit", "moz", "MS", "o", ""];
+
+    for (var i = 0; i < animations.length; i++) {
+        PrefixedEvent(animations[i], "AnimationStart", AnimationListener);
+        PrefixedEvent(animations[i], "AnimationIteration", AnimationListener);
+        PrefixedEvent(animations[i], "AnimationEnd", AnimationListener);
+    }
+ 
+    function PrefixedEvent(element, type, callback) {
+        for (var p = 0; p < pfx.length; p++) {
+            if (!pfx[p]) type = type.toLowerCase();
+            element.addEventListener(pfx[p] + type, callback, false);
+        }
+    }
+
+    function AnimationListener(e) {
+        //var background = window.getComputedStyle(e.srcElement).backgroundImage;
+        $(".menu-panel-background")
+        //    .css("background", background)
+            .css("width", $(".menu-panel").outerWidth());
+        //console.debug("Element: %s, action: %s, background: %s", e.srcElement.innerHTML, e.type, window.getComputedStyle(e.srcElement).backgroundImage);
+    }
+</script>

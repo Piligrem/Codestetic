@@ -1,0 +1,7 @@
+@model DateTime
+@using Kendo.Mvc.UI
+
+@(Html.Kendo().TimePicker()
+        .Name(ViewData.TemplateInfo.GetFullHtmlFieldName(string.Empty))
+        .Value(Model > DateTime.MinValue? Model : DateTime.Today)
+)

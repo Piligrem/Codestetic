@@ -1,0 +1,60 @@
+SignalR.Transports.TransportHeartBeat Information: 0 : Connection 601b5124-8069-4547-90ac-1d57e3a42ef1 is New.
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(601b5124-8069-4547-90ac-1d57e3a42ef1)
+SignalR.Transports.TransportHeartBeat Information: 0 : Connection b6ad74ce-f712-42cd-a12d-869af5756120 is New.
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(601b5124-8069-4547-90ac-1d57e3a42ef1)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(b6ad74ce-f712-42cd-a12d-869af5756120)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(601b5124-8069-4547-90ac-1d57e3a42ef1)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(b6ad74ce-f712-42cd-a12d-869af5756120)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(601b5124-8069-4547-90ac-1d57e3a42ef1)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(b6ad74ce-f712-42cd-a12d-869af5756120)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(601b5124-8069-4547-90ac-1d57e3a42ef1)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(b6ad74ce-f712-42cd-a12d-869af5756120)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(601b5124-8069-4547-90ac-1d57e3a42ef1)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(b6ad74ce-f712-42cd-a12d-869af5756120)
+SignalR.Transports.WebSocketTransport Verbose: 0 : Cancel(601b5124-8069-4547-90ac-1d57e3a42ef1)
+SignalR.Transports.WebSocketTransport Verbose: 0 : DrainWrites(601b5124-8069-4547-90ac-1d57e3a42ef1)
+SignalR.Transports.TransportHeartBeat Information: 0 : Dispose(). Closing all connections
+SignalR.Transports.WebSocketTransport Information: 0 : End(601b5124-8069-4547-90ac-1d57e3a42ef1)
+SignalR.Transports.WebSocketTransport Information: 0 : End(b6ad74ce-f712-42cd-a12d-869af5756120)
+SignalR.Transports.WebSocketTransport Verbose: 0 : Cancel(b6ad74ce-f712-42cd-a12d-869af5756120)
+SignalR.Transports.WebSocketTransport Verbose: 0 : DrainWrites(b6ad74ce-f712-42cd-a12d-869af5756120)
+SignalR.Transports.WebSocketTransport Information: 0 : CompleteRequest (601b5124-8069-4547-90ac-1d57e3a42ef1)
+SignalR.Transports.WebSocketTransport Information: 0 : CompleteRequest (b6ad74ce-f712-42cd-a12d-869af5756120)
+SignalR.Transports.WebSocketTransport Error: 0 : OnError(601b5124-8069-4547-90ac-1d57e3a42ef1, System.Net.WebSockets.WebSocketException (0x800703E3): Операция ввода/вывода была прервана из-за завершения потока команд или по запросу приложения
+   в System.Web.WebSockets.WebSocketPipe.<>c__DisplayClass4.<ReadFragmentAsync>b__5(Int32 hrError, Int32 cbIO, Boolean fUtf8Encoded, Boolean fFinalFragment, Boolean fClose)
+--- Конец трассировка стека из предыдущего расположения, где возникло исключение ---
+   в System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   в System.Web.WebSockets.AspNetWebSocket.<DoWork>d__1`1.MoveNext()
+--- Конец трассировка стека из предыдущего расположения, где возникло исключение ---
+   в System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   в System.Web.WebSockets.AspNetWebSocket.<>c__DisplayClass6.<<ReceiveAsyncImpl>b__7>d__0.MoveNext()
+--- Конец трассировка стека из предыдущего расположения, где возникло исключение ---
+   в System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   в Microsoft.AspNet.SignalR.WebSockets.WebSocketMessageReader.<ReadMessageAsync>d__0.MoveNext()
+--- Конец трассировка стека из предыдущего расположения, где возникло исключение ---
+   в System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   в Microsoft.AspNet.SignalR.WebSockets.WebSocketHandler.<ProcessWebSocketRequestAsync>d__e.MoveNext())
+SignalR.Transports.WebSocketTransport Error: 0 : OnError(b6ad74ce-f712-42cd-a12d-869af5756120, System.Net.WebSockets.WebSocketException (0x800703E3): Операция ввода/вывода была прервана из-за завершения потока команд или по запросу приложения
+   в System.Web.WebSockets.WebSocketPipe.<>c__DisplayClass4.<ReadFragmentAsync>b__5(Int32 hrError, Int32 cbIO, Boolean fUtf8Encoded, Boolean fFinalFragment, Boolean fClose)
+--- Конец трассировка стека из предыдущего расположения, где возникло исключение ---
+   в System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   в System.Web.WebSockets.AspNetWebSocket.<DoWork>d__1`1.MoveNext()
+--- Конец трассировка стека из предыдущего расположения, где возникло исключение ---
+   в System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   в System.Web.WebSockets.AspNetWebSocket.<>c__DisplayClass6.<<ReceiveAsyncImpl>b__7>d__0.MoveNext()
+--- Конец трассировка стека из предыдущего расположения, где возникло исключение ---
+   в System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   в Microsoft.AspNet.SignalR.WebSockets.WebSocketMessageReader.<ReadMessageAsync>d__0.MoveNext()
+--- Конец трассировка стека из предыдущего расположения, где возникло исключение ---
+   в System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   в Microsoft.AspNet.SignalR.WebSockets.WebSocketHandler.<ProcessWebSocketRequestAsync>d__e.MoveNext())
+SignalR.Transports.WebSocketTransport Information: 0 : CloseSocket(b6ad74ce-f712-42cd-a12d-869af5756120)
+SignalR.Transports.WebSocketTransport Information: 0 : CloseSocket(601b5124-8069-4547-90ac-1d57e3a42ef1)

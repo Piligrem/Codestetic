@@ -1,0 +1,88 @@
+﻿@font-face {
+	font-family: 'ico-tools';
+	src:url('fonts/ico-tools.eot?-44o4a5');
+	src:url('fonts/ico-tools.eot?#iefix-44o4a5') format('embedded-opentype'),
+		url('fonts/ico-tools.woff?-44o4a5') format('woff'),
+		url('fonts/ico-tools.ttf?-44o4a5') format('truetype'),
+		url('fonts/ico-tools.svg?-44o4a5#ico-tools') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+	font-family: 'ico-tools';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.icon-info:before {
+	content: "\e600";
+}
+.icon-satellites_00:before {
+	content: "\e601";
+}
+.icon-satellites_25:before {
+	content: "\e602";
+}
+.icon-satellites_50:before {
+	content: "\e603";
+}
+.icon-satellites_75:before {
+	content: "\e604";
+}
+.icon-satellites_100:before {
+	content: "\e605";
+}
+.icon-gsm_00:before {
+	content: "\e606";
+}
+.icon-gsm_25:before {
+	content: "\e607";
+}
+.icon-gsm_50:before {
+	content: "\e608";
+}
+.icon-gsm_75:before {
+	content: "\e609";
+}
+.icon-gsm_100:before {
+	content: "\e60a";
+}
+.icon-battery_00:before {
+	content: "\e60b";
+}
+.icon-battery_25:before {
+	content: "\e60c";
+}
+.icon-battery_50:before {
+	content: "\e60d";
+}
+.icon-battery_75:before {
+	content: "\e60e";
+}
+.icon-battery_100:before {
+	content: "\e60f";
+}
+.icon-alarm:before {
+	content: "\e610";
+}
+.icon-date:before {
+	content: "\e611";
+}
+.icon-geozone:before {
+	content: "\e612";
+}
+.icon-gear_off:before {
+	content: "\e613";
+}
+.icon-gear_on:before {
+	content: "\e614";
+}

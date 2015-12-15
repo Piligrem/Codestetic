@@ -1,0 +1,842 @@
+﻿/* VARIABLES *
+ * -------------------------- */
+
+/* COLORS & BACKGROUNDS */
+
+$white: white;
+$green: #aed2cc;
+$tan: #f1e0c5;
+$blue: #008fbe;
+$green-shadow-rgba: rgba(10,8,6,0.75); /* dark muddy grey */
+$dropshadow-rgba: rgba(0,0,0,0.35);
+  
+$top-bg: $white;
+$body-bg: $top-bg; /* differentiate from header: #eaeaea */
+$header-bg: $green;
+$main-bg: $tan;
+
+$well-header-rgba: $green-shadow-rgba;
+
+$link-color: $blue;
+$link-color-hover: darken($link-color, 15%);
+$nav-color: $link-color;
+$nav-color-hover: darken($nav-color, 15%);
+$nav-big-btn-bg: desaturate(lighten($nav-color, 15%), 25%);
+$nav-big-btn-bg-hover: lighten($nav-color, 20%);
+$nav-bg-hover: lighten($nav-color, 30%);
+
+/* Facebook (2013) */
+$facebook-bg: rgb(60, 90, 152);
+/* Twitter (2013) */
+$twitter-bg: rgb(44, 170, 225);
+
+$header-bg-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/23379/bg-map-bluegreen.jpg);
+$main-bg-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/23379/bg-wood-lighter.jpg);
+
+
+/* SIZES */
+/* prefer calculations here and calculated variables in CSS below */
+
+/* Set left-column-width, derive logo size below */
+$hdr-side-width: 266px;
+$hdr-big-btn-width: 72px; /* SIGN UP */
+
+/* to see the menu flow to more than 1 line, change 
+   $min-width here to something smaller: e.g., * 1.5; */
+$min-width: $hdr-side-width * 2; 
+$max-width: $hdr-side-width * 3;
+
+$padding-small: 10px;
+/* declared for flexibility */
+$padding-to-window: $padding-small;
+$padding-to-top: $padding-small;
+$padding-hdr: $padding-small;
+
+$hdr-big-btn-margin: floor(.75 * $padding-hdr); /* round down */
+
+$border-radius: 8px; /* big-btn radius */
+/* larger radius to flow around big button */
+$border-radius-hdr: ceil(1.25 * $border-radius); /* round up */
+$corner-border-width: $border-radius-hdr;
+$corner-border-size: $border-radius-hdr * 2;
+
+$shadow-size: 20px;
+
+$shadow-size-deep: ceil(1.5 * $shadow-size); 
+
+$hdr-menu-item-height: 18px;
+
+$hdr-menu-item-padding-top: $hdr-big-btn-margin;
+$hdr-menu-item-padding-bottom: ceil(0.5 * $hdr-big-btn-margin);
+$hdr-menu-height: $hdr-menu-item-padding-top + $hdr-menu-item-height + $hdr-menu-item-padding-bottom;
+
+$hdr-menu-item-height: $hdr-menu-height - $padding-hdr;
+
+$hdr-logo-width: $hdr-side-width - $hdr-big-btn-width - 2 * $hdr-big-btn-margin;
+$hdr-logo-height: $hdr-logo-width; //ceil(0.75 * $hdr-logo-width); /* 4x3 */
+$hdr-logo-margin-bottom: floor(0.5 * $hdr-menu-height);
+/* height of taller left side "overhang" without padding-to-top */
+$hdr-side-height: $hdr-logo-height + $hdr-logo-margin-bottom;
+$hdr-side-total-height: $hdr-side-height + $padding-to-top;
+
+$hdr-total-height: $hdr-side-total-height + $shadow-size-deep;
+
+/* extra padding-top to make room for column-1 header "overhang" */
+$column-1-padding-top: $hdr-side-total-height + floor(.5 *$shadow-size);
+
+/* shorter green bg across top */
+/* can specify or calculate: e.g., half the logo height */
+$hdr-topwell-height: ceil(0.5 * $hdr-logo-height);
+
+/* height of shorter right side - 
+   needed for .header-bg and .main padding-top */
+$hdr-top-height: $padding-to-top + $hdr-topwell-height + $hdr-menu-height;
+
+/* size and position of horizontal background "patch" 
+   extending background into negative space by size of border-radius-hdr */
+$hdr-logo-patch-height: $shadow-size + $border-radius-hdr;
+$hdr-logo-patch-width: $hdr-logo-width + $border-radius-hdr;
+$hdr-logo-patch-top: $padding-to-top + $hdr-topwell-height - $shadow-size;
+$hdr-logo-patch-background-position: -1*($hdr-topwell-height - $shadow-size);
+
+$hdr-big-btn-top: $hdr-topwell-height + $hdr-big-btn-margin;
+$hdr-big-btn-left: $hdr-logo-width + $hdr-big-btn-margin;
+$hdr-big-btn-height: $hdr-side-height -  $hdr-topwell-height - $hdr-big-btn-margin - $hdr-logo-margin-bottom;
+$hdr-big-btn-width: $hdr-side-width - $hdr-logo-width - 2 * $hdr-big-btn-margin;
+
+
+/* MIXINS 
+ * -------------------------- */
+
+@mixin dropshadow-header {
+  -webkit-box-shadow: 0 ceil(.67*$shadow-size) $shadow-size $dropshadow-rgba;
+     -moz-box-shadow: 0 ceil(.67*$shadow-size) $shadow-size $dropshadow-rgba;
+          box-shadow: 0 ceil(.67*$shadow-size) $shadow-size $dropshadow-rgba; }
+
+@mixin well {
+  -webkit-box-shadow: inset 0 0 $shadow-size $dropshadow-rgba;
+     -moz-box-shadow: inset 0 0 $shadow-size $dropshadow-rgba;
+          box-shadow: inset 0 0 $shadow-size $dropshadow-rgba; }
+
+@mixin well-left {
+  -webkit-box-shadow: inset $shadow-size -1*$shadow-size $shadow-size -1*$shadow-size $dropshadow-rgba;
+     -moz-box-shadow: inset $shadow-size -1*$shadow-size $shadow-size -1*$shadow-size $dropshadow-rgba;
+          box-shadow: inset $shadow-size -1*$shadow-size $shadow-size -1*$shadow-size $dropshadow-rgba; }
+
+@mixin well-right {
+  -webkit-box-shadow: inset -1*$shadow-size $shadow-size $shadow-size -1*$shadow-size $dropshadow-rgba;
+     -moz-box-shadow: inset -1*$shadow-size $shadow-size $shadow-size -1*$shadow-size $dropshadow-rgba;
+          box-shadow: inset -1*$shadow-size $shadow-size $shadow-size -1*$shadow-size $dropshadow-rgba; }
+
+@mixin well-header {
+  -webkit-box-shadow: inset 0 0 $shadow-size $well-header-rgba;
+     -moz-box-shadow: inset 0 0 $shadow-size $well-header-rgba;
+          box-shadow: inset 0 0 $shadow-size $well-header-rgba; }
+
+/* used in "patch" to match inset box-shadow */
+@mixin well-header-outset {
+  /* "opacify" and "transparentize" value between 0 and 1 - 
+     .20 more opaque for outset box-shadow to match inset (webkit, by my eye anyway) */
+  $deepen-amount: .20;
+  -webkit-box-shadow: 0 0 $shadow-size opacify($well-header-rgba, $deepen-amount);
+     -moz-box-shadow: 0 0 $shadow-size opacify($well-header-rgba, $deepen-amount);
+          box-shadow: 0 0 $shadow-size opacify($well-header-rgba, $deepen-amount); }
+
+/* used in "patch" to add box-shadow on left side only */
+@mixin well-header-left {
+  -webkit-box-shadow: inset $shadow-size 0 $shadow-size -1*$shadow-size $well-header-rgba;
+     -moz-box-shadow: inset $shadow-size 0 $shadow-size -1*$shadow-size $well-header-rgba;
+          box-shadow: inset $shadow-size 0 $shadow-size -1*$shadow-size $well-header-rgba; }
+
+
+/* FONT PATH
+ * -------------------------- */
+
+/* icon font for Twitter & Facebook */
+@font-face {
+  font-family: 'FontAwesome';
+  src: url('http://s.cdpn.io/23379/fontawesome-webfont.eot?v=3.2.1');
+  src: url('http://s.cdpn.io/23379/fontawesome-webfont.eot?#iefix&v=3.2.1') format('embedded-opentype'), url('http://s.cdpn.io/23379/fontawesome-webfont.woff?v=3.2.1') format('woff'), url('http://s.cdpn.io/23379/fontawesome-webfont.ttf?v=3.2.1') format('truetype'), url('http://s.cdpn.io/23379/fontawesome-webfont.svg#fontawesomeregular?v=3.2.1') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* CSS
+ * -------------------------- */
+
+/* http://www.paulirish.com/2012/box-sizing-border-box-ftw */
+*,
+*:after,
+*:before { 
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
+	box-sizing: border-box;         /* Opera/IE 8+ */
+}
+
+html { 
+  overflow-y: scroll; 
+  /* weird to scroll content horizontally with fixed header */
+  overflow-x: hidden; 
+  height: 100%; 
+  margin: 0;
+  padding: 0; 
+}
+
+body { 
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  /* change variable if you want to differentiate */
+  background: $body-bg; /* white */
+}
+  
+/* can't assume only one "header" element in HTML5 */
+.header-top { 
+    /* pin to top - 0 is default */
+    position: fixed;
+    /* raise z-index to cover, higher here to allow 
+       a range of z-indexes in the scrolling content */
+    z-index: 100;
+    /* height overflows */
+    width: 100%;
+    background: rgba(255, 0, 242, 0.38)!important;
+}
+
+/* match these backgrounds to blend */
+/* OPTIONAL, extend header bg color across top */
+.header-top,
+/* OPTIONAL extra div, extend taller header bg left: */
+.header-bg:before,
+.header-wrap,
+/* padding-to-window strip on taller left side */
+.header-wrap:before,
+ /* left-side overhang */
+.header-content:before {
+  background: $top-bg; /* white */
+}
+
+/* match widths, margins & padding */
+.page-wrap, .header-wrap { 
+  //width: 90%; 
+  //min-width: $min-width; 
+  //max-width: $max-width; 
+  /* center content */
+  //margin: 0 auto; 
+  /* separate content from window edge -- 
+     padding-top and -bottom specified below.
+     Here (not on body) to work with fixed header */
+  padding: 0 $padding-to-window;
+}
+
+/* padding-left and -right added above */
+.header-wrap { 
+  /* child elements abaolute */
+  position: relative;
+  /* a "min-height" for shorter right side */
+  height: $hdr-top-height;
+}
+
+/* extend bg into padding-to-window gap on taller left side - 
+   not needed if extending bg using optional .header-bg div */
+.header-wrap:before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* extra 2px width to cover tiny gap when iOS zooms */
+  width: $padding-to-window + 2px;
+  height: $hdr-side-total-height;
+  /* OPTIONAL, extend padding-to-window "frame" all the way down - 
+     may want to do the same on right with an :after pseudo-element:
+   height: 100000px; */
+}
+
+/* OPTIONAL, if we want to differentiate header and body - 
+   .header-bg:before extends taller bg all the way left  */
+.header-bg { 
+  /* child elements absolute */
+  position: relative;
+  /* tuck behind header framing */
+  z-index: -1;
+  width: 100%;
+}
+
+/* OPTIONAL, extends bg to left on taller left side  */
+.header-bg:before { 
+  content: "";
+  /* remove from layout */
+  position: absolute;
+  /* start from the right and extend left */
+  right: 100%;
+  /* height of shorter right side */
+  height: $hdr-side-total-height;
+  /* crazy wide - absolutely positioned 
+     to start at left edge and go left */
+  width: 100000px;
+}
+
+.header-content { 
+  /* child elements absolute */
+  position: relative;
+  height: $hdr-total-height;
+  width: 100%;
+  padding-top: $padding-to-top;
+  /* crop shadows at the sides and top */
+  overflow: hidden; }
+
+/* add taller left-side "overhang" bg + shadow  */
+.header-content:before { 
+  content: "";
+  /* remove from layout */
+  position: absolute;
+  /* tuck behind .header-wrap and .nav-main ul
+     so right-edge shadow is covered up */
+  z-index: -1;
+  height: $hdr-side-height;
+  width: $hdr-side-width;
+  padding: 0;
+  border-radius: 0 0 $border-radius-hdr 0;
+  @include dropshadow-header;
+}
+
+/* INVERTED ROUNDED CORNER under overhang L */
+.header-content:after { 
+  content: "";
+  display: block;
+  position: absolute;
+  /* tuck behind header bg */
+  z-index: -1;
+  height: $border-radius-hdr * 2;
+  width: $border-radius-hdr * 2;
+  border-top: $border-radius-hdr solid $top-bg;
+  border-left: $border-radius-hdr solid $top-bg;
+  top: $hdr-side-total-height - $border-radius-hdr;
+  left: -1*$border-radius-hdr;
+  /* top left */
+  border-radius: $border-radius-hdr * 2 0 0 0;
+}
+
+/* match backgrounds to blend */
+.header-logo, .header-social { 
+  background-color: $header-bg;
+  background-image: $header-bg-image;
+  @include well-header;
+}
+
+.header-logo { 
+  position: absolute;
+  /* cover .header-content-social */
+  /* z-index: 1; */
+  height: $hdr-logo-height;
+  width: $hdr-logo-width;
+  border-radius: $border-radius-hdr 0 $border-radius-hdr $border-radius-hdr;
+}
+.header-logo > a {
+    position: absolute;
+    z-index: 100;
+}
+
+.header-logo h1, .header-logo h2 { 
+  position: relative;
+  /* overlap .header-logo-patch */
+  z-index: 2;
+  text-shadow: 0 2px 1px rgba(255,255,255, 0.3), 
+    0 0 10px rgba(204,232,229, 0.5)
+}
+
+.header-logo h1 { 
+  padding: 10px 0 0 18px; 
+  font-size: 36px;
+}
+
+.header-logo a { 
+  color: inherit !important;
+  text-decoration: none;
+}
+
+.header-logo h2 { 
+  margin-top: -2px;
+  padding: 0 0 0 18px; 
+  font-size: 24px;
+}
+
+/* "patch" to cover shadow "seam" of overlapping shapes - 
+   can't nest pseudo-elements, so need extra div here -  
+   overflow:hidden to crop shadow of rounded corner overlay (below) */
+.header-logo-patch {
+  display: block;
+  overflow: hidden;
+  position: absolute;
+  z-index: 1;
+  top: $hdr-logo-patch-top;
+  height: $hdr-logo-patch-height;
+  width: $hdr-logo-patch-width;
+  background-color: $header-bg;
+  background-image: $header-bg-image;
+  background-position: 0 $hdr-logo-patch-background-position;
+  background-repeat: no-repeat;
+  @include well-header-left;
+}
+
+/* rounded corner overlay (with outset shadow to match "well") */
+.header-logo-patch:after {
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: -$border-radius-hdr;
+  right: -$border-radius-hdr;
+  height: $border-radius-hdr * 2;
+  width: $border-radius-hdr * 2;
+  background-color: $top-bg;
+  border-radius: $border-radius-hdr 0 0 0;
+  @include well-header-outset;
+}
+
+.header-social { 
+  position: absolute;
+  top: $padding-to-top;
+  height: $hdr-topwell-height;
+  width: 100%;
+  border-radius: $border-radius-hdr $border-radius-hdr $border-radius-hdr 0;
+}
+
+/* NAV */
+
+.horizontal-nav ul, .horizontal-nav li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.horizontal-nav li {
+  float: left;
+}
+
+.horizontal-nav li a { 
+  display: block;
+  text-decoration: none;
+}
+
+.nav-main { 
+  /* child elements absolute */
+  position: relative;
+  padding-left: $hdr-side-width; 
+  padding-top: $hdr-topwell-height + $hdr-menu-item-padding-top; 
+  padding-bottom: 0;
+  background: none;
+}
+
+/* INVERTED ROUNDED CORNER under menu - right */
+.nav-main:after { 
+  content: "";
+  display: block;
+  position: absolute;
+  /* tuck behind nav-main a:hover */
+  z-index: -1;
+  height: $border-radius-hdr * 2;
+  width: $border-radius-hdr * 2;
+  border-top: $border-radius-hdr solid $top-bg;
+  border-right: $border-radius-hdr solid $top-bg;
+  bottom: -1*$border-radius-hdr;
+  right: -1*$border-radius-hdr;
+  /* top right */
+  border-radius: 0 $border-radius-hdr * 2 0 0;
+}
+
+.nav-main ul { 
+  padding: 0 0 $hdr-menu-item-padding-bottom 2px; /* nudge links right */
+  background: $top-bg;
+  /* clear floats without extra div or 
+     using pseudo-elements needed below - 
+     cannot use with position:relative */
+  overflow: auto;
+  overflow-x: hidden;
+}
+
+/* dropshadow tracks with menu height if links exceed 1 line */
+.nav-main ul:before { 
+  content: "";
+  display: block;
+  position: absolute;
+  /* stack shadow behind "overhang" */
+  z-index: -2;
+  /* same size as parent */
+  bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: $top-bg;
+  @include dropshadow-header;
+}
+
+/* INVERTED ROUNDED CORNER under menu - left */
+.nav-main ul:after { 
+  content: "";
+  display: block;
+  position: absolute;
+  /* tuck behind nav-main a:hover */
+  z-index: -1;
+  height: $border-radius-hdr * 2;
+  width: $border-radius-hdr * 2;
+  border-top: $border-radius-hdr solid $top-bg;
+  border-left: $border-radius-hdr solid $top-bg;
+  bottom: -1*$border-radius-hdr;
+  left: $hdr-side-width - $border-radius-hdr;
+  /* top left */
+  border-radius: $border-radius-hdr * 2 0 0 0;
+}
+
+.nav-main a, 
+.nav-main:visited { 
+  display: block;
+  height: $hdr-menu-item-height;
+  padding: 0 .5em;
+  line-height: $hdr-menu-item-height;
+  color: $nav-color;
+  font-size: 0.8125em;
+  text-transform: uppercase;
+  border-radius: $border-radius;
+}
+
+.nav-main a:active, 
+.nav-main a:focus, 
+.nav-main a:hover {
+  color: $nav-color-hover;
+  background: $nav-bg-hover;
+}
+
+/* nudge down 1px for uppercase vertical centering */
+.nav-main a span { 
+  display: block; 
+  position: relative; 
+  top: 1px; 
+}
+
+a.big-btn, a.big-btn:visited { 
+  position: absolute;
+  z-index: 1;
+  height:  $hdr-big-btn-height;
+  width: $hdr-big-btn-width;
+  top: $hdr-big-btn-top;
+  left: $hdr-big-btn-left;
+  background: $nav-big-btn-bg;
+  padding: 0 6px;
+  color: $white !important;
+  text-align: center;
+  line-height: 1;
+  font-size: 1em;
+  font-weight: 200;
+  border-radius: $border-radius;
+  @include well;
+  transition: background .2s ease;
+}
+
+a.big-btn:focus,
+a.big-btn:hover {
+  background: $nav-big-btn-bg-hover;
+}
+
+a.big-btn:active {
+  background: $nav-big-btn-bg;
+  /* color snaps back on button press */
+  transition: none;
+}
+
+a.big-btn span { 
+  display: table-cell;
+  vertical-align: middle;
+  /* undo menu item nudging  */
+  top: 0;
+  height: $hdr-big-btn-height;
+  width: $hdr-big-btn-width;
+}
+
+.nav-social { 
+  /* overlap .header-logo-patch */
+  position: relative;
+  z-index: 1;
+  float: right;
+  padding-right: .875em;
+}
+
+.icon-twitter-sign, 
+.icon-twitter-sign:visited, 
+.icon-facebook-sign,
+.icon-facebook-sign:visited {
+  position: relative;
+  opacity: 0.75;
+  text-shadow: 0 2px 1px rgba(255,255,255, 0.4), 
+    0 0 10px rgba(204,232,229, 0.5);
+}
+
+.icon-twitter-sign:focus, 
+.icon-facebook-sign:focus,
+.icon-twitter-sign:hover, 
+.icon-facebook-sign:hover{
+  top: -1px;
+  opacity: 1;
+  text-shadow: 0 2px 1px rgba(0,0,0, 0.2);
+}
+
+.icon-twitter-sign:active, 
+.icon-facebook-sign:active {
+  top: 0;
+  opacity: 1;
+  text-shadow: none;
+}
+
+.icon-twitter-sign:before, .icon-facebook-sign:before {
+  display: block;
+  padding-left: .25em;
+  font-family: 'FontAwesome';
+  font-size: 44px;
+  /* vertically align middle */
+  line-height: $hdr-topwell-height;
+}
+
+.icon-twitter-sign:before {
+  content: "\f081";
+  color: $twitter-bg;
+}
+
+.icon-facebook-sign:before {
+  content: "\f082";
+  color: $facebook-bg;
+}
+
+/* MAIN */
+
+.main { 
+  background-color: $tan;
+  background-image: $main-bg-image; 
+  /* padding-top = height of header on right (column-2) */
+  padding: $hdr-top-height 2em 2em 2em;
+}
+
+/* extra padding-top for header "overhang" */
+.column-1 {
+  padding: $hdr-side-total-height + $padding-small 2em 2em 2em;
+}
+
+/* elements that reach the edges of .main need to fall 
+   under edge shadow to maintain "cut-out" illusion */
+.well-left, well-right, .well-sides {
+  position: relative;
+  overflow: hidden; 
+}
+
+/* corrected from article - left and right needed pseudos */
+.well-left:before, 
+.well-right:after, 
+.well-sides:before,
+.well-sides:after {
+  content: "";
+  display: block;
+  position: absolute;
+  /* higher than any z-index in .main, lower than header */
+  z-index: 99;
+  top: -1*$shadow-size;
+  height: 120%;
+  width: $shadow-size;
+  background: transparent;
+}
+
+.well-left:before, .well-sides:before {
+  left: 0;
+  @include well-left; 
+}
+
+.well-right:after, .well-sides:after {
+  right: 0;
+  @include well-right;
+}
+
+/* UTILITY */
+/*
+ * Clearfix: contain floats
+ *
+ * For modern browsers
+ * 1. The space content is one way to avoid an Opera bug when the
+ *    `contenteditable` attribute is included anywhere else in the document.
+ *    Otherwise it causes space to appear at the top and bottom of elements
+ *    that receive the `clearfix` class.
+ * 2. The use of `table` rather than `block` is only necessary if using
+ *    `:before` to contain the top-margins of child elements.
+ */
+
+.clearfix:before,
+.clearfix:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+/*
+* Hide only visually, but have it available for screenreaders: h5bp.com/v
+*/
+.visuallyhidden, .screen-reader-text {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+/*
+ * Extends the .visuallyhidden class to allow the element to be focusable
+ * when navigated to via the keyboard: h5bp.com/p
+ */
+.visuallyhidden.focusable:active, .screen-reader-text.focusable:active,
+.visuallyhidden.focusable:focus, .screen-reader-text.focusable:focus {
+  clip: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  width: auto;
+}
+
+/* MEDIA QUERIES */
+
+/* Mobile example - e.g., iPhone5 landscape width = 568px */
+@media only screen 
+and (max-device-width : 599px) {
+ 
+  .header-top { 
+  /* unpin header so it scrolls with content */
+    position: absolute; 
+  }
+  
+  /* even if you keep the header fixed, you might 
+     change width to 100% for better mobile zooming */
+  .page-wrap, .header-wrap { 
+    width: 100%; 
+  }
+
+}
+
+/* A full-on responsive layout would reconfigure the 
+   layout - this is just a gesture as an example */
+
+/* lose countoured bottom at smaller width - 
+   when menu items overflow 2 lines */
+
+@media only screen 
+and (max-width : 512px) {
+
+  .nav-main ul { 
+    height: $hdr-side-height - $hdr-topwell-height - $hdr-menu-item-padding-top;
+    background: none; }
+
+  /* taller left-side "tab" bg + shadow  */
+  .header-content:before,
+  /* rounded corner under menu - left */
+  .nav-main ul:after { 
+    display: none;
+  }
+
+}
+    
+@media only screen 
+and (max-width : 320px) {
+ 
+  .header-top { 
+  /* unpin header so it scrolls with content */
+   position: absolute; }
+  
+  /* even if you keep the header fixed, you might 
+     change width to 100% for better mobile zooming */
+  
+  .page-wrap, .header-wrap { 
+    width: 100%; }
+
+}
+
+
+/* Presentational CSS Below */
+
+/* force a vertical scrollbar to prevent a jumpy page */
+html {overflow-y: scroll;}
+
+body {
+  line-height: 1.3125; }
+
+/* ensure there's enough to scroll */
+.main { padding-bottom: 30em; }
+
+figure {
+  margin: 1.5em auto 1em;
+  padding: 8px;
+  background: #eaeaea;
+  text-align: center; }
+
+figcaption {
+  margin: .5em 0;
+  color: #999;
+  text-align: center;
+  font-size: 85%;
+  font-style: italic; }
+
+h1 {margin: 0; line-height: 1.0625;}
+
+h2 {color: #777; font-weight:300;}
+
+header h2 {margin:0; color: #666;}
+
+a, a:visited { color: $blue; }
+
+a:active, a:focus, a:hover { color: darken($blue, 15%); }
+
+code {
+  background: lightyellow;
+  padding: 1px .25em;
+  font-family: Menlo, Monaco, monospace;
+  font-size: 90%;}
+
+pre[rel]{
+    position: relative;
+    padding: .875em 0 0; }
+
+pre[rel]:before{
+    content:attr(rel);
+    color:white;
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    background:#e18728;
+    font-family: sans-serif;
+    padding:5px 0;
+    text-indent:15px; }
+
+pre code {
+  display: block; padding: 1.5em; }
+
+pre code i {
+  color: #bba;
+  font-style: italic; 
+  font-weight: 200; }
+
+pre code i span {
+  color: #2cb; }
+
+
+.nowrap, nobreak, .nobr { white-space: nowrap; }
+
+.header-top { background: rgba(255, 0, 242, 0.38); }
+.header-wrap:before { background: rgba(239, 58, 58, 0.26); }
+.header-wrap { background: rgba(255, 0, 0, 0.37); }
+.header-content:before { background: rgba(239, 58, 58, 0.26)!important; }
+.header-content { background: rgba(120, 242, 163, 0.09); }
+.header-content:after { border-color: coral!important; background: rgba(255, 0, 242, 0.38); }
+.header-logo:before { background: rgba(46, 146, 231, 0.15); }
+.header-logo-patch { border: 1px solid green!important; }
+.header-logo-patch:after { background: green!important; }
+.header-social { border: 1px solid blue!important; }

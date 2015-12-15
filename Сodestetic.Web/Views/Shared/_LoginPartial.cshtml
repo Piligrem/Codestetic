@@ -1,0 +1,58 @@
+﻿@model PermissionsMenu
+
+<ul class="tools-menu">
+    @if (Request.IsAuthenticated)
+    {
+        using (Html.BeginForm("Logout", "User", FormMethod.Post, new { area = "", id = "logoutForm", @class = "navbar-right" }))
+        { @Html.AntiForgeryToken() }
+        <li>
+            @Html.LinkTable(User.Identity.Name, T("Menu.Acount.Tooltip"), null, null)
+            <div>
+                <ul>
+                    @if (!(Model.IsAdmin || Model.IsSuperAdmin))
+                    {
+                        <li>@Html.RouteLink(T("Menu.Acount.Manage"), "MyAccount")</li>
+                    }
+                    <li>
+                        @*<a href="@Url.RouteUrl("Logout")"><i class="icon-sign-out"></i>@T("Menu.Acount.Logoff")</a>*@
+                        <a href="javascript:document.getElementById('logoutForm').submit()"><i class="icon-sign-out"></i>@T("Menu.Acount.Logoff")</a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+        if (Model.IsAdmin || Model.IsSuperAdmin)
+        {
+            <li>
+                @Html.LinkTable(T("Menu.Tools"), T("Menu.Tools.Tooltip"), null, null)
+                <div>
+                    <ul>
+                        <li>
+                            <a href="@Url.Action("ClearCache", "Common", new { previousUrl = Request.RawUrl, area = "Admin" })">
+                                <i class="icon-trash"></i>
+                                @T("Admin.Header.ClearCache")
+                            </a>
+                        </li>
+                        <li>
+                            <a id="restart-application" href="#" data-url="@Url.Action("RestartApplication", "Common", new { previousUrl = Request.RawUrl, area = "Admin" })">
+                                <i class="icon-power-off"></i>
+                                @T("Admin.Header.RestartApplication")
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            @Html.Action("LanguageSelector", "Common", new { area = "Admin" })
+        }
+    }
+    else
+    {
+        <li>@Html.RouteLinkTooltip(T("Menu.Acount.Register"), T("Menu.Acount.Register.Tooltip"), "Register", htmlAttributes: new { id = "registerLink" })</li>
+        <li>@Html.RouteLinkTooltip(T("Menu.Acount.Login"), T("Menu.Acount.Login.Tooltip"), "Login", htmlAttributes: new { id = "loginLink" })</li>
+    }
+    @if (!Model.IsAdmin && !Model.IsSuperAdmin)
+    {
+        @Html.Action("LanguageSelector", "Common", new { area = "" })
+    }
+</ul>
+
+

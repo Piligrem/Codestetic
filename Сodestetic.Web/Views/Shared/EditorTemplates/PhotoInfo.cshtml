@@ -1,0 +1,12 @@
+﻿@model long?
+@using Specter.Web.Core.Domain.Media;
+@{
+    var pictureService = EngineContext.Current.Resolve<Specter.Web.Services.Media.IPictureService>();
+    var photoId = Model.HasValue ? Model.Value : 0;
+}
+<div style="display: inline-block;">
+    @Html.HiddenFor(x => x, new { @class = "hidden photo-user" })
+    <div>
+        <img src="@(pictureService.GetPictureUrl(photoId, 100, true, PictureType.Photo))" class="item-photo stick-none" alt="" />
+    </div>
+</div>

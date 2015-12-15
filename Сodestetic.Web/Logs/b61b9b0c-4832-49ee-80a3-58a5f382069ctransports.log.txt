@@ -1,0 +1,82 @@
+SignalR.Transports.WebSocketTransport Information: 0 : CloseSocket(1fe007d2-7917-40ce-b08b-4b48ed5489c3)
+SignalR.Transports.TransportHeartBeat Information: 0 : Connection 1fe007d2-7917-40ce-b08b-4b48ed5489c3 is New.
+SignalR.Transports.TransportHeartBeat Information: 0 : Connection 0ee8074e-d973-4df9-aa8f-cd01c2817210 is New.
+SignalR.Transports.TransportHeartBeat Verbose: 0 : Connection 1fe007d2-7917-40ce-b08b-4b48ed5489c3 exists. Closing previous connection.
+SignalR.Transports.WebSocketTransport Information: 0 : End(1fe007d2-7917-40ce-b08b-4b48ed5489c3)
+SignalR.Transports.WebSocketTransport Verbose: 0 : Cancel(1fe007d2-7917-40ce-b08b-4b48ed5489c3)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : Connection 1fe007d2-7917-40ce-b08b-4b48ed5489c3 exists. Closing previous connection.
+SignalR.Transports.ServerSentEventsTransport Information: 0 : End(1fe007d2-7917-40ce-b08b-4b48ed5489c3)
+SignalR.Transports.ServerSentEventsTransport Verbose: 0 : Cancel(1fe007d2-7917-40ce-b08b-4b48ed5489c3)
+SignalR.Transports.WebSocketTransport Verbose: 0 : DrainWrites(1fe007d2-7917-40ce-b08b-4b48ed5489c3)
+SignalR.Transports.ServerSentEventsTransport Verbose: 0 : DrainWrites(1fe007d2-7917-40ce-b08b-4b48ed5489c3)
+SignalR.Transports.WebSocketTransport Information: 0 : CompleteRequest (1fe007d2-7917-40ce-b08b-4b48ed5489c3)
+SignalR.Transports.ServerSentEventsTransport Information: 0 : CompleteRequest (1fe007d2-7917-40ce-b08b-4b48ed5489c3)
+SignalR.Transports.LongPollingTransport Verbose: 0 : DrainWrites(1fe007d2-7917-40ce-b08b-4b48ed5489c3)
+SignalR.Transports.LongPollingTransport Information: 0 : CompleteRequest (1fe007d2-7917-40ce-b08b-4b48ed5489c3)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : 1fe007d2-7917-40ce-b08b-4b48ed5489c3 is dead
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(0ee8074e-d973-4df9-aa8f-cd01c2817210)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : 1fe007d2-7917-40ce-b08b-4b48ed5489c3 is dead
+SignalR.Transports.TransportHeartBeat Verbose: 0 : 1fe007d2-7917-40ce-b08b-4b48ed5489c3 is dead
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(0ee8074e-d973-4df9-aa8f-cd01c2817210)
+SignalR.Transports.LongPollingTransport Verbose: 0 : Cancel(1fe007d2-7917-40ce-b08b-4b48ed5489c3)
+SignalR.Transports.LongPollingTransport Verbose: 0 : DrainWrites(1fe007d2-7917-40ce-b08b-4b48ed5489c3)
+SignalR.Transports.LongPollingTransport Warning: 0 : Exception thrown by Task: System.AggregateException: Произошла одна или несколько ошибок. ---> System.Web.HttpException: Удаленный хост разорвал соединение. Код ошибки: 0x800704CD.
+   в System.Web.Hosting.IIS7WorkerRequest.RaiseCommunicationError(Int32 result, Boolean throwOnDisconnect)
+   в System.Web.Hosting.IIS7WorkerRequest.ExplicitFlush()
+   в System.Web.HttpResponse.Flush(Boolean finalFlush, Boolean async)
+   в System.Web.HttpWriter.WriteFromStream(Byte[] data, Int32 offset, Int32 size)
+   в Microsoft.Owin.Host.SystemWeb.CallStreams.OutputStream.Write(Byte[] buffer, Int32 offset, Int32 count)
+   в Microsoft.AspNet.SignalR.Owin.ServerResponse.Write(ArraySegment`1 data)
+   в Microsoft.AspNet.SignalR.Infrastructure.BinaryTextWriter.<.ctor>b__4(ArraySegment`1 data, Object state)
+   в Microsoft.AspNet.SignalR.Infrastructure.BufferTextWriter.ChunkedWriter.Flush(Byte[] byteBuffer, Boolean flushEncoder)
+   в Microsoft.AspNet.SignalR.Infrastructure.BufferTextWriter.Flush()
+   в Microsoft.AspNet.SignalR.Transports.LongPollingTransport.PerformPartialSend(Object state)
+   в Microsoft.AspNet.SignalR.Infrastructure.TaskQueue.InvokeNext(Func`2 next, Object nextState)
+   в Microsoft.AspNet.SignalR.TaskAsyncHelper.FromMethod[T1,T2,T3](Func`4 func, T1 arg1, T2 arg2, T3 arg3)
+--- Конец трассировка стека из предыдущего расположения, где возникло исключение ---
+   в System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   в Microsoft.AspNet.SignalR.Messaging.Subscription.<Invoke>d__2.MoveNext()
+--- Конец трассировка стека из предыдущего расположения, где возникло исключение ---
+   в System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   в Microsoft.AspNet.SignalR.Messaging.Subscription.<Work>d__8.MoveNext()
+--- Конец трассировка стека из предыдущего расположения, где возникло исключение ---
+   в System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   в Microsoft.AspNet.SignalR.Messaging.MessageBroker.<DoWork>d__2.MoveNext()
+   --- Конец трассировки внутреннего стека исключений ---
+---> (Внутреннее исключение #0) System.Web.HttpException (0x800704CD): Удаленный хост разорвал соединение. Код ошибки: 0x800704CD.
+   в System.Web.Hosting.IIS7WorkerRequest.RaiseCommunicationError(Int32 result, Boolean throwOnDisconnect)
+   в System.Web.Hosting.IIS7WorkerRequest.ExplicitFlush()
+   в System.Web.HttpResponse.Flush(Boolean finalFlush, Boolean async)
+   в System.Web.HttpWriter.WriteFromStream(Byte[] data, Int32 offset, Int32 size)
+   в Microsoft.Owin.Host.SystemWeb.CallStreams.OutputStream.Write(Byte[] buffer, Int32 offset, Int32 count)
+   в Microsoft.AspNet.SignalR.Owin.ServerResponse.Write(ArraySegment`1 data)
+   в Microsoft.AspNet.SignalR.Infrastructure.BinaryTextWriter.<.ctor>b__4(ArraySegment`1 data, Object state)
+   в Microsoft.AspNet.SignalR.Infrastructure.BufferTextWriter.ChunkedWriter.Flush(Byte[] byteBuffer, Boolean flushEncoder)
+   в Microsoft.AspNet.SignalR.Infrastructure.BufferTextWriter.Flush()
+   в Microsoft.AspNet.SignalR.Transports.LongPollingTransport.PerformPartialSend(Object state)
+   в Microsoft.AspNet.SignalR.Infrastructure.TaskQueue.InvokeNext(Func`2 next, Object nextState)
+   в Microsoft.AspNet.SignalR.TaskAsyncHelper.FromMethod[T1,T2,T3](Func`4 func, T1 arg1, T2 arg2, T3 arg3)
+--- Конец трассировка стека из предыдущего расположения, где возникло исключение ---
+   в System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   в Microsoft.AspNet.SignalR.Messaging.Subscription.<Invoke>d__2.MoveNext()
+--- Конец трассировка стека из предыдущего расположения, где возникло исключение ---
+   в System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   в Microsoft.AspNet.SignalR.Messaging.Subscription.<Work>d__8.MoveNext()
+--- Конец трассировка стека из предыдущего расположения, где возникло исключение ---
+   в System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   в Microsoft.AspNet.SignalR.Messaging.MessageBroker.<DoWork>d__2.MoveNext()<---
+
+SignalR.Transports.LongPollingTransport Information: 0 : CompleteRequest (1fe007d2-7917-40ce-b08b-4b48ed5489c3)
+SignalR.Transports.TransportHeartBeat Information: 0 : Dispose(). Closing all connections
+SignalR.Transports.LongPollingTransport Information: 0 : End(1fe007d2-7917-40ce-b08b-4b48ed5489c3)
+SignalR.Transports.WebSocketTransport Information: 0 : End(0ee8074e-d973-4df9-aa8f-cd01c2817210)
+SignalR.Transports.WebSocketTransport Verbose: 0 : Cancel(0ee8074e-d973-4df9-aa8f-cd01c2817210)
+SignalR.Transports.WebSocketTransport Verbose: 0 : DrainWrites(0ee8074e-d973-4df9-aa8f-cd01c2817210)
+SignalR.Transports.WebSocketTransport Information: 0 : CompleteRequest (0ee8074e-d973-4df9-aa8f-cd01c2817210)
+SignalR.Transports.WebSocketTransport Information: 0 : CloseSocket(0ee8074e-d973-4df9-aa8f-cd01c2817210)

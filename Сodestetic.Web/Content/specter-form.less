@@ -1,0 +1,292 @@
+﻿@import 'specter-varibles.less';
+@import 'mixins/specter-functions.less';
+@import 'mixins/forms.less';
+//@import 'specter-input-groups.less';
+
+.form-modal {
+    .display-flex(column, inline-flex);
+    position: relative;
+    background-color: @modal-bg;
+    .background-clip();
+    cursor: default;
+    z-index: 100000;
+    .animation-panel();
+
+    & {
+        box-shadow: @modal-border-shadow;
+        .border-radius-all(@border-radius-base);
+
+        .form-modal-title {
+            .form-modal-title();
+            .border-radius-top(@border-radius-medium);
+        }
+    }
+
+    &.ui-touch {
+        .border-flat-all(@modal-border-flat);
+        .border-radius-all(@border-radius-medium);
+
+        .form-modal-title {
+            .form-modal-title();
+            .border-radius-top(@border-radius-xs);
+            .border-flat-bottom(@modal-border-flat);
+        }
+    }
+}
+.overlay {
+    /*display: flex;
+    justify-content: center;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;*/
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.2);
+    position: absolute;
+    z-index: 99999;
+}
+
+.form-modal .form-content-container {
+    .display-flex(column, flex);
+    align-items: center;
+    justify-content: center;
+    border-bottom: @btn-default-border;
+    margin: 0 @margin-base;
+    padding: 0 @padding-horizontal-base @padding-vertical-base @padding-horizontal-base;
+}
+
+// --- Button ---
+.form-buttons {
+    position: relative;
+    bottom: 0;
+    padding: 5px;
+    //width: 100%;
+    justify-content: space-between;
+    align-self: flex-end;
+    .display-flex(row);
+    //.box-sizing(border-box);
+}
+.form-buttons-standart,
+.form-buttons-options {
+    .display-flex(row);
+    & > .btn:not(:last-child) {
+        margin-right: @margin-base;
+    }
+}
+.form-buttons-standart { 
+    align-self: flex-end; 
+    order: 2;
+}
+.form-buttons-options { 
+    align-self: flex-start; 
+    margin-right: @margin-base * 2;
+    order: 1;
+}
+.form-button {
+    width: 70px;
+    height: 25px;
+    margin-right: 5px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.65);
+    background-color: #FFF;
+    border: none;
+    border-radius: 4px;
+    
+    &:active,
+    &:hover {
+        .hover();
+    }
+    &:active {
+        box-shadow: 0 1px 5px rgba(0, 0, 0, 0.65) inset;
+    }
+    &:focus {
+        outline: none;
+    }
+}
+// --- end Button ---
+
+// --- Common form controls ---
+//
+// Shared size and type resets for form controls. Apply `.form-control` to any
+// of the following form controls:
+//
+// select
+// textarea
+// input[type="text"]
+// input[type="password"]
+// input[type="datetime"]
+// input[type="datetime-local"]
+// input[type="date"]
+// input[type="month"]
+// input[type="time"]
+// input[type="week"]
+// input[type="number"]
+// input[type="email"]
+// input[type="url"]
+// input[type="search"]
+// input[type="tel"]
+// input[type="color"]
+
+.form-control {
+    display: block;
+    width: 100%;
+    height: @input-height-base; // Make inputs at least the height of their button counterpart (base line-height + padding + border)
+    padding: @input-padding-vertical-base @padding-horizontal-base;
+    font-size: @font-size-base;
+    line-height: @line-height-base;
+    color: @input-color;
+    background-color: @input-bg;
+    background-image: none; // Reset unusual Firefox-on-Android default style; see https://github.com/necolas/normalize.css/issues/214
+    border: 1px solid @input-border;
+    border-radius: @input-border-radius; // Note: This has no effect on <select>s in some browsers, due to the limited stylability of <select>s in CSS.
+    .box-sizing(border-box);
+    .box-shadow(inset 0 1px 1px rgba(0,0,0,.075));
+    .transition(~"border-color ease-in-out .15s, box-shadow ease-in-out .15s");
+
+    // Customize the `:focus` state to imitate native WebKit styles.
+    .form-control-focus();
+
+    // Placeholder
+    .placeholder();
+
+    // Unstyle the caret on `<select>`s in IE10+.
+    &::-ms-expand {
+        border: 0;
+        background-color: transparent;
+    }
+
+    // Disabled and read-only inputs
+    //
+    // HTML5 says that controls under a fieldset > legend:first-child won't be
+    // disabled if the fieldset is disabled. Due to implementation difficulty, we
+    // don't honor that edge case; we style them as disabled anyway.
+    &[disabled],
+    &[readonly],
+    fieldset[disabled] & {
+        background-color: @input-bg-disabled;
+        opacity: 1; // iOS fix for unreadable disabled content; see https://github.com/twbs/bootstrap/issues/11655
+    }
+
+    &[disabled],
+    fieldset[disabled] & {
+        cursor: @cursor-disabled;
+    }
+
+    // Reset height for `textarea`s
+    textarea& {
+        height: auto;
+    }
+}
+// --- end Common form controls ---
+
+// --- Input controls ---
+.fieldset {
+    margin-bottom: @margin-base;
+    overflow: hidden;
+    .display-flex(column, flex);
+
+    & .lable {
+        font-size: @font-size-base;
+    }
+}
+
+// --- Spinner ---
+.ui-color-picker,
+.ui-spinner {    
+    .display-flex(row, flex);
+    align-items: center;
+    width: @spinner-default-width;
+    height: 30px;
+    & .form-control {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        padding: 5px;
+    }
+    & input {
+        height: inherit;
+    }
+}
+.color-picker-coltrol,
+.spinner-control {
+    .display-flex(column);
+    justify-content: space-between;
+    .box-sizing(border-box);
+    height: inherit;
+    border-radius: 0 @border-radius-base @border-radius-base 0;
+    border: @btn-default-border;
+    border-left-width: 0;
+    font-size: @font-size-base - 1px;
+}
+.btn-color-picker-down,
+.btn-spinner-up,
+.btn-spinner-down {
+    border: none;
+    width: 16px;
+    height: 100%;
+    font-size: inherit;
+    min-width: 0;
+    padding: 1px 2px 1px 3px;
+    justify-content: center;
+}
+.btn-spinner-up {
+    //border-bottom: 1px solid @btn-default-border;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.btn-spinner-down {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+// --- end Spinner ---
+// --- Color picker ---
+.ui-color-picker .transparent-color {
+    .border-flat-all(@btn-default-border);
+    background-image: url('/Content/Images/transparent-background.png');
+    height: 100%;
+    padding: 0;
+    overflow: hidden;
+}
+.selected-color {
+    height: inherit;
+}
+.btn-color-picker-down {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    height: 100%;
+}
+// --- end Color picker ---
+// --- end Input controls ---
+
+// --- Group control ---
+.group-control-horizontal {
+    .display-flex(row);
+    margin-top: @margin-base;
+
+    & > span {
+        .flex();
+    }
+
+    & > :not(:last-child),
+    & > :not(:last-child) {
+        margin-right: @margin-base;
+    }
+}
+.group-control-vertical {
+    .display-flex(column);
+}
+// --- end Group control ---
+
+// --- Options for other ---
+#Tolerance {
+    width: 100%;
+}
+#Battery {
+    .flex(1, 1, auto);
+}
+// --- end Options for other ---
+
+@media (min-width: 320px) and (max-width: 640px) {}
+@media (min-width: 768px) {}

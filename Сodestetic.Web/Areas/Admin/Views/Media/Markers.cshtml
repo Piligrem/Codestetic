@@ -1,0 +1,299 @@
+﻿@model ListMarkerModel
+@using Kendo.Mvc.UI;
+@using Specter.Web.Utilities;
+
+@{
+    ViewBag.Title = T("Admin.Media.MarkerDetails").Text;
+    this.ViewBag.Model = "Admin.Media.Markers";
+    ViewBag.Action = "Edit";
+    ViewBag.Type = "icon";
+    ViewBag.SaveHandler = "saveHandler";
+
+    //other variables
+    var random = CommonHelper.GenerateRandomInteger();
+    var iconUpload = "icon" + random;
+    var shadowUpload = "shadow" + random.ToString();
+    var pictureService = EngineContext.Current.Resolve<Specter.Web.Services.Media.IPictureService>();
+}
+<link type="text/css" rel="stylesheet" href="~/Areas/Admin/Content/jquery.bxslider.css" />
+<div class="admin-content align-center">
+    <div class="admin-row-content">
+        @using (Html.BeginForm())
+        {
+            @Html.Partial("_SectionHeader")
+            <div class="icon-slider">
+                @foreach (var icon in Model.Markers)
+                {
+                    <div class="slide">
+                        <img class="slide-icon" src="@icon.Url" data-id="@icon.Id" data-anchor-x="@icon.Anchor.X" data-anchor-y="@icon.Anchor.Y" data-is-system="@icon.IsSystem.ToString().ToLowerInvariant()" data-is-retina="@icon.IsRetina.ToString().ToLowerInvariant()" />
+                        @if (icon.ShadowMarker != null)
+                        {
+                            <img class="slide-shadow" src="@icon.ShadowMarker.Url" data-id="@icon.ShadowMarker.Id" data-anchor-x="@icon.ShadowMarker.Anchor.X" data-anchor-y="@icon.ShadowMarker.Anchor.Y" />
+                        }
+                    </div>
+                }
+            </div>
+            <table @Html.Attr("style", "width: 100%;")>
+                <tr>
+                    <td colspan="4">
+                        <div class="slide-edit-wrapper" @Html.Attr("style", "min-width:280px;")>
+                            <div class="slide-edit"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.SymbolForBool(false, new { id = "isSystem" })
+                        @*@Html.CheckBox("isSystem", false, new { @class = "chk-show-icon" })*@
+                    </td>
+                    <td>
+                        @Html.Label(T("Admin.Media.IsSystem"), new { @class = "chk-lable-show" })
+                    </td>
+                    <td>
+                        @Html.CheckBox("isRetina", false, new { @class = "chk-show-shadow" })
+                    </td>
+                    <td>
+                        @Html.Label(T("Admin.Media.IsRetina"), new { @class = "chk-lable-show" })
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input id="showMarker" checked="checked" class="chk-show-icon" type="checkbox" value="true" data-child="marker-icon">
+                    </td>
+                    <td>
+                        @Html.Label(T("Admin.Media.ShowMarker"), new { @class = "chk-lable-show" })
+                    </td>
+                    <td>
+                        <input id="showShadow" checked="checked" class="chk-show-icon" type="checkbox" value="true" data-child="marker-shadow">
+                    </td>
+                    <td>
+                        @Html.Label(T("Admin.Media.ShowShadow"), new { @class = "chk-lable-show" })
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <div id="@iconUpload" class="fileupload">
+                            <span class="k-button k-button-icontext fileinput-button" @Html.Attr("style", "width:100%;")>
+                                <i class="icon-upload"></i>
+                                @T("Admin.Media.UploadMarker")
+                                <input id="fileupload-@random" type="file" name="file" style="" />
+                            </span>
+                        </div>
+                    </td>
+                    <td colspan="2">
+                        <div id="@shadowUpload" class="fileupload">
+                            <span class="k-button k-button-icontext fileinput-button" @Html.Attr("style", "width:100%;")>
+                                <i class="icon-upload"></i>
+                                @T("Admin.Media.UploadShadowMarker")
+                                <input id="fileupload-@random" type="file" name="file" style="" />
+                            </span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <button id="removeMarker" class="k-button k-button-icontext remove" data-selector="icon" @Html.Attr("style", "display:none;width:100%;")>
+                            <i class="icon-trash"></i>
+                            @T("Admin.Media.RemoveMarker")
+                        </button>
+                    </td>
+                    <td colspan="2">
+                        <button id="removeShadow" class="k-button k-button-icontext remove" data-selector="shadow" @Html.Attr("style", "display:none;width:100%;"/*, picture == null*/)>
+                            <i class="icon-trash"></i>
+                            @T("Admin.Media.RemoveShadowMarker")
+                        </button>
+                    </td>
+                </tr>
+            </table>
+            <div class="span5 fileupload-progress fade">
+                <!-- The global progress bar -->
+                <div class="progress progress-success progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                    <div class="bar" style="width:0;"></div>
+                </div>
+                <!-- The extended global progress information -->
+                <div class="progress-extended"></div>
+            </div>
+        }
+        @Html.DeleteConfirmationSimple("DeleteMarker", "deleteMarker(this)", (string)ViewBag.Type + "-delete")
+    </div>
+</div>
+<script src="/Scripts/fileupload/jquery.ui.widget.min.js" type="text/javascript"></script>
+<script src="/Scripts/fileupload/jquery.fileupload.min.js" type="text/javascript"></script>
+<script src="/Scripts/jquery.bxslider.js" type="text/javascript"></script>
+<script src="/Areas/Admin/Scripts/specter.ui.icons.js" type="text/javascript"></script>
+<script>
+    var container = $(".slide-edit"),
+        anchorMarker = container.find(".anchor-icon"),
+        anchorShadow = container.find(".anchor-shadow"),
+        slider = $('.icon-slider'),
+        icon = container.find(".marker-icon"),
+        shadow = container.find(".marker-shadow"),
+        iconEditor = null;
+
+    $(document).ready(function () {
+        slider.bxSlider({
+            slideWidth: @Model.MarkerMaxSize.Width,
+            slideHeight: @Model.MarkerMaxSize.Height,
+            minSlides: 4,
+            maxSlides: 4,
+            slideMargin: 5,
+            useCSS: false
+        });
+
+        ($)(function() {
+            var slides = slider.find(".slide");
+            $.each(slides, function(key, value) {
+                var slide = $(value),
+                    icon = slide.find(".slide-icon"),
+                    shadow = slide.find(".slide-shadow");
+
+                icon.css("left", (slide.width() - icon.width()) / 2).css("top", (slide.height() - icon.height()) / 2);
+                if (shadow != undefined) {
+                    shadow.css("left", icon.position().left + icon.data("anchor-x") - shadow.data("anchor-x"))
+                        .css("top", icon.position().top + icon.data("anchor-y") - shadow.data("anchor-y"));
+                }
+            });
+        })
+
+        iconEditor = container.MarkerEditor({
+            icon: {
+                url: "@Model.CurrentMarker.Url",
+                id: @Model.CurrentMarker.Id,
+                anchor: { x: @Model.CurrentMarker.Anchor.X, y: @Model.CurrentMarker.Anchor.Y }
+            },
+            shadow: {
+                url: "@Model.CurrentMarker.ShadowMarker.Url",
+                id: @Model.CurrentMarker.ShadowMarker.Id,
+                anchor: { x: @Model.CurrentMarker.ShadowMarker.Anchor.X, y: @Model.CurrentMarker.ShadowMarker.Anchor.Y }
+            },
+            anchor: {
+                classes: "anchor-icon anchor-wrapper",
+            }
+        });
+
+        $("#showMarker").change(function() { iconEditor.show(this); });
+        $("#showShadow").change(function() { iconEditor.show(this); });
+
+        $(".slide").click(function (item, e) {
+            var icon = $(item.currentTarget).find(".slide-icon"),
+                shadow = $(item.currentTarget).find(".slide-shadow");
+
+            iconEditor.setMarker(null, {
+                imageUrl: icon.attr("src"),
+                iconId: icon.data("id"),
+                anchorX: icon.data("anchor-x"),
+                anchorY: icon.data("anchor-y")
+            });
+            iconEditor.setShadow(null, {
+                imageUrl: shadow.attr("src"),
+                iconId: shadow.data("id"),
+                anchorX: shadow.data("anchor-x"),
+                anchorY: shadow.data("anchor-y")
+            });
+
+            $("#isSystem").iconCheckBox(icon.data("is-system"));   //.[0].checked = icon.data("is-system");
+            $("#isRetina")[0].checked = icon.data("is-retina");
+        });
+
+        //window.onbeforeunload = function() {
+        //    $.ajax({
+        //        url: "/admin/media/deleteicons",
+        //        type: "POST",
+        //        dataType: "json",
+        //        contentType: "application/json",
+        //        async: false,
+        //        data: {},
+        //        error: function(e) { }
+        //    });
+        //}
+    });
+    function deleteMarker(e)
+    {
+        iconEditor.deleteMarker(e);
+    }
+    function saveHandler() {
+        var isSystem = $('#isSystem').iconCheckBoxValue(),
+            isRetina = $("#isRetina").is(":checked"),
+            form = $("#" + this.element.context.name).closest("form"),
+            input = document.createElement("input");
+
+        iconEditor.setValuesToForm(form);
+
+        input.name = "isSystem";
+        input.type = "hidden";
+        input.value = isSystem;
+        input.style.display="none";
+        form.append(input);
+
+        input = document.createElement("input")
+        input.name = "isRetina";
+        input.type = "hidden";
+        input.value = isRetina;
+        input.style.display="none";
+        form.append(input);
+
+        input = document.createElement("input")
+        input.name = "save";
+        input.type = "hidden";
+        input.value = this.element.val();
+        input.style.display="none";
+        form.append(input);
+
+        form.submit();
+    }
+    $(function () {
+        var icon = $(".slide-edit .marker-icon"),
+            shadow = $(".slide-edit .marker-shadow"),
+            elMarker = $('#@iconUpload'),
+            elMarkerRemove = $('#removeMarker'),
+            elShadow = $('#@shadowUpload'),
+            elShadowRemove = $("#removeShadow");
+
+
+        elMarker.fileupload({
+            url: '@(Url.Action("AsyncUpload", "Media", new { area = "Admin" }))',
+            dataType: "json",
+            acceptFileTypes: /(\.|\/)(png)$/i,
+            done: function (e, data) {
+                var result = data.result;
+                if (result.success) {
+                    iconEditor.setMarker(elMarkerRemove, result);
+                    //setItem(icon, elMarkerRemove, result)
+                } else {
+                    $(this).notify(result.message.type, result.message.message);
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                if (errorThrown === "abort") {
+                    //alert('File Upload has been canceled');
+                }
+                $.notify("error", "@T("Admin.Media.UploadCanceled")" + "<br />" + jqXHR.error);
+            }
+        });
+
+        elShadow.fileupload({
+            url: '@(Url.Action("AsyncUpload", "Media", new { area = "Admin" }))',
+            dataType: "json",
+            acceptFileTypes: /(\.|\/)(png)$/i,
+            done: function (e, data) {
+                var result = data.result;
+                if (result.success) {
+                    iconEditor.setShadow(elShadowRemove, result)
+                    //setItem(shadow, elShadowRemove, result)
+                } else {
+                    $(this).notify(result.message.type, result.message.message);
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                if (errorThrown === "abort") {
+                    //alert('File Upload has been canceled');
+                }
+                $.notify("error", "@T("Admin.Media.UploadCanceled")" + "<br />" + jqXHR.error);
+            }
+        });
+
+        elMarkerRemove.click(function (e) { iconEditor.clearItem(this, e); })
+        elShadowRemove.click(function (e) { iconEditor.clearItem(this, e); })
+    });
+</script>
+

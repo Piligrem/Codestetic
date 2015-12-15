@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" id="Specter">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+</head>
+<body class="page-map">
+    <div id="wrapper">
+        <div id="wrapper-container">
+            <section id="header" class="navbar-map navbar-fixed-top">
+                @*@Html.Action("ShopBar", "Common")*@
+                @Html.Action("Header", "Common", new { @class = "brand" })
+                @*@Html.Action("MegaMenu", "Catalog", new { currentCategoryId = this.CurrentCategoryId, currentProductId = this.CurrentProductId })*@
+            </section>
+            @RenderBody()
+            <section id="footer" class="footer-map title">
+                @Html.Partial("Footer", "Common")
+            </section>
+        </div>
+    </div>
+    <script>
+    $(document).ready(
+        function () {
+            $(document.body).attr('unselectable', 'on');
+            $("#x-grid").niceScroll({ cursorcolor: "#232322", cursorborder: "1px solid #636262", cursorborderradius: 0, railoffset: { top: 0, left: 11 } });
+            dialogs.Add('SettingControl', {
+                title: '@T("SettingControl")',
+                shiftVertical: 50,
+                saveButton: '@T("Common.Button.Save")',
+                cancelButton: '@T("Common.Button.Cancel")',
+                open: '@Url.Action("SettingControl", "ControlPanel")',
+                save: '@Url.Action("SaveSettingControl", "ControlPanel")'
+            });
+            dialogs.Add('GeoZoneControl', {
+                title: '@T("GeoZoneControl")',
+                shiftVertical: 50,
+                saveButton: '@T("Common.Button.Save")',
+                cancelButton: '@T("Common.Button.Cancel")',
+                open: '@Url.Action("GeoZoneControl", "ControlPanel")',
+                save: '@Url.Action("SaveGeoZoneControl", "ControlPanel")',
+            });
+            dialogs.Add('TrackControl', {
+                title: '@T("TrackControl")',
+                shiftVertical: 50,
+                cancelButton: '@T("Common.Button.Close")',
+                open: '@Url.Action("TrackControl", "ControlPanel")'
+            });
+        }
+    );
+    </script>
+</body>
+@*@Scripts.Render("~/bundles/modernizr")*@
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jquery-ui")
+@Scripts.Render("~/bundles/jquery-notify")
+@Scripts.Render("~/bundles/jquery-nicescroll")
+@Scripts.Render("~/bundles/specter.core")
+@Scripts.Render("~/bundles/specter.signalr")
+@Scripts.Render("~/bundles/specter.controlpanel.notify.map")
+
+@Scripts.Render("~/bundles/jquery.datetimepicker")
+@Scripts.Render("~/bundles/moment")
+</html>

@@ -1,0 +1,190 @@
+﻿@import "icons.less";
+
+@map-padding: 10px;
+@map-background-texture: url("../Content/Images/texture.png");
+
+html, body {
+    /*width: 100%;
+    height: 100%;
+       -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;*/
+}
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.container-wrapper {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background: @map-background-texture;
+    padding: @map-padding;
+}
+.content-map-wrap {
+    width: inherit;
+    height: inherit;
+}
+#content-body {
+    height: inherit;
+}
+.container {
+    padding: @map-padding;
+    margin: 0;
+}
+@media (min-width: 768px) {
+    .sidebar {
+        margin: 0 10px 20px 0;
+    }
+}
+
+.leaflet-sidebar {
+    display: flex;
+    -ms-flex-direction: row;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    height: 100%;
+    pointer-events: auto !important;
+
+    & .leaflet-control-zoom {
+        align-self: baseline;
+    }
+}
+//#map {
+//    height: inherit;
+//    background-color: rgb(68,68,68); /* Needed for IEs */
+    /*border: 1px solid #000;*/
+    /*border: 1px solid rgba(255,255,255,.2);
+    -moz-box-shadow: 5px 5px 5px rgba(68,68,68,0.6);
+    -webkit-box-shadow: 5px 5px 5px rgba(68,68,68,0.6);
+    box-shadow: 5px 5px 5px rgba(68,68,68,0.6);
+    -ms-filter: "progid:DXImageTransform.Microsoft.Blur(PixelRadius=3,MakeShadow=true,ShadowOpacity=0.30)";
+    filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=3,MakeShadow=true,ShadowOpacity=0.30);*/
+//    zoom: 1;
+//}
+#map {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.object-panel-shift-left {
+    margin-left: 110px;
+}
+.object-panel-shift-right {
+    margin-right: 110px;
+}
+
+.object-panel {
+    position: relative; // absolute;
+    top: 0;
+    bottom: 0;
+    width: 100px;
+    overflow: hidden;
+    z-index: 2000;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.65);
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border-radius: 4px;
+    background-color: #FFF;
+    cursor: pointer;
+
+    & .object-panel-items-header {
+        background-color: cornflowerblue;
+        color: white;
+        text-align: center;
+        font-size: 14px;
+        line-height: 25px;
+        margin-bottom: 5px;
+        box-shadow: 0 1px 5px rgba(0, 0, 0, 0.65);
+    }
+    & .object-panel-items-header:after {
+        content: "\f0d9";
+        font-family: "ico-tools";
+        font-size: 16px;
+        line-height: 25px;
+        position: absolute;
+        right: 0;
+        margin-right: 5px;
+    }
+    & .object-item {
+        display: flex;
+            -ms-flex-direction: column;
+        -webkit-flex-direction: column;
+                flex-direction: column;
+        margin: 0 5px 5px 5px;
+        width: 90px;
+        box-shadow: 0 1px 5px rgba(0, 0, 0, 0.65);
+        border-radius: 5px;
+
+        & img {
+            width: 90px;
+            border-radius: 5px 5px 0 0;
+            //height: 90px;
+        }
+        & div {
+            width: 90px;
+            text-align: center;
+            background-color: cornflowerblue;
+            font-size: 12px;
+            color: white;
+            border-radius: 0 0 5px 5px;
+        }
+    }
+}
+.object-panel-items-header {
+    background-color: cornflowerblue;
+    color: white;
+    text-align: center;
+    font-size: 14px;
+    line-height: 25px;
+    margin-bottom: 5px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.65);
+}
+.object-panel-items-header:after {
+    content: "\f0d9";
+    font-family: "ico-tools";
+    font-size: 16px;
+    line-height: 25px;
+    position: absolute;
+    right: 0;
+    margin-right: 5px;
+}
+.object-panel.collapsed {
+    width: 36px;
+    height: 36px;
+    transition: all 80ms;
+}
+.object-panel.expanded {
+    width: 100px;
+    transition: all 80ms;
+}
+.object-panel .object-item:hover,
+.object-panel .object-item.active {
+       -moz-filter: grayscale(100%) brightness(80%);
+    -webkit-filter: grayscale(100%) brightness(80%);
+        -ms-filter: grayscale(100%) brightness(80%);
+            filter: grayscale(100%) brightness(80%);
+}
+@media (min-width: 768px) {
+    .object-panel {
+        top: 10px;
+        bottom: 10px;
+        margin: 0 10px 20px 0;
+        //-moz-transition: width 500ms;
+        //-o-transition: width 500ms;
+        //-webkit-transition: width 500ms;
+        //transition: width 500ms;
+    }
+}
+@media (min-width: 768px) {
+    .object-panel-left {
+        left: 10px;
+    }
+}

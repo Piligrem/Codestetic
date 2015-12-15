@@ -1,0 +1,17 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutMap.cshtml";
+}
+@*<div hidden="hidden">
+    @Model MapModel
+    @using Specter.Web.Models;
+</div>*@
+<script src="http://api-maps.yandex.ru/2.1/?lang=ru_RU&coordorder=longlat&mode=debug" type="text/javascript"></script>
+@*<script>
+    updateInterval = parseInt('@Model.TimeoutRefreshPosition');
+    zonePositionEnable = '@Model.ZonePositionEnable';
+    zonePositionRadius = parseInt('@Model.ZonePositionRadius');
+    visualizeOnlyValid = '@Model.VisualizeOnlyValid';
+</script>*@
+<div id="map" style="overflow: hidden;">
+</div>
+

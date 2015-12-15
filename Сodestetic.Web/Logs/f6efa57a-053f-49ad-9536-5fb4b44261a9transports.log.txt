@@ -1,0 +1,26 @@
+SignalR.Transports.TransportHeartBeat Information: 0 : Connection ba9bb643-95d4-49fe-b7f6-b3ab2b89ee5b is New.
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(ba9bb643-95d4-49fe-b7f6-b3ab2b89ee5b)
+SignalR.Transports.TransportHeartBeat Information: 0 : Dispose(). Closing all connections
+SignalR.Transports.WebSocketTransport Information: 0 : End(ba9bb643-95d4-49fe-b7f6-b3ab2b89ee5b)
+SignalR.Transports.WebSocketTransport Verbose: 0 : Cancel(ba9bb643-95d4-49fe-b7f6-b3ab2b89ee5b)
+SignalR.Transports.WebSocketTransport Verbose: 0 : DrainWrites(ba9bb643-95d4-49fe-b7f6-b3ab2b89ee5b)
+SignalR.Transports.WebSocketTransport Information: 0 : CompleteRequest (ba9bb643-95d4-49fe-b7f6-b3ab2b89ee5b)
+SignalR.Transports.WebSocketTransport Error: 0 : OnError(ba9bb643-95d4-49fe-b7f6-b3ab2b89ee5b, System.Net.WebSockets.WebSocketException (0x800703E3): Операция ввода/вывода была прервана из-за завершения потока команд или по запросу приложения
+   в System.Web.WebSockets.WebSocketPipe.<>c__DisplayClass4.<ReadFragmentAsync>b__5(Int32 hrError, Int32 cbIO, Boolean fUtf8Encoded, Boolean fFinalFragment, Boolean fClose)
+--- Конец трассировка стека из предыдущего расположения, где возникло исключение ---
+   в System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   в System.Web.WebSockets.AspNetWebSocket.<DoWork>d__1`1.MoveNext()
+--- Конец трассировка стека из предыдущего расположения, где возникло исключение ---
+   в System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   в System.Web.WebSockets.AspNetWebSocket.<>c__DisplayClass6.<<ReceiveAsyncImpl>b__7>d__0.MoveNext()
+--- Конец трассировка стека из предыдущего расположения, где возникло исключение ---
+   в System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   в Microsoft.AspNet.SignalR.WebSockets.WebSocketMessageReader.<ReadMessageAsync>d__0.MoveNext()
+--- Конец трассировка стека из предыдущего расположения, где возникло исключение ---
+   в System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   в System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   в Microsoft.AspNet.SignalR.WebSockets.WebSocketHandler.<ProcessWebSocketRequestAsync>d__e.MoveNext())
+SignalR.Transports.WebSocketTransport Information: 0 : CloseSocket(ba9bb643-95d4-49fe-b7f6-b3ab2b89ee5b)

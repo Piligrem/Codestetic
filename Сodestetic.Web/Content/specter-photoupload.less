@@ -1,0 +1,39 @@
+﻿@import 'specter-varibles.less';
+@import 'mixins/specter-functions.less';
+@import 'mixins/prefixes.less';
+
+
+.ui-photoupload {
+    position: relative;
+    overflow: hidden;
+    .border-flat-all();
+    .border-radius-all();
+    &:after {
+        content: '\e602';
+        color: @modal-title-color;
+        font-family: 'icon-specter';
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        padding: @padding-vertical-base @padding-horizontal-base;
+    }
+
+    &:hover > .photoupload[role='container'] {
+        .hover();
+    }
+}
+.photoupload[role='container'] {
+    display: inline-flex;
+    width: initial;
+    left: 0;
+    z-index: 10;
+}
+.photoupload[role='upload'] {
+    position: absolute;
+    font-size: 200px;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    opacity: 0;
+    z-index: 11;
+}

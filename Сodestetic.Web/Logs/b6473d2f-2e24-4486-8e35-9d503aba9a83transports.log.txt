@@ -1,0 +1,20 @@
+SignalR.Transports.TransportHeartBeat Information: 0 : Connection f5c3d676-8625-471a-a49b-71919bed786b is New.
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(f5c3d676-8625-471a-a49b-71919bed786b)
+SignalR.Transports.WebSocketTransport Information: 0 : CloseSocket(f5c3d676-8625-471a-a49b-71919bed786b)
+SignalR.Transports.WebSocketTransport Information: 0 : Abort(f5c3d676-8625-471a-a49b-71919bed786b)
+SignalR.Transports.TransportHeartBeat Information: 0 : Removing connection f5c3d676-8625-471a-a49b-71919bed786b
+SignalR.Transports.WebSocketTransport Information: 0 : End(f5c3d676-8625-471a-a49b-71919bed786b)
+SignalR.Transports.WebSocketTransport Verbose: 0 : DrainWrites(f5c3d676-8625-471a-a49b-71919bed786b)
+SignalR.Transports.WebSocketTransport Information: 0 : CompleteRequest (f5c3d676-8625-471a-a49b-71919bed786b)
+SignalR.Transports.TransportHeartBeat Information: 0 : Connection ba0edfa0-6975-46a5-be26-1725da4b5891 is New.
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(ba0edfa0-6975-46a5-be26-1725da4b5891)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(ba0edfa0-6975-46a5-be26-1725da4b5891)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(ba0edfa0-6975-46a5-be26-1725da4b5891)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(ba0edfa0-6975-46a5-be26-1725da4b5891)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(ba0edfa0-6975-46a5-be26-1725da4b5891)
+SignalR.Transports.WebSocketTransport Verbose: 0 : Cancel(ba0edfa0-6975-46a5-be26-1725da4b5891)
+SignalR.Transports.WebSocketTransport Verbose: 0 : DrainWrites(ba0edfa0-6975-46a5-be26-1725da4b5891)
+SignalR.Transports.WebSocketTransport Information: 0 : CompleteRequest (ba0edfa0-6975-46a5-be26-1725da4b5891)
+SignalR.Transports.WebSocketTransport Information: 0 : CloseSocket(ba0edfa0-6975-46a5-be26-1725da4b5891)
+SignalR.Transports.TransportHeartBeat Information: 0 : Dispose(). Closing all connections
+SignalR.Transports.WebSocketTransport Information: 0 : End(ba0edfa0-6975-46a5-be26-1725da4b5891)

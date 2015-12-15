@@ -1,0 +1,30 @@
+﻿@model Specter.Web.Models.SiteHeaderModel
+
+<div id="logobar">
+    <a href='@Model.HomeUrl'>
+        @if (Model.LogoUploaded)
+        {
+            <img src='@Url.Content(Model.LogoUrl)'
+                alt="@Model.LogoTitle"
+                title="@Model.LogoTitle"
+                class="@Model.CustomProperties["Class"]" />
+        }
+        else
+        {
+            @Model.LogoTitle
+        }
+    </a>
+    @*<div class="regional-selectors">
+            @Html.Action("LanguageSelector", "Common")
+        </div>*@
+</div>
+@if (!Model.EnableMenu)
+{
+    <div class="header-username">@Model.UserName</div>
+}
+@if(Model.EnableMenu)
+{ 
+    @Html.Action("Menu", "Common", new { flat = false })
+}
+
+

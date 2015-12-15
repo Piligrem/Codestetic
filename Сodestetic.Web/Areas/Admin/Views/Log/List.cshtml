@@ -1,0 +1,257 @@
+﻿@model LogSearchListModel
+@using Kendo.Mvc.UI;
+@using Kendo.Mvc.UI.Fluent;
+@{
+    var gridPageSize = EngineContext.Current.Resolve<Specter.Web.Core.Domain.Common.AdminAreaSettings>().GridPageSize;
+
+    ViewBag.Title = T("Admin.System.Log").Text;
+}
+<div class="admin-content align-center">
+    <div class="admin-row-content">
+        <div class="section-header">
+            <div class="title"><i class="icon icon-fire"></i>@ViewBag.Title</div>
+            <div class="options">
+                <button type="submit" id="clearAll" name="clearall" value="clearall" class="btn btn-danger">
+                    <i class="icon-trash icon-white"></i>@T("Admin.System.Log.ClearLog")
+                </button>
+                <button type="submit" id="delete-selected" name="delete-selected" value="delete_selected" class="btn">
+                    <i class="k-icon k-delete icon-trash icon-white"></i>@T("Admin.System.Log.DeleteSelected")
+                </button>
+            </div>
+        </div>
+    <table style="width: 100%">
+            <tr>
+                <td class="adminTitle">
+                    @Html.SpecterLabelFor(model => model.CreatedOnFrom)
+                </td>
+                <td class="adminData">
+                    @Html.Kendo().DatePickerFor(model => model.CreatedOnFrom).Format("{0:dd-MM-yyyy}")
+                </td>
+            </tr>
+            <tr>
+                <td class="adminTitle">
+                    @Html.SpecterLabelFor(model => model.CreatedOnTo)
+                </td>
+                <td class="adminData">
+                    @Html.Kendo().DatePickerFor(model => Model.CreatedOnTo).Format("{0:dd-MM-yyyy}")
+                </td>
+            </tr>
+            <tr>
+                <td class="adminTitle">
+                    @Html.SpecterLabelFor(model => model.Message)
+                </td>
+                <td class="adminData">
+                    @Html.Kendo().TextBoxFor(model => Model.Message)
+                </td>
+            </tr>
+            <tr>
+                <td class="adminTitle">
+                    @Html.SpecterLabelFor(model => model.LogLevelId)
+                </td>
+                <td class="adminData">
+                    @Html.Kendo().DropDownListFor(model => model.LogLevelId).BindTo(Model.AvailableLogLevels)
+                </td>
+            </tr>
+            <tr>
+                <td class="adminTitle">
+                    @Html.SpecterLabelFor(model => model.MinFrequency)
+                </td>
+                <td class="adminData">
+                    @Html.Kendo().IntegerTextBoxFor(model => Model.MinFrequency)
+                </td>
+            </tr>
+            <tr>
+                <td class="adminData" colspan="2" style="text-align:center">
+                    <button type="submit" id="btnSearch" class="btn"><i class="icon-search"></i>@T("Admin.Common.Search")</button>
+                </td>
+            </tr>
+        </table>
+        <hr />
+        <div class="adminContent">
+            @(Html.Kendo().Grid<LogListModel>()
+                .Name("log-grid")
+                .Columns(columns =>
+                {
+                    columns.Bound(x => x.Id)
+                        .Filterable(false)
+                        .ClientTemplate("<input type='checkbox' name='checkedRecords' value='#= Id #' class='checkboxGroups'/>")
+                        //.Title("<input id='mastercheckbox' type='checkbox'/>")
+                        .Title("")
+                        .Width(30)
+                        .HtmlAttributes(new { style = "text-align:center" })
+                        .HeaderHtmlAttributes(new { style = "text-align:center" });
+                    columns.Bound(x => x.Frequency)
+                        .Filterable(false)
+                        .Centered();
+                    //.Width(50);
+                    columns.Bound(x => x.ShortMessage)
+                        .ClientTemplate("<span class='label label-#= LogLevelHint #' style='margin-right: 4px'>#= LogLevel #</span><a href=\"View/#= Id #\">#= ShortMessage #</a>")
+                        .Filterable(filter => filter.Cell(cell => cell.Operator("contains")))
+                        .Width(800);
+                    columns.Bound(x => x.LogLevel)
+                        .Filterable(filter => filter.Cell(cell => cell.Operator("contains")))
+                        .Width(140);
+                    columns.Bound(x => x.CreatedOn)
+                        .Width(140)
+                        .Filterable(false)
+                        .Format("{0:dd-MM-yyyy hh:mm}");
+                    columns.Bound(x => x.UpdatedOn)
+                        .Width(140)
+                        .Filterable(false)
+                        .Format("{0:dd-MM-yyyy hh:mm}");
+                })
+                .Pageable(pager => pager
+                        .Input(true)
+                        .Numeric(true)
+                        .Info(true)
+                        .PreviousNext(true)
+                        .Refresh(true)
+                        .PageSizes(true))
+                .Filterable(filter => filter.Mode(GridFilterMode.Row))
+                .DataSource(dataBinding =>
+                {
+                    dataBinding
+                        .Ajax()
+                        .Model(x => x.Id("Id"))
+                        .Read("LogList", "Log", new { area = "Admin" })
+                        .ServerOperation(true)
+                        .PageSize(gridPageSize);
+                })
+                .Events(events => events
+                    .DataBinding("onDataBinding")
+                    .DataBound("onDataBound")
+                )
+            )
+        </div>
+        <script type="text/javascript">
+            var selectedIds = [];
+            $(document).ready(function () {
+                $("#clearAll").click(function () {
+                    $.ajax({
+                        cache: false,
+                        type: "POST",
+                        data: "clearall=clearall",
+                        url: "@Url.Action("List", "Log", new { area = "Admin", model = new { } })",
+                        complete: function (data) {
+                            //reload grid
+                            var grid = $('#log-grid').data("kendoGrid");
+                            grid.pager.page(1);
+                            grid.dataSource.read();
+                            selectedIds = [];
+                            $(this).notify("success", data.responseJSON.Notify);
+                        },
+                        error: function (xhr, ajaxOptions, thrownError) {
+                            $(this).notify("error", thrownError);
+                        },
+                        traditional: true
+                    });
+                });
+
+                //search button
+                $('#btnSearch').click(function () {
+                    readAllLog(this);
+                    //search
+                    //var grid = $('#log-grid').data('tGrid');
+                    //grid.currentPage = 1; //new search. Set page size to 1
+                    //grid.ajaxRequest();
+                    ////clear selected checkboxes
+                    //$('.checkboxGroups').attr('checked', false).change();
+                    //selectedIds = [];
+                    //return false;
+                });
+
+                $("#@Html.FieldIdFor(model => model.Message)").keydown(function (event) {
+                    if (event.keyCode == 13) {
+                        $("#btnSearch").click();
+                        return false;
+                    }
+                });
+
+                //"delete selected" button
+                $('#delete-selected').click(function (e) {
+                    e.preventDefault();
+                    var selected = $(".checkboxGroups");
+                    selected.each(function (i, el) {
+                        if (el.checked) {
+                            selectedIds.push(el.value);
+                        }
+                    })
+                    var postData = {
+                        selectedIds: selectedIds
+                    };
+
+                    $.ajax({
+                        cache: false,
+                        type: "POST",
+                        url: "@(Url.Action("DeleteSelected", "Log"))",
+                        data: postData,
+                        complete: function (data) {
+                            //reload grid
+                            var grid = $('#log-grid').data("kendoGrid");
+                            grid.pager.page(1);
+                            grid.dataSource.read();
+                            //clear selected checkboxes
+                            $('.checkboxGroups').attr('checked', false).change();
+                            selectedIds = [];
+                        },
+                        error: function (xhr, ajaxOptions, thrownError) {
+                            $(this).notify("error", thrownError);
+                        },
+                        traditional: true
+                    });
+                    return false;
+                });
+
+
+                $('#mastercheckbox').click(function () {
+                    $('.checkboxGroups').attr('checked', $(this).is(':checked')).change();
+                });
+            });
+
+            function onDataBinding(e) {
+                var searchModel = {
+                    CreatedOnFrom: $('#@Html.FieldIdFor(model => model.CreatedOnFrom)').val(),
+                    CreatedOnTo: $('#@Html.FieldIdFor(model => model.CreatedOnTo)').val(),
+                    Message: $('#@Html.FieldIdFor(model => model.Message)').val(),
+                    LogLevelId: $('#@Html.FieldIdFor(model => model.LogLevelId)').val(),
+                    MinFrequency: $('#@Html.FieldIdFor(model => model.MinFrequency)').val()
+                };
+                e.data = searchModel;
+            }
+
+            function onDataBound(e) {
+
+                $('#log-grid input[type=checkbox][id!=mastercheckbox]').each(function () {
+                    var currentId = $(this).val();
+                    var checked = jQuery.inArray(currentId, selectedIds);
+                    //set checked based on if current checkbox's value is in selectedIds.
+                    $(this).attr('checked', checked > -1);
+                });
+
+                updateMasterCheckbox();
+            }
+
+            function updateMasterCheckbox() {
+                var numChkBoxes = $('#log-grid input[type=checkbox][id!=mastercheckbox]').length;
+                var numChkBoxesChecked = $('#log-grid input[type=checkbox][checked][id!=mastercheckbox]').length;
+                $('#mastercheckbox').attr('checked', numChkBoxes == numChkBoxesChecked && numChkBoxes > 0);
+            }
+
+            function readAllLog(e) {
+                var fromUtc = $("#CreatedOnFrom").data("kendoDatePicker").value(),
+                    toDate = $("#CreatedOnTo").data("kendoDatePicker").value();
+                var searchModel = {
+                    CreatedOnFrom: kendo.parseDate(fromUtc, "MM/dd/yyyy"),
+                    CreatedOnTo: kendo.parseDate(toDate, "MM/dd/yyyy"),
+                    Message: $("#Message").val(),
+                    LogLevelId: $("#LogLevelId").val(),
+                    MinFrequency: $("#MinFrequency").val()
+                };
+                var grid = $("#log-grid").data("kendoGrid");
+                grid.dataSource.transport.options.read.data = searchModel;
+                grid.pager.page(1);
+                //grid.dataSource.read();
+            }
+        </script>
+    </div>
+</div>

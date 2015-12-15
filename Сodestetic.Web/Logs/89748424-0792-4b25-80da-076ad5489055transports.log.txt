@@ -1,0 +1,1 @@
+SignalR.Transports.TransportHeartBeat Information: 0 : Connection 404dd64d-771b-48cf-98ad-33d20334946d is New.

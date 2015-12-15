@@ -1,0 +1,245 @@
+﻿@model UserListModel
+@using Kendo.Mvc.UI;
+@using System.Globalization;
+@{
+    var gridPageSize = EngineContext.Current.Resolve<Specter.Web.Core.Domain.Common.AdminAreaSettings>().GridPageSize;
+    //page title
+    ViewBag.Title = T("Admin.Users").Text;
+}
+<div class="admin-content align-center">
+    @using (Html.BeginForm())
+    {
+        <div class="section-header">
+            <div class="title">
+                <i class="icon icon-group"></i>
+                @ViewBag.Title
+            </div>
+        </div>
+        <p>
+        </p>
+        <table class="adminContent">
+            <tr>
+                <td>
+                    @(Html.Kendo().Grid<UserModel>(Model.Users.Data)
+                        .Name("users-grid")
+                        .Columns(columns =>
+                        {
+                            //columns.Bound(x => x.Id)
+                            //    .Template(x => string.Format("<input type='checkbox' name='checkedRecords' value='{0}' class='checkboxGroups'/>", x.Id))
+                            //    .ClientTemplate("<input type='checkbox' name='checkedRecords' value='#=Id#' class='checkboxGroups'/>")
+                            //    .Title("<input id='mastercheckbox' type='checkbox'/>")
+                            //    .Filterable(false)
+                            //    .Width(50)
+                            //    .HtmlAttributes(new { style = "text-align:center" })
+                            //    .HeaderHtmlAttributes(new { style = "text-align:center" });
+
+                            columns.Bound(x => x.Id)
+                                .Visible(false)
+                                .Filterable(false);
+                            //.Width(50);
+                            columns.Bound(x => x.Email)
+                                .ClientTemplate("<a href='" + @Url.Action("Edit", "User", new { area = "Admin", id = "#=Id#" }) + "'>#=Email#</a>")
+                                //.Template(x => Html.ActionLink(x.Email, "Edit", "User", new { id = x.Id }, new { }))
+                                .Width(150);
+                            columns.Bound(x => x.Username)
+                                .Width(150)
+                                .Visible(Model.UsernamesEnabled);
+                            columns.Bound(x => x.FullName)
+                                .Width(200);
+                            columns.Bound(x => x.UserRoleNames)
+                                //.ClientTemplate("<div style='overflow:hidden;text-overflow:ellipsis'>#=UserRoleNames#</div>")
+                                .Width(200);
+                            columns.Bound(x => x.Company)
+                                .Width(150)
+                                .Visible(Model.CompanyEnabled);
+                            columns.Bound(x => x.Phone)
+                                .Width(100)
+                                .Visible(Model.PhoneEnabled);
+                            columns.Bound(x => x.ZipPostalCode)
+                                .Width(75)
+                                .Visible(Model.ZipPostalCodeEnabled);
+                            columns.Bound(x => x.Active)
+                                //.Template(item => @Html.SymbolForBool(item.Active))
+                                .ClientTemplate(@Html.SymbolForBool("Active"))
+                                .Filterable(false)
+                                //.Width(50)
+                                .Centered();
+                            columns.Bound(x => x.CreatedOn)
+                                .Format("{0:dd-MM-yyyy hh:mm}")
+                                .Filterable(false);
+                            columns.Bound(x => x.LastActivityDate)
+                                .Format("{0:dd-MM-yyyy hh:mm}")
+                                .Filterable(false);
+                            columns.Bound(x => x.Id)
+                                .Filterable(false)
+                                .Title("")//T("Admin.Common.Edit").Text)
+                                .Centered()
+                                .Template(x => Html.ActionLink(T("Admin.Common.Edit").Text, "Edit", new { id = x.Id }))
+                                .ClientTemplate("<a class='k-button k-button-icontext k-grid-edit' href='Edit/#=Id#'><span class='k-icon k-edit'></span>" + T("Admin.Common.Edit").Text + "</a>");
+                        })
+                        .Pageable(pager => pager
+                            .Input(true)
+                            .Numeric(true)
+                            .Info(true)
+                            .PreviousNext(true)
+                            .Refresh(true)
+                            .PageSizes(true)
+                        )
+                        .Filterable(filter => filter.Mode(GridFilterMode.Row))
+                        .DataSource(dataSource => dataSource
+                            .Ajax()
+                            .Model(x => x.Id("Id"))
+                            .ServerOperation(false)
+                            .Read(read => read.Action("List", "User", new { area = "Admin" }))
+                            .PageSize(gridPageSize)
+                        )
+                        //.Events(events => events
+                        //    .DataBinding("onDataBinding")
+                        //    .DataBound("onDataBound")
+                        //)
+                    )
+                </td>
+
+            </tr>
+        </table>
+        <script type="text/javascript">
+            var selectedIds = [];
+            $(document).ready(function () {
+
+                //search button
+                $('#search-users').click(function () {
+                    var grid = $('#users-grid').data('tGrid');
+                    grid.currentPage = 1; //new search. Set page size to 1
+                    grid.ajaxRequest();
+                    return false;
+                });
+
+                $("#@Html.FieldIdFor(model => model.SearchEmail)").keydown(function (event) {
+                    if (event.keyCode == 13) {
+                        $("#search-users").click();
+                        return false;
+                    }
+                });
+                $("#@Html.FieldIdFor(model => model.SearchUsername)").keydown(function (event) {
+                    if (event.keyCode == 13) {
+                        $("#search-users").click();
+                        return false;
+                    }
+                });
+                $("#@Html.FieldIdFor(model => model.SearchFirstName)").keydown(function (event) {
+                    if (event.keyCode == 13) {
+                        $("#search-users").click();
+                        return false;
+                    }
+                });
+                $("#@Html.FieldIdFor(model => model.SearchLastName)").keydown(function (event) {
+                    if (event.keyCode == 13) {
+                        $("#search-users").click();
+                        return false;
+                    }
+                });
+                $("#@Html.FieldIdFor(model => model.SearchCompany)").keydown(function (event) {
+                    if (event.keyCode == 13) {
+                        $("#search-users").click();
+                        return false;
+                    }
+                });
+                $("#@Html.FieldIdFor(model => model.SearchPhone)").keydown(function (event) {
+                    if (event.keyCode == 13) {
+                        $("#search-users").click();
+                        return false;
+                    }
+                });
+                $("#@Html.FieldIdFor(model => model.SearchZipPostalCode)").keydown(function (event) {
+                    if (event.keyCode == 13) {
+                        $("#search-users").click();
+                        return false;
+                    }
+                });
+
+                //"Export Excel selected" button
+                $('#exportexcel-selected').click(function (e) {
+                    e.preventDefault();
+                    //redirect to required URL
+                    setLocation('@(Url.Action("ExportExcelSelected", "User"))?selectedIds=' + selectedIds.join(","));
+                    return false;
+                });
+
+                //"Export XML selected" button
+                $('#exportxml-selected').click(function (e) {
+                    e.preventDefault();
+                    //redirect to required URL
+                    setLocation('@(Url.Action("ExportXmlSelected", "User"))?selectedIds=' + selectedIds.join(","));
+                    return false;
+                });
+
+                $('#mastercheckbox').click(function () {
+                    $('.checkboxGroups').attr('checked', $(this).is(':checked')).change();
+                });
+
+                //wire up checkboxes.
+                $('#users-grid input[type=checkbox][id!=mastercheckbox]').on('change', function (e) {
+                    var $check = $(this);
+                    if ($check.is(":checked") == true) {
+                        var checked = jQuery.inArray($check.val(), selectedIds);
+                        if (checked == -1) {
+                            //add id to selectedIds.
+                            selectedIds.push($check.val());
+                        }
+                    }
+                    else {
+                        var checked = jQuery.inArray($check.val(), selectedIds);
+                        if (checked > -1) {
+                            //remove id from selectedIds.
+                            selectedIds = $.grep(selectedIds, function (item, index) {
+                                return item != $check.val();
+                            });
+                        }
+                    }
+                    updateMasterCheckbox();
+                });
+            });
+
+            function onDataBound(e) {
+
+                $('#users-grid input[type=checkbox][id!=mastercheckbox]').each(function () {
+                    var currentId = $(this).val();
+                    var checked = jQuery.inArray(currentId, selectedIds);
+                    //set checked based on if current checkbox's value is in selectedIds.
+                    $(this).attr('checked', checked > -1);
+                });
+
+                updateMasterCheckbox();
+            }
+            function updateMasterCheckbox() {
+                var numChkBoxes = $('#users-grid input[type=checkbox][id!=mastercheckbox]').length;
+                var numChkBoxesChecked = $('#users-grid input[type=checkbox][checked][id!=mastercheckbox]').length;
+                $('#mastercheckbox').attr('checked', numChkBoxes == numChkBoxesChecked && numChkBoxes > 0);
+            }
+            function onDataBinding(e) {
+                var userRoleIds = [];
+                $('[name=SearchUserRoleIds]:checked').each(function () {
+                    userRoleIds.push($(this).val());
+                });
+
+                var searchModel = {
+                    SearchUserRoleIds: userRoleIds.join(","),
+                    SearchEmail: $('#@Html.FieldIdFor(model => model.SearchEmail)').val(),
+                    SearchUsername: $('#@Html.FieldIdFor(model => model.SearchUsername)').val(),
+                    SearchFirstName: $('#@Html.FieldIdFor(model => model.SearchFirstName)').val(),
+                    SearchLastName: $('#@Html.FieldIdFor(model => model.SearchLastName)').val(),
+                    SearchDayOfBirth: $('#@Html.FieldIdFor(model => model.SearchDayOfBirth)').val(),
+                    SearchMonthOfBirth: $('#@Html.FieldIdFor(model => model.SearchMonthOfBirth)').val(),
+                    SearchCompany: $('#@Html.FieldIdFor(model => model.SearchCompany)').val(),
+                    SearchPhone: $('#@Html.FieldIdFor(model => model.SearchPhone)').val(),
+                    SearchZipPostalCode: $('#@Html.FieldIdFor(model => model.SearchZipPostalCode)').val()
+                };
+                e.data = searchModel;
+            }
+
+            function userEdit(e) {
+
+            }
+        </script>
+    }
+</div>

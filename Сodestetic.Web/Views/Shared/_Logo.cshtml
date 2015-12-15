@@ -1,0 +1,17 @@
+﻿@{
+    var _settingService = EngineContext.Current.Resolve<Specter.Web.Services.Configuration.ISettingService>();
+    var _pictureService = EngineContext.Current.Resolve<Specter.Web.Services.Media.IPictureService>();
+    var siteSettings = _settingService.LoadSetting<Specter.Web.Core.Domain.Common.SiteSettings>();
+    var logoPictureId = siteSettings.LogoPictureId;
+    string logoUrl = null;
+    var logoSize = System.Drawing.Size.Empty;
+    if (logoPictureId > 0)
+    {
+        logoUrl = _pictureService.GetPictureUrl(logoPictureId);
+        logoSize = _pictureService.GetPictureSize(logoPictureId);
+    }
+}
+@if (logoUrl != null)
+{
+    <div style="background-image:url(@logoUrl);background-size: 100px"></div>
+}

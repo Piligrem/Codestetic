@@ -1,0 +1,19 @@
+﻿@{
+    Layout = "~/Views/Shared/_RootMap.cshtml";
+}
+<div id="content-wrapper">
+    <section id="content" class="container drop-shadow lifted">
+        @if (IsSectionDefined("left"))
+        {
+            @RenderSection("left")
+        }
+        @Html.Action("ControlPanel", "ControlPanel")
+        <div id="content-body">
+            <div id="content-center">
+                @RenderBody()
+            </div>
+        </div>
+    </section>
+</div>
+
+

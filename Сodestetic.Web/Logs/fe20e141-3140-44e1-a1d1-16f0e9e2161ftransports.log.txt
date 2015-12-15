@@ -1,0 +1,1 @@
+SignalR.Transports.TransportHeartBeat Information: 0 : Dispose(). Closing all connections

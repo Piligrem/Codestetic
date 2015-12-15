@@ -1,0 +1,13 @@
+﻿@{
+    Layout = "~/Views/Shared/_ColumnsTwo.cshtml";
+
+    //title
+    ViewBag.Title = T("PageTitle.NotSupported").Text;
+    Html.AddTitleParts((string)ViewBag.Title);
+}
+@section left {}
+<div class="page-title">@ViewBag.Title</div>
+<div class="page">
+    <div class="page-body" slyle="  margin-bottom: 5px;">@T("Common.NotSupported.Message")</div>
+</div>
+

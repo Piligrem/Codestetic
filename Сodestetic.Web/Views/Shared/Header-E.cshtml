@@ -1,0 +1,43 @@
+﻿@model Specter.Web.Models.SiteHeaderModel
+
+<div id="logobar">
+    <a href='@Model.HomeUrl'>
+        @if (Model.LogoUploaded)
+        {
+            <img src='@Url.Content(Model.LogoUrl)'
+                alt="@Model.LogoTitle"
+                title="@Model.LogoTitle"
+                class="@Model.CustomProperties["Class"]" />
+        }
+        else
+        {
+            @Model.LogoTitle
+        }
+    </a>
+    @*<div class="regional-selectors">
+            @Html.Action("LanguageSelector", "Common")
+        </div>*@
+</div>
+@if (!Model.EnableMenu)
+{
+    <div class="header-username">@Model.UserName</div>
+}
+@if (Model.EnableMenu)
+{
+    <ul>
+        <li><a href="/"><div>Menu.Home<span>Menu.Home.Tooltip</span></div></a></li>
+            @*if (Request.IsAuthenticated && Model.IsRegistered)
+                {
+                    <li>@Html.LinkTable("Menu.Map", "Menu.Map.Tooltip", "Map", "Home")</li>
+                }*@
+            <li><a href="/About"><div>Menu.About<span>Menu.About.Tooltip</span></div></a></li>
+            <li><a href="/Contact"><div>Menu.Contact<span>Menu.Contact.Tooltip</span></div></a></li>
+            <li><a href="/Admin?action=TestPage&amp;controller=Common"><div>Test<span>test</span></div></a></li>
+       <ul>
+            <li><a href="/Admin?action=Register&amp;controller=Account" id="registerLink"><div>Register<span>for registering</span></div></a></li>
+            <li><a href="/Admin?action=Login&amp;controller=User" id="loginLink"><div>Log in<span>for loging</span></div></a></li>
+        </ul>
+    </ul>
+}
+
+

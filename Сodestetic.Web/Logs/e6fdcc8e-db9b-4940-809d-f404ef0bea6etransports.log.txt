@@ -1,0 +1,53 @@
+SignalR.Transports.TransportHeartBeat Information: 0 : Connection dfe0cc30-d285-48b7-bd94-c8ed75a8db89 is New.
+SignalR.Transports.WebSocketTransport Verbose: 0 : DrainWrites(dfe0cc30-d285-48b7-bd94-c8ed75a8db89)
+SignalR.Transports.WebSocketTransport Error: 0 : CompleteRequest (dfe0cc30-d285-48b7-bd94-c8ed75a8db89) failed: System.NullReferenceException: Ссылка на объект не указывает на экземпляр объекта.
+   в Specter.Web.Services.SignalR.NotificationHub.OnReconnected() в e:\Projects\Specter.GPS.Server\Web\Libraries\Specter.Web.Services\SignalR\NotificationHub.cs:строка 106
+   в Microsoft.AspNet.SignalR.Hubs.HubDispatcher.Reconnect(IHub hub) в e:\Projects\Specter.GPS.Server\Web\Libraries\SignalR\Microsoft.AspNet.SignalR.Core\Hubs\HubDispatcher.cs:строка 294
+   в Microsoft.AspNet.SignalR.Hubs.HubPipelineModule.<>c__DisplayClasse.<BuildReconnect>b__c(IHub hub) в e:\Projects\Specter.GPS.Server\Web\Libraries\SignalR\Microsoft.AspNet.SignalR.Core\Hubs\Pipeline\HubPipelineModule.cs:строка 95
+   в Microsoft.AspNet.SignalR.Hubs.HubPipelineModule.<>c__DisplayClasse.<BuildReconnect>b__c(IHub hub) в e:\Projects\Specter.GPS.Server\Web\Libraries\SignalR\Microsoft.AspNet.SignalR.Core\Hubs\Pipeline\HubPipelineModule.cs:строка 95
+   в Microsoft.AspNet.SignalR.Hubs.HubPipeline.Reconnect(IHub hub) в e:\Projects\Specter.GPS.Server\Web\Libraries\SignalR\Microsoft.AspNet.SignalR.Core\Hubs\Pipeline\HubPipeline.cs:строка 49
+   в Microsoft.AspNet.SignalR.Hubs.HubDispatcher.<OnReconnected>b__1d(IHub hub) в e:\Projects\Specter.GPS.Server\Web\Libraries\SignalR\Microsoft.AspNet.SignalR.Core\Hubs\HubDispatcher.cs:строка 368
+   в Microsoft.AspNet.SignalR.Hubs.HubDispatcher.<>c__DisplayClass33.<ExecuteHubEvent>b__2f(IHub instance) в e:\Projects\Specter.GPS.Server\Web\Libraries\SignalR\Microsoft.AspNet.SignalR.Core\Hubs\HubDispatcher.cs:строка 421
+   в System.Linq.Enumerable.WhereSelectListIterator`2.MoveNext()
+   в System.Linq.Buffer`1..ctor(IEnumerable`1 source)
+   в System.Linq.Enumerable.ToArray[TSource](IEnumerable`1 source)
+   в Microsoft.AspNet.SignalR.Hubs.HubDispatcher.ExecuteHubEvent(IRequest request, String connectionId, Func`2 action) в e:\Projects\Specter.GPS.Server\Web\Libraries\SignalR\Microsoft.AspNet.SignalR.Core\Hubs\HubDispatcher.cs:строка 421
+   в Microsoft.AspNet.SignalR.Hubs.HubDispatcher.OnReconnected(IRequest request, String connectionId) в e:\Projects\Specter.GPS.Server\Web\Libraries\SignalR\Microsoft.AspNet.SignalR.Core\Hubs\HubDispatcher.cs:строка 368
+   в Microsoft.AspNet.SignalR.PersistentConnection.<>c__DisplayClass8.<ProcessRequest>b__3() в e:\Projects\Specter.GPS.Server\Web\Libraries\SignalR\Microsoft.AspNet.SignalR.Core\PersistentConnection.cs:строка 258
+   в Microsoft.AspNet.SignalR.TaskAsyncHelper.FromMethod(Func`1 func) в e:\Projects\Specter.GPS.Server\Web\Libraries\SignalR\Microsoft.AspNet.SignalR.Core\TaskAsyncHelper.cs:строка 680
+SignalR.Transports.WebSocketTransport Information: 0 : CloseSocket(dfe0cc30-d285-48b7-bd94-c8ed75a8db89)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : Connection dfe0cc30-d285-48b7-bd94-c8ed75a8db89 exists. Closing previous connection.
+SignalR.Transports.WebSocketTransport Information: 0 : End(dfe0cc30-d285-48b7-bd94-c8ed75a8db89)
+SignalR.Transports.WebSocketTransport Verbose: 0 : DrainWrites(dfe0cc30-d285-48b7-bd94-c8ed75a8db89)
+SignalR.Transports.WebSocketTransport Error: 0 : CompleteRequest (dfe0cc30-d285-48b7-bd94-c8ed75a8db89) failed: System.NullReferenceException: Ссылка на объект не указывает на экземпляр объекта.
+   в Specter.Web.Services.SignalR.NotificationHub.OnReconnected() в e:\Projects\Specter.GPS.Server\Web\Libraries\Specter.Web.Services\SignalR\NotificationHub.cs:строка 106
+   в Microsoft.AspNet.SignalR.Hubs.HubDispatcher.Reconnect(IHub hub) в e:\Projects\Specter.GPS.Server\Web\Libraries\SignalR\Microsoft.AspNet.SignalR.Core\Hubs\HubDispatcher.cs:строка 294
+   в Microsoft.AspNet.SignalR.Hubs.HubPipelineModule.<>c__DisplayClasse.<BuildReconnect>b__c(IHub hub) в e:\Projects\Specter.GPS.Server\Web\Libraries\SignalR\Microsoft.AspNet.SignalR.Core\Hubs\Pipeline\HubPipelineModule.cs:строка 95
+   в Microsoft.AspNet.SignalR.Hubs.HubPipelineModule.<>c__DisplayClasse.<BuildReconnect>b__c(IHub hub) в e:\Projects\Specter.GPS.Server\Web\Libraries\SignalR\Microsoft.AspNet.SignalR.Core\Hubs\Pipeline\HubPipelineModule.cs:строка 95
+   в Microsoft.AspNet.SignalR.Hubs.HubPipeline.Reconnect(IHub hub) в e:\Projects\Specter.GPS.Server\Web\Libraries\SignalR\Microsoft.AspNet.SignalR.Core\Hubs\Pipeline\HubPipeline.cs:строка 49
+   в Microsoft.AspNet.SignalR.Hubs.HubDispatcher.<OnReconnected>b__1d(IHub hub) в e:\Projects\Specter.GPS.Server\Web\Libraries\SignalR\Microsoft.AspNet.SignalR.Core\Hubs\HubDispatcher.cs:строка 368
+   в Microsoft.AspNet.SignalR.Hubs.HubDispatcher.<>c__DisplayClass33.<ExecuteHubEvent>b__2f(IHub instance) в e:\Projects\Specter.GPS.Server\Web\Libraries\SignalR\Microsoft.AspNet.SignalR.Core\Hubs\HubDispatcher.cs:строка 421
+   в System.Linq.Enumerable.WhereSelectListIterator`2.MoveNext()
+   в System.Linq.Buffer`1..ctor(IEnumerable`1 source)
+   в System.Linq.Enumerable.ToArray[TSource](IEnumerable`1 source)
+   в Microsoft.AspNet.SignalR.Hubs.HubDispatcher.ExecuteHubEvent(IRequest request, String connectionId, Func`2 action) в e:\Projects\Specter.GPS.Server\Web\Libraries\SignalR\Microsoft.AspNet.SignalR.Core\Hubs\HubDispatcher.cs:строка 421
+   в Microsoft.AspNet.SignalR.Hubs.HubDispatcher.OnReconnected(IRequest request, String connectionId) в e:\Projects\Specter.GPS.Server\Web\Libraries\SignalR\Microsoft.AspNet.SignalR.Core\Hubs\HubDispatcher.cs:строка 368
+   в Microsoft.AspNet.SignalR.PersistentConnection.<>c__DisplayClass8.<ProcessRequest>b__3() в e:\Projects\Specter.GPS.Server\Web\Libraries\SignalR\Microsoft.AspNet.SignalR.Core\PersistentConnection.cs:строка 258
+   в Microsoft.AspNet.SignalR.TaskAsyncHelper.FromMethod(Func`1 func) в e:\Projects\Specter.GPS.Server\Web\Libraries\SignalR\Microsoft.AspNet.SignalR.Core\TaskAsyncHelper.cs:строка 680
+SignalR.Transports.WebSocketTransport Information: 0 : CloseSocket(dfe0cc30-d285-48b7-bd94-c8ed75a8db89)
+SignalR.Transports.WebSocketTransport Information: 0 : Abort(dfe0cc30-d285-48b7-bd94-c8ed75a8db89)
+SignalR.Transports.WebSocketTransport Information: 0 : Abort(dfe0cc30-d285-48b7-bd94-c8ed75a8db89)
+SignalR.Transports.TransportHeartBeat Information: 0 : Removing connection dfe0cc30-d285-48b7-bd94-c8ed75a8db89
+SignalR.Transports.WebSocketTransport Information: 0 : End(dfe0cc30-d285-48b7-bd94-c8ed75a8db89)
+SignalR.Transports.WebSocketTransport Verbose: 0 : DrainWrites(dfe0cc30-d285-48b7-bd94-c8ed75a8db89)
+SignalR.Transports.WebSocketTransport Information: 0 : CompleteRequest (dfe0cc30-d285-48b7-bd94-c8ed75a8db89)
+SignalR.Transports.WebSocketTransport Verbose: 0 : DrainWrites(dfe0cc30-d285-48b7-bd94-c8ed75a8db89)
+SignalR.Transports.WebSocketTransport Information: 0 : CompleteRequest (dfe0cc30-d285-48b7-bd94-c8ed75a8db89)
+SignalR.Transports.TransportHeartBeat Information: 0 : Connection 2c840d55-e39f-4f9a-a095-e2f51b9af03b is New.
+SignalR.Transports.WebSocketTransport Information: 0 : CloseSocket(2c840d55-e39f-4f9a-a095-e2f51b9af03b)
+SignalR.Transports.WebSocketTransport Information: 0 : Abort(2c840d55-e39f-4f9a-a095-e2f51b9af03b)
+SignalR.Transports.TransportHeartBeat Information: 0 : Removing connection 2c840d55-e39f-4f9a-a095-e2f51b9af03b
+SignalR.Transports.WebSocketTransport Information: 0 : End(2c840d55-e39f-4f9a-a095-e2f51b9af03b)
+SignalR.Transports.WebSocketTransport Verbose: 0 : DrainWrites(2c840d55-e39f-4f9a-a095-e2f51b9af03b)
+SignalR.Transports.WebSocketTransport Information: 0 : CompleteRequest (2c840d55-e39f-4f9a-a095-e2f51b9af03b)
+SignalR.Transports.TransportHeartBeat Information: 0 : Dispose(). Closing all connections

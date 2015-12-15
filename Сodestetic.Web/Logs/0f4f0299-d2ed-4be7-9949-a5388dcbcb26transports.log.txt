@@ -1,0 +1,3 @@
+SignalR.Transports.TransportHeartBeat Information: 0 : Connection 231af729-71bd-4c31-baba-6ea9b6dbb3bf is New.
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(231af729-71bd-4c31-baba-6ea9b6dbb3bf)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(231af729-71bd-4c31-baba-6ea9b6dbb3bf)

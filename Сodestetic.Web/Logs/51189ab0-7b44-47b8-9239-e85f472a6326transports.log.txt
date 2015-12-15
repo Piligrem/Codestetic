@@ -1,0 +1,22 @@
+SignalR.Transports.TransportHeartBeat Information: 0 : Connection 722f953e-a11d-43a6-a08b-67d7863a80c8 is New.
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(722f953e-a11d-43a6-a08b-67d7863a80c8)
+SignalR.Transports.WebSocketTransport Information: 0 : CloseSocket(722f953e-a11d-43a6-a08b-67d7863a80c8)
+SignalR.Transports.WebSocketTransport Information: 0 : Abort(722f953e-a11d-43a6-a08b-67d7863a80c8)
+SignalR.Transports.TransportHeartBeat Information: 0 : Removing connection 722f953e-a11d-43a6-a08b-67d7863a80c8
+SignalR.Transports.WebSocketTransport Information: 0 : End(722f953e-a11d-43a6-a08b-67d7863a80c8)
+SignalR.Transports.WebSocketTransport Verbose: 0 : DrainWrites(722f953e-a11d-43a6-a08b-67d7863a80c8)
+SignalR.Transports.WebSocketTransport Information: 0 : CompleteRequest (722f953e-a11d-43a6-a08b-67d7863a80c8)
+SignalR.Transports.TransportHeartBeat Information: 0 : Connection 025927cd-d5c7-41fa-9a98-35aba392b4a4 is New.
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(025927cd-d5c7-41fa-9a98-35aba392b4a4)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(025927cd-d5c7-41fa-9a98-35aba392b4a4)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(025927cd-d5c7-41fa-9a98-35aba392b4a4)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(025927cd-d5c7-41fa-9a98-35aba392b4a4)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(025927cd-d5c7-41fa-9a98-35aba392b4a4)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(025927cd-d5c7-41fa-9a98-35aba392b4a4)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(025927cd-d5c7-41fa-9a98-35aba392b4a4)
+SignalR.Transports.WebSocketTransport Verbose: 0 : Cancel(025927cd-d5c7-41fa-9a98-35aba392b4a4)
+SignalR.Transports.WebSocketTransport Verbose: 0 : DrainWrites(025927cd-d5c7-41fa-9a98-35aba392b4a4)
+SignalR.Transports.WebSocketTransport Information: 0 : CompleteRequest (025927cd-d5c7-41fa-9a98-35aba392b4a4)
+SignalR.Transports.WebSocketTransport Information: 0 : CloseSocket(025927cd-d5c7-41fa-9a98-35aba392b4a4)
+SignalR.Transports.TransportHeartBeat Information: 0 : Dispose(). Closing all connections
+SignalR.Transports.WebSocketTransport Information: 0 : End(025927cd-d5c7-41fa-9a98-35aba392b4a4)

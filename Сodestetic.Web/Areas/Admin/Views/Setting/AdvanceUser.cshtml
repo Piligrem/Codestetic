@@ -1,0 +1,743 @@
+﻿@model AdvanceUserSettingsModel
+@using Kendo.Mvc.UI;
+@using Specter.Web.Core.Domain.Users;
+@using Specter.Web.Core.Domain.Security;
+@{
+    //page title
+    ViewBag.Title = T("Admin.Configuration.Settings.AdvanceUser").Text;
+}
+@using (Html.BeginForm())
+{
+    <div class="section-header">
+        <div class="title">
+            <i class="icon icon-group"></i>
+            @T("Admin.Configuration.Settings.AdvanceUser")
+        </div>
+        <div class="options">
+            <button type="submit" name="save" value="save" class="btn btn-primary"><i class="icon-ok icon-white"></i>@T("Admin.Common.Save")</button>
+        </div>
+    </div>
+    
+    @Html.ValidationSummary(false)
+
+    
+    @Html.TabSite().TabStrip().Name("usersettings-edit").Items(x =>
+{
+    x.Add().Text(T("Admin.Configuration.Settings.AdvanceUser.UserSettings").Text).Content(TabUserSettings()).Selected(true);
+    x.Add().Text(T("Admin.Configuration.Settings.AdvanceUser.UserFormFields").Text).Content(TabUserFormFields().ToHtmlString());
+    x.Add().Text(T("Admin.Configuration.Settings.AdvanceUser.AddressFormFields").Text).Content(TabAddressFormFields().ToHtmlString());
+    x.Add().Text(T("Admin.Configuration.Settings.AdvanceUser.DateTimeSettings").Text).Content(TabDateTimeSettings());
+    x.Add().Text(T("Admin.Configuration.Settings.AdvanceUser.ExternalAuthenticationSettings").Text).Content(TabExternalAuthenticationSettings());
+
+    //generate an event
+    EngineContext.Current.Resolve<IEventPublisher>().Publish(new TabStripCreated(x, "usersettings-edit", this.Html, this.Model));
+})
+}
+@helper TabUserSettings()
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("#@Html.FieldIdFor(model => model.UserSettings.AllowUsersToUploadAvatars)").click(toggleAvatar);
+            $("#@Html.FieldIdFor(model => model.UserSettings.UsernamesEnabled)").click(toggleUsername);
+
+            toggleAvatar();
+            toggleUsername();
+        });
+
+        function toggleAvatar() {
+            if ($('#@Html.FieldIdFor(model => model.UserSettings.AllowUsersToUploadAvatars)').is(':checked')) {
+                $('#pnlDefaultAvatarEnabled').show();
+            }
+            else {
+                $('#pnlDefaultAvatarEnabled').hide();
+            }
+        }
+
+        function toggleUsername() {
+            if ($('#@Html.FieldIdFor(model => model.UserSettings.UsernamesEnabled)').is(':checked')) {
+                $('#pnlAllowUsersToChangeUsernames').show();
+                $('#pnlCheckUsernameAvailability').show();
+            }
+            else {
+                $('#pnlAllowUsersToChangeUsernames').hide();
+                $('#pnlCheckUsernameAvailability').hide();
+            }
+        }
+
+    </script>
+    <table class="adminContent">
+        <tr>
+            <td class="adminTitle">
+                @Html.SpecterLabelFor(model => model.UserSettings.UsernamesEnabled)
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.UserSettings.UsernamesEnabled)
+                @Html.ValidationMessageFor(model => model.UserSettings.UsernamesEnabled)
+            </td>
+        </tr>
+        <tr id="pnlAllowUsersToChangeUsernames">
+            <td class="adminTitle">
+                @Html.SpecterLabelFor(model => model.UserSettings.AllowUsersToChangeUsernames)
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.UserSettings.AllowUsersToChangeUsernames)
+                @Html.ValidationMessageFor(model => model.UserSettings.AllowUsersToChangeUsernames)
+            </td>
+        </tr>
+        <tr id="pnlCheckUsernameAvailability">
+            <td class="adminTitle">
+                @Html.SpecterLabelFor(model => model.UserSettings.CheckUsernameAvailabilityEnabled)
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.UserSettings.CheckUsernameAvailabilityEnabled)
+                @Html.ValidationMessageFor(model => model.UserSettings.CheckUsernameAvailabilityEnabled)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SpecterLabelFor(model => model.UserSettings.UserRegistrationType)
+            </td>
+            <td class="adminData">
+                @Html.DropDownListFor(model => model.UserSettings.UserRegistrationType, ((UserRegistrationType)Model.UserSettings.UserRegistrationType).ToSelectList())
+                @Html.ValidationMessageFor(model => model.UserSettings.UserRegistrationType)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SpecterLabelFor(model => model.UserSettings.AllowUsersToUploadAvatars)
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.UserSettings.AllowUsersToUploadAvatars)
+                @Html.ValidationMessageFor(model => model.UserSettings.AllowUsersToUploadAvatars)
+            </td>
+        </tr>
+        <tr id="pnlDefaultAvatarEnabled">
+            <td class="adminTitle">
+                @Html.SpecterLabelFor(model => model.UserSettings.DefaultAvatarEnabled)
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.UserSettings.DefaultAvatarEnabled)
+                @Html.ValidationMessageFor(model => model.UserSettings.DefaultAvatarEnabled)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SpecterLabelFor(model => model.UserSettings.ShowUsersLocation)
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.UserSettings.ShowUsersLocation)
+                @Html.ValidationMessageFor(model => model.UserSettings.ShowUsersLocation)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SpecterLabelFor(model => model.UserSettings.ShowUsersJoinDate)
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.UserSettings.ShowUsersJoinDate)
+                @Html.ValidationMessageFor(model => model.UserSettings.ShowUsersJoinDate)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SpecterLabelFor(model => model.UserSettings.AllowViewingProfiles)
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.UserSettings.AllowViewingProfiles)
+                @Html.ValidationMessageFor(model => model.UserSettings.AllowViewingProfiles)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SpecterLabelFor(model => model.UserSettings.NotifyNewUserRegistration)
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.UserSettings.NotifyNewUserRegistration)
+                @Html.ValidationMessageFor(model => model.UserSettings.NotifyNewUserRegistration)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SpecterLabelFor(model => model.UserSettings.HideDownloadableProductsTab)
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.UserSettings.HideDownloadableProductsTab)
+                @Html.ValidationMessageFor(model => model.UserSettings.HideDownloadableProductsTab)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SpecterLabelFor(model => model.UserSettings.HideBackInStockSubscriptionsTab)
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.UserSettings.HideBackInStockSubscriptionsTab)
+                @Html.ValidationMessageFor(model => model.UserSettings.HideBackInStockSubscriptionsTab)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SpecterLabelFor(model => model.UserSettings.UserNameFormat)
+            </td>
+            <td class="adminData">
+                @Html.DropDownListFor(model => model.UserSettings.UserNameFormat, ((UserNameFormat)Model.UserSettings.UserNameFormat).ToSelectList())
+                @Html.ValidationMessageFor(model => model.UserSettings.UserNameFormat)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SpecterLabelFor(model => model.UserSettings.DefaultPasswordFormat)
+            </td>
+            <td class="adminData">
+                @Html.DropDownListFor(model => model.UserSettings.DefaultPasswordFormat, ((PasswordFormat)Model.UserSettings.DefaultPasswordFormat).ToSelectList())
+                @Html.ValidationMessageFor(model => model.UserSettings.DefaultPasswordFormat)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SpecterLabelFor(model => model.UserSettings.HideNewsletterBlock)
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.UserSettings.HideNewsletterBlock)
+                @Html.ValidationMessageFor(model => model.UserSettings.HideNewsletterBlock)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SpecterLabelFor(model => model.UserSettings.StoreLastVisitedPage)
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.UserSettings.StoreLastVisitedPage)
+                @Html.ValidationMessageFor(model => model.UserSettings.StoreLastVisitedPage)
+            </td>
+        </tr>
+    </table>
+}
+@helper TabUserFormFields()
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("#@Html.FieldIdFor(model => model.UserSettings.CountryEnabled)").click(toggleUserCountryFormField);
+            $("#@Html.FieldIdFor(model => model.UserSettings.CompanyEnabled)").click(toggleUserRequiredFormField);
+            $("#@Html.FieldIdFor(model => model.UserSettings.StreetAddressEnabled)").click(toggleUserRequiredFormField);
+            $("#@Html.FieldIdFor(model => model.UserSettings.StreetAddress2Enabled)").click(toggleUserRequiredFormField);
+            $("#@Html.FieldIdFor(model => model.UserSettings.ZipPostalCodeEnabled)").click(toggleUserRequiredFormField);
+            $("#@Html.FieldIdFor(model => model.UserSettings.CityEnabled)").click(toggleUserRequiredFormField);
+            $("#@Html.FieldIdFor(model => model.UserSettings.PhoneEnabled)").click(toggleUserRequiredFormField);
+            $("#@Html.FieldIdFor(model => model.UserSettings.FaxEnabled)").click(toggleUserRequiredFormField);
+
+
+            toggleUserCountryFormField();
+            toggleUserRequiredFormField();
+        });
+
+        function toggleUserCountryFormField() {
+            if ($('#@Html.FieldIdFor(model => model.UserSettings.CountryEnabled)').is(':checked')) {
+                $('#pnlUserStateProvinceEnabled').show();
+            }
+            else {
+                $('#pnlUserStateProvinceEnabled').hide();
+            }
+        }
+
+        function toggleUserRequiredFormField() {
+            if ($('#@Html.FieldIdFor(model => model.UserSettings.CompanyEnabled)').is(':checked')) {
+                $('#pnlUserCompanyRequired').show();
+            }
+            else {
+                $('#pnlUserCompanyRequired').hide();
+            }
+
+            if ($('#@Html.FieldIdFor(model => model.UserSettings.StreetAddressEnabled)').is(':checked')) {
+                $('#pnlUserStreetAddressRequired').show();
+            }
+            else {
+                $('#pnlUserStreetAddressRequired').hide();
+            }
+
+            if ($('#@Html.FieldIdFor(model => model.UserSettings.StreetAddress2Enabled)').is(':checked')) {
+                $('#pnlUserStreetAddress2Required').show();
+            }
+            else {
+                $('#pnlUserStreetAddress2Required').hide();
+            }
+
+            if ($('#@Html.FieldIdFor(model => model.UserSettings.ZipPostalCodeEnabled)').is(':checked')) {
+                $('#pnlUserZipPostalCodeRequired').show();
+            }
+            else {
+                $('#pnlUserZipPostalCodeRequired').hide();
+            }
+
+            if ($('#@Html.FieldIdFor(model => model.UserSettings.CityEnabled)').is(':checked')) {
+                $('#pnlUserCityRequired').show();
+            }
+            else {
+                $('#pnlUserCityRequired').hide();
+            }
+
+            if ($('#@Html.FieldIdFor(model => model.UserSettings.PhoneEnabled)').is(':checked')) {
+                $('#pnlUserPhoneRequired').show();
+            }
+            else {
+                $('#pnlUserPhoneRequired').hide();
+            }
+
+            if ($('#@Html.FieldIdFor(model => model.UserSettings.FaxEnabled)').is(':checked')) {
+                $('#pnlUserFaxRequired').show();
+            }
+            else {
+                $('#pnlUserFaxRequired').hide();
+            }
+        }
+
+    </script>
+    <table class="adminContent">
+        <tr>
+            <td colspan="2">
+                <em>@T("Admin.Configuration.Settings.AdvanceUser.UserFormFields.Description")</em>
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SpecterLabelFor(model => model.UserSettings.GenderEnabled)
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.UserSettings.GenderEnabled)
+                @Html.ValidationMessageFor(model => model.UserSettings.GenderEnabled)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SpecterLabelFor(model => model.UserSettings.DateOfBirthEnabled)
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.UserSettings.DateOfBirthEnabled)
+                @Html.ValidationMessageFor(model => model.UserSettings.DateOfBirthEnabled)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SpecterLabelFor(model => model.UserSettings.CompanyEnabled)
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.UserSettings.CompanyEnabled)
+                @Html.ValidationMessageFor(model => model.UserSettings.CompanyEnabled)
+            </td>
+        </tr>
+        <tr id="pnlCompanyRequired">
+            <td class="adminTitle">
+                @Html.SpecterLabelFor(model => model.UserSettings.CompanyRequired)
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.UserSettings.CompanyRequired)
+                @Html.ValidationMessageFor(model => model.UserSettings.CompanyRequired)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SpecterLabelFor(model => model.UserSettings.StreetAddressEnabled)
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.UserSettings.StreetAddressEnabled)
+                @Html.ValidationMessageFor(model => model.UserSettings.StreetAddressEnabled)
+            </td>
+        </tr>
+        <tr id="pnlStreetAddressRequired">
+            <td class="adminTitle">
+                @Html.SpecterLabelFor(model => model.UserSettings.StreetAddressRequired)
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.UserSettings.StreetAddressRequired)
+                @Html.ValidationMessageFor(model => model.UserSettings.StreetAddressRequired)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SpecterLabelFor(model => model.UserSettings.StreetAddress2Enabled)
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.UserSettings.StreetAddress2Enabled)
+                @Html.ValidationMessageFor(model => model.UserSettings.StreetAddress2Enabled)
+            </td>
+        </tr>
+        <tr id="pnlStreetAddress2Required">
+            <td class="adminTitle">
+                @Html.SpecterLabelFor(model => model.UserSettings.StreetAddress2Required)
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.UserSettings.StreetAddress2Required)
+                @Html.ValidationMessageFor(model => model.UserSettings.StreetAddress2Required)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SpecterLabelFor(model => model.UserSettings.ZipPostalCodeEnabled)
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.UserSettings.ZipPostalCodeEnabled)
+                @Html.ValidationMessageFor(model => model.UserSettings.ZipPostalCodeEnabled)
+            </td>
+        </tr>
+        <tr id="pnlZipPostalCodeRequired">
+            <td class="adminTitle">
+                @Html.SpecterLabelFor(model => model.UserSettings.ZipPostalCodeRequired)
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.UserSettings.ZipPostalCodeRequired)
+                @Html.ValidationMessageFor(model => model.UserSettings.ZipPostalCodeRequired)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SpecterLabelFor(model => model.UserSettings.CityEnabled)
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.UserSettings.CityEnabled)
+                @Html.ValidationMessageFor(model => model.UserSettings.CityEnabled)
+            </td>
+        </tr>
+        <tr id="pnlCityRequired">
+            <td class="adminTitle">
+                @Html.SpecterLabelFor(model => model.UserSettings.CityRequired)
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.UserSettings.CityRequired)
+                @Html.ValidationMessageFor(model => model.UserSettings.CityRequired)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SpecterLabelFor(model => model.UserSettings.CountryEnabled)
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.UserSettings.CountryEnabled)
+                @Html.ValidationMessageFor(model => model.UserSettings.CountryEnabled)
+            </td>
+        </tr>
+        <tr id="pnlStateProvincEnabled">
+            <td class="adminTitle">
+                @Html.SpecterLabelFor(model => model.UserSettings.StateProvinceEnabled)
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.UserSettings.StateProvinceEnabled)
+                @Html.ValidationMessageFor(model => model.UserSettings.StateProvinceEnabled)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SpecterLabelFor(model => model.UserSettings.PhoneEnabled)
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.UserSettings.PhoneEnabled)
+                @Html.ValidationMessageFor(model => model.UserSettings.PhoneEnabled)
+            </td>
+        </tr>
+        <tr id="pnlPhoneRequired">
+            <td class="adminTitle">
+                @Html.SpecterLabelFor(model => model.UserSettings.PhoneRequired)
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.UserSettings.PhoneRequired)
+                @Html.ValidationMessageFor(model => model.UserSettings.PhoneRequired)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SpecterLabelFor(model => model.UserSettings.FaxEnabled)
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.UserSettings.FaxEnabled)
+                @Html.ValidationMessageFor(model => model.UserSettings.FaxEnabled)
+            </td>
+        </tr>
+        <tr id="pnlFaxRequired">
+            <td class="adminTitle">
+                @Html.SpecterLabelFor(model => model.UserSettings.FaxRequired)
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.UserSettings.FaxRequired)
+                @Html.ValidationMessageFor(model => model.UserSettings.FaxRequired)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SpecterLabelFor(model => model.UserSettings.NewsletterEnabled)
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.UserSettings.NewsletterEnabled)
+                @Html.ValidationMessageFor(model => model.UserSettings.NewsletterEnabled)
+            </td>
+        </tr>
+    </table>
+}
+@helper TabAddressFormFields()
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("#@Html.FieldIdFor(model => model.AddressSettings.CountryEnabled)").click(toggleAddressCountryFormField);
+            $("#@Html.FieldIdFor(model => model.AddressSettings.CompanyEnabled)").click(toggleAddressRequiredFormField);
+            $("#@Html.FieldIdFor(model => model.AddressSettings.StreetAddressEnabled)").click(toggleAddressRequiredFormField);
+            $("#@Html.FieldIdFor(model => model.AddressSettings.StreetAddress2Enabled)").click(toggleAddressRequiredFormField);
+            $("#@Html.FieldIdFor(model => model.AddressSettings.ZipPostalCodeEnabled)").click(toggleAddressRequiredFormField);
+            $("#@Html.FieldIdFor(model => model.AddressSettings.CityEnabled)").click(toggleAddressRequiredFormField);
+            $("#@Html.FieldIdFor(model => model.AddressSettings.PhoneEnabled)").click(toggleAddressRequiredFormField);
+            $("#@Html.FieldIdFor(model => model.AddressSettings.FaxEnabled)").click(toggleAddressRequiredFormField);
+
+
+            toggleAddressCountryFormField();
+            toggleAddressRequiredFormField();
+        });
+
+        function toggleAddressCountryFormField() {
+            if ($('#@Html.FieldIdFor(model => model.AddressSettings.CountryEnabled)').is(':checked')) {
+                $('#pnlAddressStateProvinceEnabled').show();
+            }
+            else {
+                $('#pnlAddressStateProvinceEnabled').hide();
+            }
+        }
+
+        function toggleAddressRequiredFormField() {
+            if ($('#@Html.FieldIdFor(model => model.AddressSettings.CompanyEnabled)').is(':checked')) {
+                $('#pnlAddressCompanyRequired').show();
+            }
+            else {
+                $('#pnlAddressCompanyRequired').hide();
+            }
+
+            if ($('#@Html.FieldIdFor(model => model.AddressSettings.StreetAddressEnabled)').is(':checked')) {
+                $('#pnlAddressStreetAddressRequired').show();
+            }
+            else {
+                $('#pnlAddressStreetAddressRequired').hide();
+            }
+
+            if ($('#@Html.FieldIdFor(model => model.AddressSettings.StreetAddress2Enabled)').is(':checked')) {
+                $('#pnlAddressStreetAddress2Required').show();
+            }
+            else {
+                $('#pnlAddressStreetAddress2Required').hide();
+            }
+
+            if ($('#@Html.FieldIdFor(model => model.AddressSettings.ZipPostalCodeEnabled)').is(':checked')) {
+                $('#pnlAddressZipPostalCodeRequired').show();
+            }
+            else {
+                $('#pnlAddressZipPostalCodeRequired').hide();
+            }
+
+            if ($('#@Html.FieldIdFor(model => model.AddressSettings.CityEnabled)').is(':checked')) {
+                $('#pnlAddressCityRequired').show();
+            }
+            else {
+                $('#pnlAddressCityRequired').hide();
+            }
+
+            if ($('#@Html.FieldIdFor(model => model.AddressSettings.PhoneEnabled)').is(':checked')) {
+                $('#pnlAddressPhoneRequired').show();
+            }
+            else {
+                $('#pnlAddressPhoneRequired').hide();
+            }
+
+            if ($('#@Html.FieldIdFor(model => model.AddressSettings.FaxEnabled)').is(':checked')) {
+                $('#pnlAddressFaxRequired').show();
+            }
+            else {
+                $('#pnlAddressFaxRequired').hide();
+            }
+        }
+
+    </script>
+    <table class="adminContent">
+        <tr>
+            <td colspan="2">
+                <em>@T("Admin.Configuration.Settings.AdvanceUser.AddressFormFields.Description")</em>
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SpecterLabelFor(model => model.AddressSettings.CompanyEnabled)
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.AddressSettings.CompanyEnabled)
+                @Html.ValidationMessageFor(model => model.AddressSettings.CompanyEnabled)
+            </td>
+        </tr>
+        <tr id="pnlAddressCompanyRequired">
+            <td class="adminTitle">
+                @Html.SpecterLabelFor(model => model.AddressSettings.CompanyRequired)
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.AddressSettings.CompanyRequired)
+                @Html.ValidationMessageFor(model => model.AddressSettings.CompanyRequired)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SpecterLabelFor(model => model.AddressSettings.StreetAddressEnabled)
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.AddressSettings.StreetAddressEnabled)
+                @Html.ValidationMessageFor(model => model.AddressSettings.StreetAddressEnabled)
+            </td>
+        </tr>
+        <tr id="pnlAddressStreetAddressRequired">
+            <td class="adminTitle">
+                @Html.SpecterLabelFor(model => model.AddressSettings.StreetAddressRequired)
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.AddressSettings.StreetAddressRequired)
+                @Html.ValidationMessageFor(model => model.AddressSettings.StreetAddressRequired)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SpecterLabelFor(model => model.AddressSettings.StreetAddress2Enabled)
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.AddressSettings.StreetAddress2Enabled)
+                @Html.ValidationMessageFor(model => model.AddressSettings.StreetAddress2Enabled)
+            </td>
+        </tr>
+        <tr id="pnlAddressStreetAddress2Required">
+            <td class="adminTitle">
+                @Html.SpecterLabelFor(model => model.AddressSettings.StreetAddress2Required)
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.AddressSettings.StreetAddress2Required)
+                @Html.ValidationMessageFor(model => model.AddressSettings.StreetAddress2Required)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SpecterLabelFor(model => model.AddressSettings.ZipPostalCodeEnabled)
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.AddressSettings.ZipPostalCodeEnabled)
+                @Html.ValidationMessageFor(model => model.AddressSettings.ZipPostalCodeEnabled)
+            </td>
+        </tr>
+        <tr id="pnlAddressZipPostalCodeRequired">
+            <td class="adminTitle">
+                @Html.SpecterLabelFor(model => model.AddressSettings.ZipPostalCodeRequired)
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.AddressSettings.ZipPostalCodeRequired)
+                @Html.ValidationMessageFor(model => model.AddressSettings.ZipPostalCodeRequired)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SpecterLabelFor(model => model.AddressSettings.CityEnabled)
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.AddressSettings.CityEnabled)
+                @Html.ValidationMessageFor(model => model.AddressSettings.CityEnabled)
+            </td>
+        </tr>
+        <tr id="pnlAddressCityRequired">
+            <td class="adminTitle">
+                @Html.SpecterLabelFor(model => model.AddressSettings.CityRequired)
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.AddressSettings.CityRequired)
+                @Html.ValidationMessageFor(model => model.AddressSettings.CityRequired)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SpecterLabelFor(model => model.AddressSettings.CountryEnabled)
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.AddressSettings.CountryEnabled)
+                @Html.ValidationMessageFor(model => model.AddressSettings.CountryEnabled)
+            </td>
+        </tr>
+        <tr id="pnlAddressStateProvinceEnabled">
+            <td class="adminTitle">
+                @Html.SpecterLabelFor(model => model.AddressSettings.StateProvinceEnabled)
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.AddressSettings.StateProvinceEnabled)
+                @Html.ValidationMessageFor(model => model.AddressSettings.StateProvinceEnabled)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SpecterLabelFor(model => model.AddressSettings.PhoneEnabled)
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.AddressSettings.PhoneEnabled)
+                @Html.ValidationMessageFor(model => model.AddressSettings.PhoneEnabled)
+            </td>
+        </tr>
+        <tr id="pnlAddressPhoneRequired">
+            <td class="adminTitle">
+                @Html.SpecterLabelFor(model => model.AddressSettings.PhoneRequired)
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.AddressSettings.PhoneRequired)
+                @Html.ValidationMessageFor(model => model.AddressSettings.PhoneRequired)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SpecterLabelFor(model => model.AddressSettings.FaxEnabled)
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.AddressSettings.FaxEnabled)
+                @Html.ValidationMessageFor(model => model.AddressSettings.FaxEnabled)
+            </td>
+        </tr>
+        <tr id="pnlAddressFaxRequired">
+            <td class="adminTitle">
+                @Html.SpecterLabelFor(model => model.AddressSettings.FaxRequired)
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.AddressSettings.FaxRequired)
+                @Html.ValidationMessageFor(model => model.AddressSettings.FaxRequired)
+            </td>
+        </tr>
+    </table>
+}
+@helper TabDateTimeSettings()
+{
+    <table class="adminContent">
+        <tr>
+            <td class="adminTitle">
+                @Html.SpecterLabelFor(model => model.DateTimeSettings.AllowUsersToSetTimeZone)
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.DateTimeSettings.AllowUsersToSetTimeZone)
+                @Html.ValidationMessageFor(model => model.DateTimeSettings.AllowUsersToSetTimeZone)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SpecterLabelFor(model => model.DateTimeSettings.DefaultStoreTimeZoneId)
+            </td>
+            <td class="adminData">
+                @Html.DropDownListFor(model => model.DateTimeSettings.DefaultStoreTimeZoneId, Model.DateTimeSettings.AvailableTimeZones)
+                @Html.ValidationMessageFor(model => model.DateTimeSettings.DefaultStoreTimeZoneId)
+            </td>
+        </tr>
+    </table>
+}
+@helper TabExternalAuthenticationSettings()
+{
+    <table class="adminContent">
+        <tr>
+            <td class="adminTitle">
+                @Html.SpecterLabelFor(model => model.ExternalAuthenticationSettings.AutoRegisterEnabled)
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.ExternalAuthenticationSettings.AutoRegisterEnabled)
+                @Html.ValidationMessageFor(model => model.ExternalAuthenticationSettings.AutoRegisterEnabled)
+            </td>
+        </tr>
+    </table>
+}

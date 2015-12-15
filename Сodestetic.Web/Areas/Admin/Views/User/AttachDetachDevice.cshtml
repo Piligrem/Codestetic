@@ -1,0 +1,155 @@
+﻿@model GridModel<UserDeviceModel>
+@using Kendo.Mvc.UI;
+@using System.Globalization;
+@{
+    Layout = "~/Area/Admin/Views/Shared/_LayoutAdmin.cshtml";
+    var gridPageSize = EngineContext.Current.Resolve<Specter.Web.Core.Domain.Common.AdminAreaSettings>().GridPageSize;
+    ViewBag.Title = T("Admin.Users.AttachDevices").Text;
+}
+<div class="admin-content align-center">
+    @using (Html.BeginForm())
+    {
+        <div class="section-header">
+            <div class="title">
+                <i class="icon icon-group"></i>
+                @ViewBag.Title: @ViewBag.userFullName
+                @Html.ActionLink("(" + T("Admin.Users.Edit.BackToEditDetails") + ")", "Edit", new { id = @ViewBag.userId })
+            </div>
+        </div>
+        <p>
+        </p>
+        <table class="adminContent">
+            <tr>
+                <td>
+                    @(Html.Kendo().Grid<UserDeviceModel>(Model.Data)
+                        .Name("user-devices-grid")
+                        .BindTo(Model.Data)
+                        .Columns(columns =>
+                        {
+                            columns.Bound(x => x.Id)
+                                .Visible(false)
+                                .Filterable(false);
+                            columns.Bound(x => x.DeviceAttached)
+                                .Template(item => @Html.SymbolForBool(item.DeviceAttached))
+                                .ClientTemplate(@Html.SymbolForBool("DeviceAttached"))
+                                .Filterable(false)
+                                .Centered();
+                            columns.Bound(x => x.IMEI)
+                                //.ClientTemplate("<a href='" + @Url.Action("Edit", "User", new { area = "Admin", id = "#=Id#" }) + "'>#=Email#</a>")
+                                //.Template(x => Html.ActionLink(x.Email, "Edit", "User", new { id = x.Id }, new { }))
+                                .Width(150);
+                            columns.Bound(x => x.Name)
+                                .Width(150);
+                            columns.Bound(x => x.DeviceType)
+                                .Width(200);
+                            columns.Bound(x => x.CreatedOn)
+                                .Filterable(false)
+                                .Format("{0:dd-MM-yyyy hh:mm}");
+                            columns.Bound(x => x.LastConnection)
+                                .Filterable(false)
+                                .Format("{0:dd-MM-yyyy hh:mm}");
+                            columns.Bound(x => x.UpdateOn)
+                                .Filterable(false)
+                                .Format("{0:dd-MM-yyyy hh:mm}");
+                            columns.Bound(x => x.Active)
+                                .Template(item => @Html.SymbolForBool(item.Active))
+                                .ClientTemplate(@Html.SymbolForBool("Active"))
+                                .Filterable(false)
+                                .Centered();
+                            columns.Bound(x => x.Id)
+                                .Filterable(false)
+                                .ClientTemplate("<a class='k-button k-button-icontext' onclick='attachDetach(this, #=Id#)'><span class='k-icon k-chain'></span>" + T("Admin.Common.Attach").Text + "</a>")
+                                .Title("");
+                        })
+                        .Pageable(pager => pager
+                            .Input(true)
+                            .Numeric(true)
+                            .Info(true)
+                            .PreviousNext(true)
+                            .Refresh(true)
+                            .PageSizes(true))
+                        .Filterable(filter => filter.Mode(GridFilterMode.Row))
+                        .DataSource(dataSource => dataSource
+                            .Ajax()
+                            .Model(model =>
+                            {
+                                model.Id(x => x.Id);
+                                model.Field(x => x.DeviceAttached).Editable(false);
+                                model.Field(x => x.IMEI).Editable(false);
+                                model.Field(x => x.Name).Editable(false);
+                                model.Field(x => x.DeviceType).Editable(false);
+                                model.Field(x => x.CreatedOn).Editable(false);
+                                model.Field(x => x.LastConnection).Editable(false);
+                                model.Field(x => x.UpdateOn).Editable(false);
+                                model.Field(x => x.Active).Editable(false);
+                            })
+                            //.Update("AttachingDevice", "User")
+                            .ServerOperation(false)
+                            .AutoSync(true)
+                            .PageSize(gridPageSize)
+                        )
+                        .Events(events =>
+                        {
+                            events.DataBound("onDataBound");
+                            //events.Edit("setValue");
+                            //events.Change("updateValue");
+                            //events.Save("updateValue");
+                        })
+                    )
+                </td>
+            </tr>
+        </table>
+    }
+</div>
+<script type="text/javascript">
+    function attachDetach(element, deviceId) {
+        var grid = $("#user-devices-grid").data("kendoGrid"),
+            row = $(element).closest("tr"),
+            deviceAttachedCell = row.find(".grid-icon").first(),
+            button = row.find(".k-button");
+
+        $.ajax({
+            type: "POST",
+            url: "@Url.Action("AttachDetachDevice", "User")",
+            data: JSON.stringify({
+                userId: @ViewBag.userId,
+                deviceId: deviceId,
+                userAttached: !grid.dataItem(row).DeviceAttached
+            }),
+            async: true,
+            dataType: "json",
+            contentType: "application/json",
+            traditional: true,
+            success: function (result) {
+                if (result.Message != "") {
+                    console.debug("Error: " + result.Message);
+                } else {
+                    grid.dataItem(row).DeviceAttached = !grid.dataItem(row).DeviceAttached;
+                    deviceAttachedCell.removeClass("grid-icon-active-" + !grid.dataItem(row).DeviceAttached).addClass("grid-icon-active-" + grid.dataItem(row).DeviceAttached);
+                    changeButton(button, grid.dataItem(row).DeviceAttached);
+                }
+            },
+            error: function (xhr) {
+                console.debug("Error: " + xhr.statusText +  ", @Url.Action("AttachDetachDevice", "Device")");
+            }
+        });
+    }
+    function changeButton(button, value)
+    {
+        var buttonAttach = "<span class='k-icon k-chain'></span>@T("Admin.Common.Attach")",
+            buttonDetach = "<span class='k-icon k-chain-broken'></span>@T("Admin.Common.Detach")";
+        if (value)
+        {
+            $(button).html(buttonDetach);
+        } else {
+            $(button).html(buttonAttach);
+        }
+    }
+    function onDataBound(e) {
+        var buttons = $('#user-devices-grid a.k-button'), // a.k-button'),
+            items = e.sender.dataItems(),
+            count = buttons.length;
+        for (var i = 0; i < count; i++) { changeButton(buttons[i], items[i].DeviceAttached); }
+    }
+</script>
+

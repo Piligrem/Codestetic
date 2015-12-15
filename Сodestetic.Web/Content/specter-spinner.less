@@ -1,0 +1,42 @@
+﻿@import 'mixins/specter-functions.less';
+@import 'mixins/prefixes.less';
+
+.spinner[role='container'] {
+    position: relative;
+    .display-flex(row, flex);
+    min-width: 65px;
+
+    & .spinner[role='input'] {
+        width: 45px;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+}
+.spinner[role='control'] {
+    .border-flat-all(@btn-default-border);
+    border-left-width: 0;
+    border-radius: 0 @border-radius-base @border-radius-base 0;
+    .display-flex(column);
+    align-items: center;
+    .align-content(center);
+    justify-content: space-between;
+    width: 20px;
+    height: 30px;
+    .box-sizing(border-box);
+    line-height: 0;
+    right: 0;
+    overflow: hidden;
+
+    & > .spinner i {
+        line-height: 0;
+    }
+}
+.btn.btn-default.spinner {
+    min-width: 0;
+    border: none;
+    width: 100%;
+    height: 100%;
+    .border-radius-all(0);
+    padding-right: 2px;
+    padding-left: 2px;
+}

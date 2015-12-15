@@ -1,0 +1,151 @@
+﻿@model MaintenanceModel
+@using Kendo.Mvc.UI;
+
+<div class="admin-content align-center">
+    <div class="admin-row-content">
+        <div class="section-header">
+            <div class="title"><i class="icon icon-cogs"></i>@T("Admin.System.Maintenance").Text</div>
+            <div class="options">
+            </div>
+        </div>
+        @using (Html.BeginForm())
+        {
+            <table class="adminContent">
+                <tr>
+                    <td colspan="2">
+                        <b>@T("Admin.System.Maintenance.DeleteImageCache")</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="adminTitle">
+                        @Html.SpecterLabelFor(model => model.DeleteImageCache.FileCount)
+                    </td>
+                    <td class="adminData">
+                        @Model.DeleteImageCache.FileCount
+                    </td>
+                </tr>
+                <tr>
+                    <td class="adminTitle">
+                        @Html.SpecterLabelFor(model => model.DeleteImageCache.TotalSize)
+                    </td>
+                    <td class="adminData">
+                        @Model.DeleteImageCache.TotalSize
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <button type="submit" name="delete-image-cache" value="delete-image-cache" class="btn btn-primary">
+                            <i class="icon-recycle"></i>@T("Admin.Header.ClearCache")
+                        </button>
+                    </td>
+                </tr>
+                <tr><td colspan="2"><hr /></td></tr>
+                <tr>
+                    <td colspan="2">
+                        <b>@T("Admin.System.Maintenance.DeleteGuests")</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="adminTitle">
+                        @Html.SpecterLabelFor(model => model.DeleteGuests.StartDate)
+                    </td>
+                    <td class="adminData">
+                        @Html.Kendo().DatePickerFor(model => model.DeleteGuests.StartDate).Format("dd-MM-yyyy").HtmlAttributes(new { height = "28px" })
+                    </td>
+                </tr>
+                <tr>
+                    <td class="adminTitle">
+                        @Html.SpecterLabelFor(model => model.DeleteGuests.EndDate)
+                    </td>
+                    <td class="adminData">
+                        @Html.Kendo().DatePickerFor(model => model.DeleteGuests.EndDate).Format("dd-MM-yyyy")
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <button type="submit" name="delete-guests" value="delete-guests" class="btn btn-primary"><i class="icon-trash-o"></i>@T("Admin.Common.Delete")</button>
+                    </td>
+                </tr>
+                @if (Model.DeleteGuests.NumberOfDeletedUsers.HasValue)
+                {
+                    <tr>
+                        <td colspan="2">
+                            <b>@string.Format(@T("Admin.System.Maintenance.DeleteGuests.TotalDeleted").Text, Model.DeleteGuests.NumberOfDeletedUsers.Value)</b>
+                        </td>
+                    </tr>
+                }
+                <tr><td colspan="2"><hr /></td></tr>
+                <tr>
+                    <td colspan="2">
+                        <b>@T("Admin.System.Maintenance.DeleteExportedFiles")</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="adminTitle">
+                        @Html.SpecterLabelFor(model => model.DeleteExportedFiles.StartDate)
+                    </td>
+                    <td class="adminData">
+                        @Html.Kendo().DatePickerFor(model => model.DeleteExportedFiles.StartDate).Format("dd-MM-yyyy")
+                    </td>
+                </tr>
+                <tr>
+                    <td class="adminTitle">
+                        @Html.SpecterLabelFor(model => model.DeleteExportedFiles.EndDate)
+                    </td>
+                    <td class="adminData">
+                        @Html.Kendo().DatePickerFor(model => model.DeleteExportedFiles.EndDate).Format("dd-MM-yyyy")
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <button type="submit" name="delete-exported-files" value="delete-exported-files" class="btn btn-danger">
+                            <i class="icon-trash-o"></i>@T("Admin.Common.Delete")
+                        </button>
+                    </td>
+                </tr>
+                @if (Model.DeleteExportedFiles.NumberOfDeletedFiles.HasValue)
+                {
+                    <tr>
+                        <td colspan="2">
+                            <b>@string.Format(@T("Admin.System.Maintenance.DeleteExportedFiles.TotalDeleted").Text, Model.DeleteExportedFiles.NumberOfDeletedFiles.Value)</b>
+                        </td>
+                    </tr>
+                }
+                <tr><td colspan="2"><hr /></td></tr>
+                <tr>
+                    <td colspan="2">
+                        <b>@T("Admin.System.Maintenance.SqlQueryTitle")</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="adminTitle">
+                        <div class="ctl-label">
+                            @Html.SpecterLabelFor(model => model.SqlQuery)
+                        </div>
+                    </td>
+                    <td class="adminData">
+                        @Html.TextAreaFor(model => model.SqlQuery, new { style = "width:500px; height:250px;" })
+                    </td>
+                </tr>
+                <tr>
+                    <td class="adminData">
+                        &nbsp;
+                    </td>
+                    <td>
+                        <button type="submit" name="execute-sql-query" value="execute-sql-query" class="btn btn-danger">
+                            <i class="icon-bolt"></i>@T("Admin.System.Maintenance.SqlQueryExecute")
+                        </button>
+                    </td>
+                </tr>
+                @if (Model.DeleteExportedFiles.NumberOfDeletedFiles.HasValue)
+                {
+                    <tr>
+                        <td colspan="2">
+                            <b>@string.Format(@T("Admin.System.Maintenance.DeleteExportedFiles.TotalDeleted").Text, Model.DeleteExportedFiles.NumberOfDeletedFiles.Value)</b>
+                        </td>
+                    </tr>
+                }
+            </table>
+        }
+    </div>
+</div>

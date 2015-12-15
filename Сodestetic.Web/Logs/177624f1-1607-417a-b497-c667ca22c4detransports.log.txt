@@ -1,0 +1,9 @@
+SignalR.Transports.TransportHeartBeat Information: 0 : Connection 7496183f-81f0-4349-9f70-c363984e68db is New.
+SignalR.Transports.WebSocketTransport Information: 0 : CloseSocket(7496183f-81f0-4349-9f70-c363984e68db)
+SignalR.Transports.WebSocketTransport Information: 0 : Abort(7496183f-81f0-4349-9f70-c363984e68db)
+SignalR.Transports.TransportHeartBeat Information: 0 : Removing connection 7496183f-81f0-4349-9f70-c363984e68db
+SignalR.Transports.WebSocketTransport Information: 0 : End(7496183f-81f0-4349-9f70-c363984e68db)
+SignalR.Transports.WebSocketTransport Verbose: 0 : DrainWrites(7496183f-81f0-4349-9f70-c363984e68db)
+SignalR.Transports.WebSocketTransport Information: 0 : CompleteRequest (7496183f-81f0-4349-9f70-c363984e68db)
+SignalR.Transports.TransportHeartBeat Information: 0 : Connection 51d3f49d-90a5-4814-830e-c0c52a9415c6 is New.
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(51d3f49d-90a5-4814-830e-c0c52a9415c6)

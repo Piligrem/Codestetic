@@ -1,0 +1,1 @@
+SignalR.Transports.TransportHeartBeat Information: 0 : Connection c78f6914-8085-4a25-8801-6dd60b0b6806 is New.

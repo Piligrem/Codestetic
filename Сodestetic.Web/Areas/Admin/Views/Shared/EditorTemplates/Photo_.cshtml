@@ -1,0 +1,67 @@
+﻿@model long?
+@using Specter.Web.Core;
+@using Specter.Web.Framework.UI;
+@using Specter.Web.Utilities;
+@using Specter.Web.Core.Domain.Media;
+@{
+    
+    //other variables
+    var random = CommonHelper.GenerateRandomInteger();
+    var deviceId = "photo" + random;
+    var pictureService = EngineContext.Current.Resolve<Specter.Web.Services.Media.IPictureService>();
+    var photoId = Model.HasValue ? Model.Value : 0;
+
+    var bundle = System.Web.Optimization.BundleTable.Bundles.GetRegisteredBundles()
+        .Where(b => b.Path == "~/Content/css")
+        .First();
+    bundle.Include("~/Content/fileupload/fileupload.css");
+}
+
+<div id="@deviceId" class="fileupload" style="display: inline-block;">
+
+    @Html.HiddenFor(x => x, new { @class = "hidden photo-user" })
+    <div>
+        <img src="@(pictureService.GetPictureUrl(photoId, 100, true, PictureType.Photo))" class="item-photo stick-none" alt="" />
+    </div>
+    <div class="clearfix">
+        <span class="btn fileinput-button">
+            <i class="icon-upload"></i>
+            <input id="fileupload-@random" type="file" name="file" style="" />
+        </span>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        var el = $('#@deviceId'),
+            img = el.find('img'),
+            elPhoto = el.find('.photo-user'),
+            elRemove = el.find('.remove');
+        $('#@deviceId').fileupload({
+            url: '@(Url.Action("AsyncUpload", "Media", new { area = "" }))',
+            dataType: 'json',
+            //acceptFileTypes: /^image\/(gif|jpeg|jpg|png)$/,
+            acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
+            done: function (e, data) {
+                var result = data.result;
+                if (result.success) {
+                    img.attr('src', result.imageUrl);
+                    elPhoto.val(result.pictureId);
+                    elRemove.show();
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                if (errorThrown === 'abort') {
+                    //alert('File Upload has been canceled');
+                }
+            }
+        });
+
+        elRemove.click(function (e) {
+            img.attr('src', '@pictureService.GetDefaultPictureUrl()');
+            elPhoto.val(0);
+            $(this).hide();
+            e.preventDefault();
+        });
+    });
+</script>

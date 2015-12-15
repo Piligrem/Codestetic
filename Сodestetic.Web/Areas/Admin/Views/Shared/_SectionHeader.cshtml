@@ -1,0 +1,92 @@
+﻿@using Kendo.Mvc.UI;
+@{
+    var model = (string)ViewBag.Model ?? "";
+    var action = (string)ViewBag.Action ?? "";
+    var sendMail = ViewBag.SendMail != null ? (bool)ViewBag.SendMail : false;
+    var subtitle = (string)ViewBag.Subtitle ?? "";
+    
+    var backToList = ViewBag.BackToList != null ? "(" + T(string.Format("{0}.{1}.BackToList", ViewBag.Model, ViewBag.Action)) + ")" : null;
+    var type = (string)ViewBag.Type;
+    var enableContinue = (bool)(ViewBag.Continue ?? true);
+    var handlerSave = (string)ViewBag.SaveHandler;
+    var title = "";
+
+    switch (action)
+    {
+        case "New":
+            title = T(string.Format("{0}.Add{1}", model, action));
+            break;
+        case "Edit":
+            title = T(string.Format("{0}.{1}Details", model, action));
+            break;
+    }
+    title += backToList != null ? (subtitle != null ? " - " + subtitle : "") : "";
+}
+<div class="section-header">
+    <div class="title">
+        @title
+        @if (backToList != null)
+        {
+            @Html.ActionLink((string)backToList, "List")
+        }
+    </div>
+    <div class="options">
+        @if (handlerSave.IsNullOrEmpty())
+        {
+            @(Html.Kendo().Button()
+                .Name("save")
+                .Icon("!icon-ok")
+                .Content(T("Common.Button.Save"))
+                .HtmlAttributes(new { name = "save", type = "submit", value = "save" })
+            )
+        }
+        else
+        {
+            @(Html.Kendo().Button()
+                .Name("save")
+                .Icon("!icon-ok")
+                .Content(T("Common.Button.Save"))
+                .HtmlAttributes(new { name = "save", type = "button", value = "save" })
+                .Events(events => events.Click(handlerSave))
+            )
+        }
+        @if (enableContinue)
+        {
+            if (handlerSave.IsNullOrEmpty())
+            {
+                @(Html.Kendo().Button()
+                    .Name("saveContinue")
+                    .Content(T("Common.Button.SaveContinue"))
+                    .HtmlAttributes(new { name = "save", type = "submit", value = "continueEditing" })
+                )
+            }
+            else
+            {
+                @(Html.Kendo().Button()
+                    .Name("saveContinue")
+                    .Content(T("Common.Button.SaveContinue"))
+                    .HtmlAttributes(new { name = "save", type = "button", value = "continueEditing" })
+                    .Events(events => events.Click(handlerSave))
+                )
+            }
+        }
+        @if (sendMail)
+        {
+            @(Html.Kendo().Button()
+                .Name("icon-envelope")
+                .Icon("!icon-envelope")
+                .Content(T(model + ".SendEmail"))
+                .HtmlAttributes(new { name = type + "-sendmail", type = "submit" })
+            )
+        }
+        @if (type != null)
+        {
+            @(Html.Kendo().Button()
+                .Name(type + "-delete")
+                .Icon("!icon-trash")
+                .Content(@T("Common.Button.Delete"))
+                .HtmlAttributes(new { name = type + "-delete", type = "submit" })
+            )
+        }
+    </div>
+</div>

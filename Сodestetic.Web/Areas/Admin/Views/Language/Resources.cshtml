@@ -1,0 +1,119 @@
+﻿@model Specter.Web.Areas.Admin.Infrastructure.GridModel<LanguageResourceModel>
+@using Kendo.Mvc.UI;
+@using Kendo.Mvc.UI.Fluent;
+@using System.Linq;
+@{
+    var gridPageSize = EngineContext.Current.Resolve<Specter.Web.Core.Domain.Common.AdminAreaSettings>().GridPageSize;
+    //page title
+    ViewBag.Title = T("Admin.Configuration.Languages.Localization").Text;
+}
+<div class="admin-content align-center">
+    <div class="admin-row-content">
+        <div class="section-header">
+            <div class="title">@ViewBag.Title</div>
+        </div>
+        @if (ViewBag.AllLanguages != null)
+        {
+            <table class="adminContent" style="margin-bottom: 10px;">
+                <tr>
+                    <td class="adminTitle">
+                        @T("Admin.Configuration.Languages.Select")
+                    </td>
+                    <td class="adminData">
+
+                        @Html.DropDownList("localeresource-language", (IEnumerable<SelectListItem>)ViewBag.AllLanguages, new { onchange = "onLocaleResourceLanguageSelected(this.value);" })
+
+                        <script type="text/javascript">
+                            function onLocaleResourceLanguageSelected(languageid) {
+                                window.location = '@(Url.Action("Resources") + "?languageId=")' + languageid;
+                            }
+                        </script>
+                    </td>
+                </tr>
+            </table>
+        }
+        <table class="adminContent">
+            <tr>
+                <td>
+                    <div class="alert alert-info fade in">
+                        @T("Admin.Configuration.Languages.Resources.Description")
+                        <button class="close" data-dismiss="alert">x</button>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @(Html.Kendo().Grid<LanguageResourceModel>(Model.Data)
+                        .Name("resources-grid")
+                        .BindTo(Model.Data)
+                        .Columns(columns =>
+                        {
+                            columns.Bound(x => x.LanguageName)
+                                .Width(100)
+                                .Filterable(false);
+                            columns.Bound(x => x.Name).Width(300);
+                            columns.Bound(x => x.Value);
+                            columns.Command(commands =>
+                            {
+                                commands.Edit().Text(@T("Admin.Common.Edit"));
+                                commands.Destroy().Text(@T("Admin.Common.Delete"));
+                            });
+                        })
+                        .ToolBar(
+                            toolbar => toolbar.Create().Text(@T("Admin.Common.Insert")).HtmlAttributes(new { @class="btn"}))
+                        .Editable(x =>
+                        {
+                            x.Mode(GridEditMode.InLine);
+                        })
+                        .Filterable(filter => filter.Mode(GridFilterMode.Row))
+                        .Pageable(pager => pager
+                            .Input(true)
+                            .Numeric(true)
+                            .Info(true)
+                            .PreviousNext(true)
+                            .Refresh(true))
+                        .DataSource(dataBinding =>
+                        {
+                            dataBinding
+                                .Ajax()
+                                .ServerOperation(true)
+                                .Total(Model.Total)
+                                .Model(model =>
+                                {
+                                    model.Id(x => x.Id);
+                                    model.Field(x => x.LanguageName).Editable(false);
+                                    model.Field(x => x.Id).Editable(false);
+                                })
+                                .Read("Resources", "Language", new { languageId = ViewBag.LanguageId })
+                                .Update("ResourceUpdate", "Language")
+                                .Destroy("ResourceDelete", "Language")
+                                .Create("ResourceAdd", "Language", new { id = ViewBag.LanguageId })
+                                .PageSize(gridPageSize)
+                                .AutoSync(true);
+                        })
+                            //.EnableCustomBinding(true)
+                        .Events(x => x.Edit("onResourceEdit"))
+                            //.Events(x => x.Error("Grid_onError")))
+                    )
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<script type="text/javascript">
+    function editRow(element, resourceId)
+    {
+        var grid = $("#resources-grid").data("kendoGrid");
+        element.hidden = true;
+        grid.editRow($(element).closest("tr"));
+    }
+    function onResourceEdit(e) {
+        if (e.mode == "insert") {
+            $(e.form).find("td:first").html("@ViewBag.LanguageName");
+        }
+    }
+    function Grid_onError(e) {
+        alert(e.XMLHttpRequest.responseText);
+        e.preventDefault();
+    }
+</script>

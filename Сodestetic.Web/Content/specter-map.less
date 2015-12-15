@@ -1,0 +1,101 @@
+﻿@import 'icon-specter.less';
+@import 'mixins/specter-functions.less';
+@import 'specter-panel.less';
+@import 'specter-typography.less';
+@import 'specter-buttons.less';
+@import 'specter-form.less';
+@import 'specter-popup.less';
+@import 'specter-colorpicker.less';
+@import 'specter-markerselector.less';
+@import 'specter-photoupload.less';
+@import 'specter-spinner.less';
+@import 'specter-titletooltip.less';
+@import 'specter-leaflet-draw.less';
+@import 'specter-leaflet-contextmenu.less';
+
+@map-padding: 10px;
+@map-background-texture: url("../Content/Images/texture.png");
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+       -moz-user-select: none;
+        -ms-user-select: none;
+    -webkit-user-select: none;
+            user-select: none;
+    overflow: hidden;
+    font-family: 'Open Sans', sans-serif;
+    .box-sizing(border-box);
+}
+
+.container-wrapper {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background: @map-background-texture;
+    padding: @map-padding;
+}
+.content-map-wrap {
+    width: inherit;
+    height: inherit;
+}
+#content-body {
+    height: inherit;
+}
+.container {
+    padding: @map-padding;
+    margin: 0;
+}
+@media (min-width: 768px) {
+    .sidebar {
+        margin: 0 10px 20px 0;
+    }
+}
+
+.leaflet-center {
+    display: flex;
+        -ms-flex-direction: column;
+    -webkit-flex-direction: column;
+            flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.attribution-vendor-maps {
+    display: flex;
+    -ms-flex-direction: column;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+
+    & .logo-vendor-maps {
+        position: relative;
+        display: inherit;
+        align-self: flex-end;
+    }
+
+    & .info-vendor-maps {
+        display: inherit;
+            -ms-flex-direction: row;
+        -webkit-flex-direction: row;
+                flex-direction: row;
+        mix-blend-mode: luminosity;
+        overflow: hidden;
+        -webkit-filter: contrast(1.25);
+        filter: contrast(1.25);
+    }
+}
+
+#map {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+

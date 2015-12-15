@@ -1,0 +1,21 @@
+SignalR.Transports.TransportHeartBeat Information: 0 : Connection 8004ab00-4b4a-434c-86d1-059019687ba7 is New.
+SignalR.Transports.WebSocketTransport Information: 0 : CloseSocket(8004ab00-4b4a-434c-86d1-059019687ba7)
+SignalR.Transports.WebSocketTransport Information: 0 : Abort(8004ab00-4b4a-434c-86d1-059019687ba7)
+SignalR.Transports.TransportHeartBeat Information: 0 : Removing connection 8004ab00-4b4a-434c-86d1-059019687ba7
+SignalR.Transports.WebSocketTransport Information: 0 : End(8004ab00-4b4a-434c-86d1-059019687ba7)
+SignalR.Transports.WebSocketTransport Verbose: 0 : DrainWrites(8004ab00-4b4a-434c-86d1-059019687ba7)
+SignalR.Transports.WebSocketTransport Information: 0 : CompleteRequest (8004ab00-4b4a-434c-86d1-059019687ba7)
+SignalR.Transports.TransportHeartBeat Information: 0 : Connection 3456bd68-d301-4bff-87c7-65cdc9625773 is New.
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(3456bd68-d301-4bff-87c7-65cdc9625773)
+SignalR.Transports.WebSocketTransport Information: 0 : CloseSocket(3456bd68-d301-4bff-87c7-65cdc9625773)
+SignalR.Transports.WebSocketTransport Information: 0 : Abort(3456bd68-d301-4bff-87c7-65cdc9625773)
+SignalR.Transports.TransportHeartBeat Information: 0 : Removing connection 3456bd68-d301-4bff-87c7-65cdc9625773
+SignalR.Transports.WebSocketTransport Information: 0 : End(3456bd68-d301-4bff-87c7-65cdc9625773)
+SignalR.Transports.WebSocketTransport Verbose: 0 : DrainWrites(3456bd68-d301-4bff-87c7-65cdc9625773)
+SignalR.Transports.WebSocketTransport Information: 0 : CompleteRequest (3456bd68-d301-4bff-87c7-65cdc9625773)
+SignalR.Transports.TransportHeartBeat Information: 0 : Connection 3425ccb9-7fb5-4f7c-bb99-38e4aae74154 is New.
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(3425ccb9-7fb5-4f7c-bb99-38e4aae74154)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(3425ccb9-7fb5-4f7c-bb99-38e4aae74154)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(3425ccb9-7fb5-4f7c-bb99-38e4aae74154)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(3425ccb9-7fb5-4f7c-bb99-38e4aae74154)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(3425ccb9-7fb5-4f7c-bb99-38e4aae74154)

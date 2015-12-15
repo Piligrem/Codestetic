@@ -1,0 +1,222 @@
+﻿@model MediaSettingsModel
+@using Kendo.Mvc.UI;
+
+@{
+    //page title
+    ViewBag.Title = T("Admin.Configuration.Settings.Media").Text;
+}
+<div class="admin-content align-center">
+    @using (Html.BeginForm())
+    {
+        <div class="section-header">
+            <div class="title">
+                <i class="icon icon-picture"></i>
+                @ViewBag.Title
+            </div>
+            <div class="options">
+                <button type="submit" name="save" value="save" class="btn btn-primary"><i class="icon-ok icon-white"></i>@T("Admin.Common.Save")</button>
+            </div>
+        </div>
+
+        <script>
+        $(function () {
+            $("#@Html.FieldIdFor(model => model.DefaultPictureZoomEnabled)").click(togglePictureZoomType);
+            togglePictureZoomType();
+        });
+
+        function togglePictureZoomType() {
+            if ($('#@Html.FieldIdFor(model => model.DefaultPictureZoomEnabled)').is(':checked')) {
+                $('#pnlPictureZoomType').show();
+            }
+            else {
+                $('#pnlPictureZoomType').hide();
+            }
+        }
+        </script>
+        //@Html.Action("StoreScopeConfiguration", "Setting")
+        @Html.ValidationSummary(false)
+
+        <table class="adminContent">
+            <tr>
+                <td class="adminTitle">
+                    @Html.SpecterLabelFor(model => model.PicturesStoredIntoDatabase)
+                </td>
+                <td class="adminData">
+                    @if (Model.PicturesStoredIntoDatabase)
+                    {
+                        @T("Admin.Configuration.Settings.Media.PicturesStoredIntoDatabase.Database")
+                    }
+                    else
+                    {
+                        @T("Admin.Configuration.Settings.Media.PicturesStoredIntoDatabase.FileSystem")
+                    }
+
+                    <button type="submit" name="change-picture-storage" value="change-picture-storage" class="btn">
+                        <i class="icon-pencil"></i>&nbsp;@T("Admin.Configuration.Settings.Media.PicturesStoredIntoDatabase.Change")
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <div class="alert alert-info" style="margin-bottom: 0; margin-top: 8px; max-width: 800px;">
+                        @T("Admin.Configuration.Settings.Media.Note")
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="adminTitle">
+                    @Html.SpecterLabelFor(model => model.DeviceUserPhotoSize)
+                </td>
+                <td class="adminData">
+                    @Html.SettingEditorFor(model => model.DeviceUserPhotoSize)
+                    @Html.ValidationMessageFor(model => model.DeviceUserPhotoSize)
+                </td>
+            </tr>
+            <tr>
+                <td class="adminTitle">
+                    @Html.SpecterLabelFor(model => model.DeviceUserPhotoBigSize)
+                </td>
+                <td class="adminData">
+                    @Html.SettingEditorFor(model => model.DeviceUserPhotoBigSize)
+                    @Html.ValidationMessageFor(model => model.DeviceUserPhotoBigSize)
+                </td>
+            </tr>
+            <tr>
+                <td class="adminTitle">
+                    @Html.SpecterLabelFor(model => model.DeviceUserMarkerMaxSize)
+                </td>
+                <td class="adminData">
+                    @Html.SettingEditorFor(model => model.DeviceUserMarkerMaxSize)
+                    @Html.ValidationMessageFor(model => model.DeviceUserMarkerMaxSize)
+                </td>
+            </tr>
+            @*<tr>
+                <td class="adminTitle">
+                    @Html.SpecterLabelFor(model => model.AvatarPictureSize)
+                </td>
+                <td class="adminData">
+                    @Html.SettingEditorFor(model => model.AvatarPictureSize)
+                    @Html.ValidationMessageFor(model => model.AvatarPictureSize)
+                </td>
+            </tr>
+            <tr>
+                <td class="adminTitle">
+                    @Html.SpecterLabelFor(model => model.ProductThumbPictureSize)
+                </td>
+                <td class="adminData">
+                    @Html.SettingEditorFor(model => model.ProductThumbPictureSize)
+                    @Html.ValidationMessageFor(model => model.ProductThumbPictureSize)
+                </td>
+            </tr>
+            <tr>
+                <td class="adminTitle">
+                    @Html.SpecterLabelFor(model => model.ProductThumbPictureSizeOnProductDetailsPage)
+                </td>
+                <td class="adminData">
+                    @Html.SettingEditorFor(model => model.ProductThumbPictureSizeOnProductDetailsPage)
+                    @Html.ValidationMessageFor(model => model.ProductThumbPictureSizeOnProductDetailsPage)
+                </td>
+            </tr>
+            <tr>
+                <td class="adminTitle">
+                    @Html.SpecterLabelFor(model => model.ProductDetailsPictureSize)
+                </td>
+                <td class="adminData">
+                    @Html.SettingEditorFor(model => model.ProductDetailsPictureSize)
+                    @Html.ValidationMessageFor(model => model.ProductDetailsPictureSize)
+                </td>
+            </tr>*@
+            <tr>
+                <td class="adminTitle">
+                    @Html.SpecterLabelFor(model => model.DefaultPictureZoomEnabled)
+                </td>
+                <td class="adminData">
+                    @Html.SettingEditorFor(model => model.DefaultPictureZoomEnabled)
+                    @Html.ValidationMessageFor(model => model.DefaultPictureZoomEnabled)
+                </td>
+            </tr>
+            @*<tr id="pnlPictureZoomType">
+                <td class="adminTitle">
+                    @Html.SpecterLabelFor(model => model.PictureZoomType)
+                </td>
+                <td class="adminData">
+                    @Html.SettingOverrideCheckbox(model => Model.PictureZoomType)
+                    @Html.Kendo().DropDownListFor(model => model.PictureZoomType).BindTo(Model.AvailablePictureZoomTypes)
+                    @Html.ValidationMessageFor(model => model.PictureZoomType)
+                </td>
+            </tr>
+            <tr>
+                <td class="adminTitle">
+                    @Html.SpecterLabelFor(model => model.AssociatedProductPictureSize)
+                </td>
+                <td class="adminData">
+                    @Html.SettingEditorFor(model => model.AssociatedProductPictureSize)
+                    @Html.ValidationMessageFor(model => model.AssociatedProductPictureSize)
+                </td>
+            </tr>
+            <tr>
+                <td class="adminTitle">
+                    @Html.SpecterLabelFor(model => model.BundledProductPictureSize)
+                </td>
+                <td class="adminData">
+                    @Html.SettingEditorFor(model => model.BundledProductPictureSize)
+                    @Html.ValidationMessageFor(model => model.BundledProductPictureSize)
+                </td>
+            </tr>
+            <tr>
+                <td class="adminTitle">
+                    @Html.SpecterLabelFor(model => model.CategoryThumbPictureSize)
+                </td>
+                <td class="adminData">
+                    @Html.SettingEditorFor(model => model.CategoryThumbPictureSize)
+                    @Html.ValidationMessageFor(model => model.CategoryThumbPictureSize)
+                </td>
+            </tr>
+            <tr>
+                <td class="adminTitle">
+                    @Html.SpecterLabelFor(model => model.ManufacturerThumbPictureSize)
+                </td>
+                <td class="adminData">
+                    @Html.SettingEditorFor(model => model.ManufacturerThumbPictureSize)
+                    @Html.ValidationMessageFor(model => model.ManufacturerThumbPictureSize)
+                </td>
+            </tr>
+            <tr>
+                <td class="adminTitle">
+                    @Html.SpecterLabelFor(model => model.CartThumbPictureSize)
+                </td>
+                <td class="adminData">
+                    @Html.SettingEditorFor(model => model.CartThumbPictureSize)
+                    @Html.ValidationMessageFor(model => model.CartThumbPictureSize)
+                </td>
+            </tr>
+            <tr>
+                <td class="adminTitle">
+                    @Html.SpecterLabelFor(model => model.CartThumbBundleItemPictureSize)
+                </td>
+                <td class="adminData">
+                    @Html.SettingEditorFor(model => model.CartThumbBundleItemPictureSize)
+                    @Html.ValidationMessageFor(model => model.CartThumbBundleItemPictureSize)
+                </td>
+            </tr>
+            <tr>
+                <td class="adminTitle">
+                    @Html.SpecterLabelFor(model => model.MiniCartThumbPictureSize)
+                </td>
+                <td class="adminData">
+                    @Html.SettingEditorFor(model => model.MiniCartThumbPictureSize)
+                    @Html.ValidationMessageFor(model => model.MiniCartThumbPictureSize)
+                </td>
+            </tr>*@
+            <tr>
+                <td class="adminTitle">
+                    @Html.SpecterLabelFor(model => model.MaximumImageSize)
+                </td>
+                <td class="adminData">
+                    @Html.SettingEditorFor(model => model.MaximumImageSize)
+                    @Html.ValidationMessageFor(model => model.MaximumImageSize)
+                </td>
+            </tr>
+        </table>
+    }
+</div>

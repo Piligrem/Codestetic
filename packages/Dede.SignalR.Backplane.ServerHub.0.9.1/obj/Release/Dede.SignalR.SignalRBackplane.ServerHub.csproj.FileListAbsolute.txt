@@ -1,0 +1,9 @@
+C:\Users\admdede\Documents\Visual Studio 2012\Projects\Dede-SignalR\Dede.SignalR.SignalRBackplane.ServerHub\bin\Release\Dede.SignalR.SignalRBackplane.ServerHub.dll
+C:\Users\admdede\Documents\Visual Studio 2012\Projects\Dede-SignalR\Dede.SignalR.SignalRBackplane.ServerHub\bin\Release\Dede.SignalR.SignalRBackplane.ServerHub.pdb
+C:\Users\admdede\Documents\Visual Studio 2012\Projects\Dede-SignalR\Dede.SignalR.SignalRBackplane.ServerHub\bin\Release\Microsoft.AspNet.SignalR.Core.dll
+C:\Users\admdede\Documents\Visual Studio 2012\Projects\Dede-SignalR\Dede.SignalR.SignalRBackplane.ServerHub\bin\Release\Newtonsoft.Json.dll
+C:\Users\admdede\Documents\Visual Studio 2012\Projects\Dede-SignalR\Dede.SignalR.SignalRBackplane.ServerHub\bin\Release\Microsoft.AspNet.SignalR.Core.xml
+C:\Users\admdede\Documents\Visual Studio 2012\Projects\Dede-SignalR\Dede.SignalR.SignalRBackplane.ServerHub\bin\Release\Newtonsoft.Json.xml
+C:\Users\admdede\Documents\Visual Studio 2012\Projects\Dede-SignalR\Dede.SignalR.SignalRBackplane.ServerHub\obj\Release\Dede.SignalR.SignalRBackplane.ServerHub.csprojResolveAssemblyReference.cache
+C:\Users\admdede\Documents\Visual Studio 2012\Projects\Dede-SignalR\Dede.SignalR.SignalRBackplane.ServerHub\obj\Release\Dede.SignalR.SignalRBackplane.ServerHub.dll
+C:\Users\admdede\Documents\Visual Studio 2012\Projects\Dede-SignalR\Dede.SignalR.SignalRBackplane.ServerHub\obj\Release\Dede.SignalR.SignalRBackplane.ServerHub.pdb

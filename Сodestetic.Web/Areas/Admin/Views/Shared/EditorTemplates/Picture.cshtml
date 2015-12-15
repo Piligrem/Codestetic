@@ -1,0 +1,81 @@
+﻿@model long?
+@using Specter.Web.Core;
+@using Specter.Web.Framework.UI;
+@using Specter.Web.Utilities;
+@using Specter.Web.Core.Domain.Media;
+@{
+    
+    //other variables
+    var random = CommonHelper.GenerateRandomInteger();
+    var clientId = "picture" + random;
+    var pictureService = EngineContext.Current.Resolve<Specter.Web.Services.Media.IPictureService>();
+    var pictureId = Model.HasValue ? Model.Value : 0;
+    var picture = pictureService.GetPictureById(pictureId);
+
+    var bundle = System.Web.Optimization.BundleTable.Bundles.GetRegisteredBundles()
+        .Where(b => b.Path == "~/Content/css")
+        .First();
+    bundle.Include("~/Content/fileupload/fileupload.css");
+}
+<div id="@clientId" class="fileupload" style="display: inline-block;">
+
+    @Html.HiddenFor(x => x, new { @class = "hidden picture-user" })
+    <div>
+        <img src="@(pictureService.GetPictureUrl(pictureId, 100, true))" class="item-photo stick-none" alt="" />
+    </div>
+    <div class="clearfix">
+        <span class="k-button k-button-icontext fileinput-button">
+            <i class="icon-upload"></i>
+            <input id="fileupload-@random" type="file" name="file" style="" />
+        </span>
+        <button class="btn remove" @Html.Attr("style", "display:none", picture == null)>
+            <i class="icon-trash"></i>
+            @T("Admin.Picture.RemovePicture")
+        </button>
+        <div class="span5 fileupload-progress fade">
+            <!-- The global progress bar -->
+            <div class="progress progress-success progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+                <div class="bar" style="width:0%;"></div>
+            </div>
+            <!-- The extended global progress information -->
+            <div class="progress-extended">&nbsp;</div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        var el = $('#@clientId'),
+            img = el.find('img'),
+            elPicture = el.find('.picture-user'),
+            elRemove = el.find('.remove');
+
+        $('#@clientId').fileupload({
+            url: '@(Url.Action("AsyncUpload", "Media", new { area = "" }))',
+            dataType: 'json',
+            //acceptFileTypes: /^image\/(gif|jpeg|jpg|png)$/,
+            acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
+            done: function (e, data) {
+                var result = data.result;
+                if (result.success) {
+                    img.attr('src', result.imageUrl);
+                    elPhoto.val(result.pictureId);
+                    elRemove.show();
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                if (errorThrown === 'abort') {
+                    //alert('File Upload has been canceled');
+                }
+            }
+        });
+
+        elRemove.click(function (e) {
+            img.attr('src', '@pictureService.GetDefaultPictureUrl()');
+            elPhoto.val(0);
+            $(this).hide();
+            e.preventDefault();
+        });
+    });
+</script>
+

@@ -1,0 +1,81 @@
+﻿@*@model Kendo.Mvc.GridModel<EmailAccountModel>*@
+@using Kendo.Mvc.UI
+@{
+    //page title
+    ViewBag.Title = T("Admin.Configuration.EmailAccounts").Text;
+    var gridPageSize = EngineContext.Current.Resolve<Specter.Web.Core.Domain.Common.AdminAreaSettings>().GridPageSize;
+}
+<div class="admin-content align-center">
+    <div class="admin-row-content">
+        <div class="section-header">
+            <div class="title">
+                <i class="icon icon-envelope-alt"></i>
+                @ViewBag.Title
+            </div>
+            <div class="options">
+                <a href="@Url.Action("Create")" class="btn btn-primary"><i class="icon-plus icon-white"></i>&nbsp;@T("Admin.Common.AddNew")</a>
+            </div>
+        </div>
+        <table class="adminContent">
+            <tr>
+                <td>
+                    @(Html.Kendo().Grid<EmailAccountModel>()
+                        .Name("emailAccounts-grid")
+                        .Columns(columns =>
+                        {
+                            columns.Bound(x => x.Email);
+                            columns.Bound(x => x.DisplayName)
+                                .Width(150)
+                                .Centered();
+                            columns.Bound(x => x.IsDefaultEmailAccount)
+                                .Template(item => @Html.SymbolForBool(item.IsDefaultEmailAccount))
+                                .ClientTemplate(@Html.SymbolForBool("IsDefaultEmailAccount"))
+                                .Width(100)
+                                .Locked();
+                            //.ReadOnly();
+                            //columns.Command(commands => commands.Select().Text(T("Admin.Telerik.GridLocalization.Select").ToString()))
+                            //    .Title(T("Admin.Configuration.EmailAccounts.Fields.MarkAsDefaultEmail").Text).Width(100);
+                            //columns.Command(commands =>
+                            //{
+                            //    commands.Edit().Text(@T("Admin.Common.Edit"));
+                            //    commands.Destroy().Text(@T("Admin.Common.Delete"));
+                            //});
+                            columns.Bound(x => x.Id)
+                                .Filterable(false)
+                                .Title("")//T("Admin.Common.Edit").Text)
+                                .Centered()
+                                .Template(x => Html.ActionLink(T("Admin.Common.Edit").Text, "Edit", new { id = x.Id }))
+                                .ClientTemplate("<a class='k-button k-button-icontext k-grid-edit' href='Edit/#=Id#'><span class='k-icon k-edit'></span>" + T("Admin.Common.Edit").Text + "</a>");
+                            //columns.Bound(x => x.Id)
+                            //    .Template(x => Html.ActionLink(T("Admin.Common.Edit").Text, "Edit", new { id = x.Id }))
+                            //    .ClientTemplate("<a href=\"Edit/<#= Id #>\">" + T("Admin.Common.Edit").Text + "</a>")
+                            //    .Width(50)
+                            //    .Centered()
+                            //    .HeaderTemplate(T("Admin.Common.Edit").Text)
+                            //    .Filterable(false);
+                        })
+                        .Pageable(pager => pager
+                                .Input(true)
+                                .Numeric(true)
+                                .Info(true)
+                                .PreviousNext(true)
+                                .Refresh(true)
+                                .PageSizes(true))
+                        .DataSource(dataBinding =>
+                        {
+                            dataBinding
+                                .Ajax()
+                                .Model(x => x.Id(y => y.Id))
+                                .Read("List", "EmailAccount")
+                                //.Update("Edit", "EmailAccount", new { area = "Admin" })
+                                //.Destroy("Delete", "EmailAccount", new { area = "Admin" })
+                                //.Create("Create", "EmailAccount", new { area = "Admin" })
+                                .PageSize(gridPageSize)
+                                .ServerOperation(true);
+                        })
+                    )
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

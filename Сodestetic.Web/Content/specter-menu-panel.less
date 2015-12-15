@@ -1,0 +1,97 @@
+﻿nav.general-menu-panel {
+    display: flex;
+        -ms-flex-direction: row;
+    -webkit-flex-direction: row;
+            flex-direction: row;
+    z-index: 1;
+}
+nav.general-menu-panel ul {
+    position: fixed;
+    list-style: none outside none;
+    margin: 0;
+    width: 167px;
+    height: 100%;
+    //box-shadow: 0 1px 5px rgba(0, 0, 0, 0.4);
+    //border: 1px solid white;
+    padding: 20px;
+    z-index: 3;
+
+    & li {
+        margin-bottom: 10px;
+    }
+
+    & li a {
+        text-decoration: none;
+        color: white;
+        display: flex;
+        -ms-flex-direction: row;
+        -webkit-flex-direction: row;
+        flex-direction: row;
+
+        & i {
+            font-size: 32px;
+            margin: 0 20px 0 0;
+        }
+
+        & h3 {
+            font-size: 12.5px;
+            font-weight: normal;
+            line-height: 40px;
+        }
+    }
+}
+.menu-panel-header {
+    display: flex;
+    -ms-flex-direction: column;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    align-items: center;
+    //border: 1px solid white;
+}
+.menu-panel-header .header-title {
+    -ms-flex-direction: row;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    align-self: stretch;
+    //border: 1px solid white;
+    margin-bottom: 10px;
+}
+.menu-panel-photo {
+    width: 96px;
+    height: 96px;
+    border-radius: 48px;
+    overflow: hidden;
+}
+.menu-panel-setings {
+    font-size: 27px;
+    color: white;
+}
+.menu-panel .splitter {
+    border: 1px solid white;
+    margin-bottom: 20px;
+}
+.menu-panel-background {
+    position: fixed;
+    height: 100%;
+
+    color: transparent;
+    //background-size: cover;
+    //background-position: 50% 50%;
+    //background-repeat: none;
+    opacity: 0.3;
+    z-index: 0;
+    -webkit-filter: blur(5px) brightness(5) saturate(100%);
+    -moz-filter: blur(5px) brightness(5) saturate(100%);
+    filter: blur(5px) brightness(5) saturate(100%);
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    backface-visibility: hidden;
+    //-webkit-animation: imageAnimation 36s linear infinite 0s;
+    //-moz-animation: imageAnimation 36s linear infinite 0s;
+    //-o-animation: imageAnimation 36s linear infinite 0s;
+    //-ms-animation: imageAnimation 36s linear infinite 0s;
+    //animation: menuBackgroundAnimation 36s linear infinite 0s;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.4);
+    background-color: #000;
+    z-index: 2;
+}

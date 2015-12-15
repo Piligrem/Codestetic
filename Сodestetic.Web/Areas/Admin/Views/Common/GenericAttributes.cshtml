@@ -1,0 +1,44 @@
+﻿@model GenericAttributeModel
+@using Kendo.Mvc.UI;
+@{
+    var gridPageSize = EngineContext.Current.Resolve<Specter.Web.Core.Domain.Common.AdminAreaSettings>().GridPageSize;
+}
+
+@(Html.Kendo().Grid<GenericAttributeModel>()
+        .Name("generic-attributes-grid")
+        .Columns(columns =>
+        {
+            columns.Bound(x => x.Key).Width(400);
+            columns.Bound(x => x.Value);
+            columns.Command(commands =>
+            {
+                commands.Edit().Localize(T);
+                commands.Destroy().Localize(T);
+            }).Width(200);
+
+        })
+        .ToolBar(x => x.Create())
+        .Editable(x =>
+        {
+            x.Mode(GridEditMode.InLine);
+        })
+        //.Pageable(settings => settings.PageSize(gridPageSize).Total(Model.Total).Position(GridPagerPosition.Both))
+        .DataSource(dataSource => dataSource
+            .Ajax()
+            .Model(x => x.Id("id"))
+            .ServerOperation(false)
+            .Read(read => read.Action("GenericAttributesSelect", "Common", new { area = "Admin", entityName = ViewBag.EntityName, entityId = ViewBag.EntityId }))
+            .Create("GenericAttributeAdd", "Common", new { area = "Admin" })
+            .Update("GenericAttributesSelect", "Common", new { area = "Admin" })
+            .Destroy("GenericAttributeDelete", "Common", new { area = "Admin" })
+            .PageSize(gridPageSize)
+            .Events(x => x.Error("Grid_onError"))
+        )
+        .EnableCustomBinding(true)
+    )
+<script type="text/javascript">
+    function Grid_onError(e) {
+        alert(e.XMLHttpRequest.responseText);
+        e.preventDefault();
+    }
+</script>

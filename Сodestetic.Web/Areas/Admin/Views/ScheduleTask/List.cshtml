@@ -1,0 +1,75 @@
+﻿@using Kendo.Mvc.UI;
+@using System.Linq;
+@{
+    //page title
+    ViewBag.Title = T("Admin.System.ScheduleTasks").Text;
+}
+<div class="admin-content align-center">
+    <div class="admin-row-content">
+        <div class="section-header">
+            <div class="title">
+                <i class="icon icon-time"></i>
+                @ViewBag.Title
+            </div>
+        </div>
+
+        <div class="alert alert-info fade in">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            @T("Admin.System.ScheduleTasks.RestartApplication")
+        </div>
+        <div class="admin-content align-center">
+            <div class="admin-row-content">
+                <table class="adminContent">
+                    <tr>
+                        <td>
+                            @(Html.Kendo().Grid<ScheduleTaskModel>()
+                                .Name("schedule-tasks-grid")
+                                .Columns(columns =>
+                                {
+                                    columns.Bound(x => x.Name);
+                                    columns.Bound(x => x.Seconds)
+                                        .RightAlign();
+                                    columns.Bound(x => x.Enabled)
+                                        .Template(item => @Html.SymbolForBool(item.Enabled))
+                                        .ClientTemplate(@Html.SymbolForBool("Enabled"))
+                                        .Centered();
+                                    columns.Bound(x => x.StopOnError)
+                                        .Template(item => @Html.SymbolForBool(item.StopOnError))
+                                        .ClientTemplate(@Html.SymbolForBool("StopOnError"))
+                                        .Centered();
+                                    columns.Bound(x => x.LastStartUtc)
+                                        .Format("{0:dd-MM-yyyy hh:mm:ss}")
+                                        .Locked(true);
+                                    columns.Bound(x => x.LastEndUtc)
+                                        .Format("{0:dd-MM-yyyy hh:mm:ss}")
+                                        .Locked(true);
+                                    columns.Bound(x => x.LastSuccessUtc)
+                                        .Format("{0:dd-MM-yyyy hh:mm:ss}")
+                                        .Locked(true);
+                                    columns.Command(commands =>
+                                    {
+                                        commands.Edit().Text(T("Admin.Common.Edit").Text);
+                                    }).Title("");
+
+                                })
+                                .Editable(x =>
+                                {
+                                    x.Mode(GridEditMode.InLine);
+                                })
+                                .DataSource(dataBinding =>
+                                {
+                                    dataBinding
+                                        .Ajax()
+                                        .Model(x => x.Id("Id"))
+                                        .Read("List", "ScheduleTask")
+                                        .Update("TaskUpdate", "ScheduleTask");
+                                })
+                                .EnableCustomBinding(true)
+                            )
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

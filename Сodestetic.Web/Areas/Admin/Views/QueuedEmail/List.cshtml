@@ -1,0 +1,247 @@
+﻿@model QueuedEmailListModel
+@using Kendo.Mvc.UI
+@{
+    var gridPageSize = EngineContext.Current.Resolve<Specter.Web.Core.Domain.Common.AdminAreaSettings>().GridPageSize;
+    //page title
+    ViewBag.Title = T("Admin.System.QueuedEmails").Text;
+}
+<div class="admin-content align-center">
+    <div class="admin-row-content">
+        @using (Html.BeginForm())
+        {
+            <div class="section-header">
+                <div class="title">
+                    <i class="icon icon-envelope-alt"></i>
+                    @ViewBag.Title
+                </div>
+            </div>
+            <table  class="adminContent">
+                <tr>
+                    <td class="adminTitle">
+                        @Html.SpecterLabelFor(model => model.SearchStartDate)
+                    </td>
+                    <td class="adminData">
+                        @Html.Kendo().DatePickerFor(model => model.SearchStartDate)
+                    </td>
+                </tr>
+                <tr>
+                    <td class="adminTitle">
+                        @Html.SpecterLabelFor(model => model.SearchEndDate)
+                    </td>
+                    <td class="adminData">
+                        @Html.Kendo().DatePickerFor(model => Model.SearchEndDate)
+                    </td>
+                </tr>
+                <tr>
+                    <td class="adminTitle">
+                        @Html.SpecterLabelFor(model => model.SearchFromEmail)
+                    </td>
+                    <td class="adminData">
+                        @Html.Kendo().TextBoxFor(model => Model.SearchFromEmail)
+                    </td>
+                </tr>
+                <tr>
+                    <td class="adminTitle">
+                        @Html.SpecterLabelFor(model => model.SearchToEmail)
+                    </td>
+                    <td class="adminData">
+                        @Html.Kendo().TextBoxFor(model => Model.SearchToEmail)
+                    </td>
+                </tr>
+                <tr>
+                    <td class="adminTitle">
+                        @Html.SpecterLabelFor(model => model.SearchLoadNotSent)
+                    </td>
+                    <td class="adminData">
+                        @Html.EditorFor(model => Model.SearchLoadNotSent)
+                    </td>
+                </tr>
+                <tr>
+                    <td class="adminTitle">
+                        @Html.SpecterLabelFor(model => model.SearchMaxSentTries)
+                    </td>
+                    <td class="adminData">
+                        @Html.Kendo().TextBoxFor(model => Model.SearchMaxSentTries)
+                    </td>
+                </tr>
+                <tr>
+                    <td class="adminTitle">
+                        &nbsp;
+                    </td>
+                    <td class="adminData">
+                        <button type="submit" id="btnSearch" class="btn">
+                            <i class="icon-search icon-white"></i>&nbsp;@T("Admin.Common.Search")
+                        </button>
+                        <button type="submit" id="delete-selected" name="delete-selected" value="delete_selected" class="btn btn-danger">
+                            <i class="k-icon k-delete icon-trash icon-white"></i>&nbsp;@T("Admin.System.QueuedEmails.DeleteSelected")
+                        </button>
+                    </td>
+                </tr>
+            </table>
+            <hr />
+            <table>
+                <tr>
+                    <td>
+                        @(Html.Kendo().Grid<QueuedEmailModel>()
+                            .Name("queuedEmails-grid")
+                            .Columns(columns =>
+                            {
+                                columns.Bound(x => x.Id)
+                                    .ClientTemplate("<input type='checkbox' name='checkedRecords' value='<#= Id #>' class='checkboxGroups'/>")
+                                    .Title("<input id='mastercheckbox' type='checkbox'/>")
+                                    .Width(50)
+                                    .HtmlAttributes(new { style = "text-align:center" })
+                                    .HeaderHtmlAttributes(new { style = "text-align:center" });
+
+                                columns.Bound(x => x.Id)
+                                    .Filterable(false)
+                                    .Width(50);
+                                columns.Bound(x => x.Subject).Width(300);
+                                columns.Bound(x => x.Priority)
+                                    .Filterable(false)
+                                    .Width(50);
+                                columns.Bound(x => x.From).Width(100);
+                                columns.Bound(x => x.FromName).Width(100);
+                                columns.Bound(x => x.CreatedOn).Width(100);
+                                columns.Bound(x => x.SentOn).Width(150);
+                                columns.Bound(x => x.Id)
+                                    .Filterable(false)
+                                    .Title("")//T("Admin.Common.Edit").Text)
+                                    .Centered()
+                                    .Template(x => Html.ActionLink(T("Admin.Common.Edit").Text, "Edit", new { id = x.Id }))
+                                    .ClientTemplate("<a class='k-button k-button-icontext k-grid-edit' href='Edit/#=Id#'><span class='k-icon k-edit'></span>" + T("Admin.Common.Edit").Text + "</a>");
+                            })
+                            .Pageable(pager => pager
+                                .Input(true)
+                                .Numeric(true)
+                                .Info(true)
+                                .PreviousNext(true)
+                                .Refresh(true)
+                                .PageSizes(true))
+                            //.Filterable(filter => filter
+                            //    .Mode(GridFilterMode.Row)
+                            //    .Extra(false)
+                            //)
+                            .DataSource(dataBinding =>
+                            {
+                                dataBinding
+                                    .Ajax()
+                                    .Model(x => x.Id(y => y.Id))
+                                    .Read("QueuedEmailList", "QueuedEmail", new { area = "Admin" })
+                                    .PageSize(gridPageSize)
+                                    .ServerOperation(true);
+                            })
+                            .Events(events => events.DataBinding("onDataBinding").DataBound("onDataBound"))
+                        )
+                    </td>
+                </tr>
+            </table>
+            <script type="text/javascript">
+                var selectedIds = [];
+
+                $(document).ready(function () {
+                    //search button
+                    $('#btnSearch').click(function () {
+                        //search
+                        var grid = $('#queuedEmails-grid').data('tGrid');
+                        grid.currentPage = 1; //new search. Set page size to 1
+                        grid.ajaxRequest();
+                        //clear selected checkboxes
+                        $('.checkboxGroups').attr('checked', false).change();
+                        selectedIds = [];
+                        return false;
+                    });
+
+                    //"delete selected" button
+                    $('#delete-selected').click(function (e) {
+                        e.preventDefault();
+
+                        var postData = {
+                            selectedIds: selectedIds
+                        };
+
+                        $.ajax({
+                            cache: false,
+                            type: "POST",
+                            url: "@(Url.Action("DeleteSelected", "QueuedEmail"))",
+                            data: postData,
+                            complete: function (data) {
+                                //reload grid
+                                var grid = $('#queuedEmails-grid').data('tGrid');
+                                grid.currentPage = 1; //new search. Set page size to 1
+                                grid.ajaxRequest();
+                                //clear selected checkboxes
+                                $('.checkboxGroups').attr('checked', false).change();
+                                selectedIds = [];
+                            },
+                            error: function (xhr, ajaxOptions, thrownError) {
+                                alert(thrownError);
+                            },
+                            traditional: true
+                        });
+                        return false;
+                    });
+
+                    //$('#selectAllProducts').click(function () {
+                    //    $("#Grid tbody input:checkbox").attr("checked", this.checked);
+                    //});
+                    $('#mastercheckbox').click(function () {
+                        $('.checkboxGroups').attr('checked', $(this).is(':checked')).change();
+                    });
+
+                    //wire up checkboxes.
+                    $('#queuedEmails-grid input[type=checkbox][id!=mastercheckbox]').on('change', function (e) {
+                        var $check = $(this);
+                        if ($check.is(":checked") == true) {
+                            var checked = jQuery.inArray($check.val(), selectedIds);
+                            if (checked == -1) {
+                                //add id to selectedIds.
+                                selectedIds.push($check.val());
+                            }
+                        }
+                        else {
+                            var checked = jQuery.inArray($check.val(), selectedIds);
+                            if (checked > -1) {
+                                //remove id from selectedIds.
+                                selectedIds = $.grep(selectedIds, function (item, index) {
+                                    return item != $check.val();
+                                });
+                            }
+                        }
+                        updateMasterCheckbox();
+                    });
+                });
+
+                function onDataBinding(e) {
+                    var searchModel = {
+                        SearchStartDate: $('#@Html.FieldIdFor(model => model.SearchStartDate)').val(),
+                        SearchEndDate: $('#@Html.FieldIdFor(model => model.SearchEndDate)').val(),
+                        SearchFromEmail: $('#@Html.FieldIdFor(model => model.SearchFromEmail)').val(),
+                        SearchToEmail: $('#@Html.FieldIdFor(model => model.SearchToEmail)').val(),
+                        SearchLoadNotSent: $('#@Html.FieldIdFor(model => model.SearchLoadNotSent)').is(':checked'),
+                        SearchMaxSentTries: $('#@Html.FieldIdFor(model => model.SearchMaxSentTries)').val()
+                    };
+                    e.data = searchModel;
+                }
+
+                function onDataBound(e) {
+
+                    $('#queuedEmails-grid input[type=checkbox][id!=mastercheckbox]').each(function () {
+                        var currentId = $(this).val();
+                        var checked = jQuery.inArray(currentId, selectedIds);
+                        //set checked based on if current checkbox's value is in selectedIds.
+                        $(this).attr('checked', checked > -1);
+                    });
+
+                    updateMasterCheckbox();
+                }
+
+                function updateMasterCheckbox() {
+                    var numChkBoxes = $('#queuedEmails-grid input[type=checkbox][id!=mastercheckbox]').length;
+                    var numChkBoxesChecked = $('#queuedEmails-grid input[type=checkbox][checked][id!=mastercheckbox]').length;
+                    $('#mastercheckbox').attr('checked', numChkBoxes == numChkBoxesChecked && numChkBoxes > 0);
+                }
+            </script>
+        }
+    </div>
+</div>

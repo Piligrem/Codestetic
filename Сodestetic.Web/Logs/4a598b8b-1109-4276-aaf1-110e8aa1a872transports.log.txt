@@ -1,0 +1,13 @@
+SignalR.Transports.TransportHeartBeat Information: 0 : Connection 0172899e-101d-46c2-bd8b-4571a46a9880 is New.
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(0172899e-101d-46c2-bd8b-4571a46a9880)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(0172899e-101d-46c2-bd8b-4571a46a9880)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(0172899e-101d-46c2-bd8b-4571a46a9880)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(0172899e-101d-46c2-bd8b-4571a46a9880)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(0172899e-101d-46c2-bd8b-4571a46a9880)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(0172899e-101d-46c2-bd8b-4571a46a9880)
+SignalR.Transports.WebSocketTransport Verbose: 0 : Cancel(0172899e-101d-46c2-bd8b-4571a46a9880)
+SignalR.Transports.WebSocketTransport Verbose: 0 : DrainWrites(0172899e-101d-46c2-bd8b-4571a46a9880)
+SignalR.Transports.TransportHeartBeat Information: 0 : Dispose(). Closing all connections
+SignalR.Transports.WebSocketTransport Information: 0 : End(0172899e-101d-46c2-bd8b-4571a46a9880)
+SignalR.Transports.WebSocketTransport Information: 0 : CompleteRequest (0172899e-101d-46c2-bd8b-4571a46a9880)
+SignalR.Transports.WebSocketTransport Information: 0 : CloseSocket(0172899e-101d-46c2-bd8b-4571a46a9880)

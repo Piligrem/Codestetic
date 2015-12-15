@@ -1,0 +1,496 @@
+﻿@model UserModel
+@using Kendo.Mvc.UI;
+
+@Html.ValidationSummary(false)
+@Html.HiddenFor(model => model.Id)
+@Html.TabSite().TabStrip().Name("user-edit").Items(x =>
+{
+    var tabInfo = x.Add().Text(T("Admin.Users.Info").Text).Content(TabInfo());
+    var tabUserRoles = x.Add().Text(T("Admin.Users.UserRoles").Text).Content(TabUserRoles());
+
+    TabBuilder tabAddresses = null;
+    TabBuilder tabDevices = null;
+    if (Model.Id > 0)
+    {
+        tabAddresses = x.Add().Text(T("Admin.Users.Addresses").Text).Content(TabAddresses());
+        tabDevices = x.Add().Text(T("Admin.Users.Devices").Text).Content(TabDevices());
+    }
+    var selectedTab = (string)ViewData["selectedTab"];
+    switch (selectedTab)
+    {
+        case "info":
+            tabInfo.Selected(true);
+            break;
+        case "userroles":
+            tabUserRoles.Selected(true);
+            break;
+        case "addresses":
+            tabAddresses.Selected(true);
+            break;
+        case "devices":
+            tabDevices.Selected(true);
+            break;
+        default:
+            tabInfo.Selected(true);
+            break;
+    }
+
+    //generate an event
+    EngineContext.Current.Resolve<IEventPublisher>().Publish(new TabStripCreated(x, "user-edit", this.Html, this.Model));
+})
+@helper TabInfo()
+{
+    <table class="adminContent">
+        @if (Model.UsernamesEnabled)
+        {
+            if (Model.Id == 0 || Model.AllowUsersToChangeUsernames)
+            {
+                <tr>
+                    <td class="adminTitle">
+                        @Html.SpecterLabelFor(model => model.Username)
+                    </td>
+                    <td class="adminData">
+                        @Html.EditorFor(model => model.Username)
+                        @Html.ValidationMessageFor(model => model.Username)
+                    </td>
+                </tr>
+            }
+            else
+            {
+                <tr>
+                    <td class="adminTitle">
+                        @Html.SpecterLabelFor(model => model.Username)
+                    </td>
+                    <td class="adminData">
+                        @Model.Username
+                        @Html.HiddenFor(model => model.Username)
+                    </td>
+                </tr>
+            }
+        }
+        <tr>
+            <td class="adminTitle">
+                @Html.SpecterLabelFor(model => model.Email)
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.Email)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SpecterLabelFor(model => model.Password)
+            </td>
+            <td class="adminData adminData-flex">
+                @Html.EditorFor(model => model.Password)
+                @if (Model.Id > 0)
+                {
+                    @Html.Kendo().Button().Name("changepassword").Icon("!icon-pencil").Content(T("Common.ChangePassword")).HtmlAttributes(new { name = "changepassword", type = "submit", value = "changepassword", style="height:34px;margin-top:4px" })
+                }
+            </td>
+        </tr>
+        @if (Model.Id > 0 && Model.AssociatedExternalAuthRecords.Count > 0)
+        {
+            <tr>
+                <td class="adminTitle">
+                    @Html.SpecterLabelFor(model => model.AssociatedExternalAuthRecords)
+                </td>
+                <td class="adminData">
+                    @(Html.Kendo().Grid<UserModel.AssociatedExternalAuthModel>(Model.AssociatedExternalAuthRecords)
+                    .Name("externalauthrecords-grid")
+                    .Columns(columns =>
+                    {
+                        columns.Bound(x => x.AuthMethodName)
+                            .Width(100);
+                        columns.Bound(x => x.Email)
+                             .Width(100);
+                        columns.Bound(x => x.ExternalIdentifier)
+                            .Width(300);
+                    })
+                    )
+                    @*.Footer(false))*@
+                </td>
+            </tr>
+        }
+        @if (Model.GenderEnabled)
+        {
+            <tr>
+                <td class="adminTitle">
+                    @Html.SpecterLabelFor(model => model.Gender)
+                </td>
+                <td class="adminData">
+
+                    <label class="radio inline">
+                        @Html.RadioButton("Gender", "M", (Model.Gender == "M"))
+                        @T("Common.Fields.Gender.Male")
+                    </label>
+
+                    <label class="radio inline">
+                        @Html.RadioButton("Gender", "F", (Model.Gender == "F"))
+                        @T("Common.Fields.Gender.Female")
+                    </label>
+                </td>
+            </tr>
+        }
+        <tr>
+            <td class="adminTitle">
+                @Html.SpecterLabelFor(model => model.FirstName)
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.FirstName)
+                @Html.ValidationMessageFor(model => model.FirstName)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.SpecterLabelFor(model => model.LastName)
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.LastName)
+                @Html.ValidationMessageFor(model => model.LastName)
+            </td>
+        </tr>
+        @if (Model.DateOfBirthEnabled)
+        {
+            <tr>
+                <td class="adminTitle">
+                    @Html.SpecterLabelFor(model => model.DateOfBirth)
+                </td>
+                <td class="adminData">
+                    @Html.Kendo().DatePickerFor(model => model.DateOfBirth).Culture(System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName).HtmlAttributes(new { iconfont = true })
+                    @Html.ValidationMessageFor(model => model.DateOfBirth)
+                </td>
+            </tr>
+        }
+        @if (Model.CompanyEnabled)
+        {
+            <tr>
+                <td class="adminTitle">
+                    @Html.SpecterLabelFor(model => model.Company)
+                </td>
+                <td class="adminData">
+                    @Html.EditorFor(model => model.Company)
+                    @Html.ValidationMessageFor(model => model.Company)
+                </td>
+            </tr>
+        }
+        @if (Model.StreetAddressEnabled)
+        {
+            <tr>
+                <td class="adminTitle">
+                    @Html.SpecterLabelFor(model => model.StreetAddress)
+                </td>
+                <td class="adminData">
+                    @Html.EditorFor(model => model.StreetAddress)
+                    @Html.ValidationMessageFor(model => model.StreetAddress)
+                </td>
+            </tr>
+        }
+        @if (Model.StreetAddress2Enabled)
+        {
+            <tr>
+                <td class="adminTitle">
+                    @Html.SpecterLabelFor(model => model.StreetAddress2)
+                </td>
+                <td class="adminData">
+                    @Html.EditorFor(model => model.StreetAddress2)
+                    @Html.ValidationMessageFor(model => model.StreetAddress2)
+                </td>
+            </tr>
+        }
+        @if (Model.ZipPostalCodeEnabled)
+        {
+            <tr>
+                <td class="adminTitle">
+                    @Html.SpecterLabelFor(model => model.ZipPostalCode)
+                </td>
+                <td class="adminData">
+                    @Html.EditorFor(model => model.ZipPostalCode)
+                    @Html.ValidationMessageFor(model => model.ZipPostalCode)
+                </td>
+            </tr>
+        }
+        @if (Model.CityEnabled)
+        {
+            <tr>
+                <td class="adminTitle">
+                    @Html.SpecterLabelFor(model => model.City)
+                </td>
+                <td class="adminData">
+                    @Html.EditorFor(model => model.City)
+                    @Html.ValidationMessageFor(model => model.City)
+                </td>
+            </tr>
+        }
+        @if (Model.CountryEnabled)
+        {
+            <tr>
+                <td class="adminTitle">
+                    @Html.SpecterLabelFor(model => model.CountryId)
+                </td>
+                <td class="adminData">
+                    @Html.DropDownList("CountryId", Model.AvailableCountries)
+                </td>
+            </tr>
+        }
+        @if (Model.PhoneEnabled)
+        {
+            <tr>
+                <td class="adminTitle">
+                    @Html.SpecterLabelFor(model => model.Phone)
+                </td>
+                <td class="adminData">
+                    @Html.EditorFor(model => model.Phone)
+                    @Html.ValidationMessageFor(model => model.Phone)
+                </td>
+            </tr>
+        }
+        @if (Model.FaxEnabled)
+        {
+            <tr>
+                <td class="adminTitle">
+                    @Html.SpecterLabelFor(model => model.Fax)
+                </td>
+                <td class="adminData">
+                    @Html.EditorFor(model => model.Fax)
+                    @Html.ValidationMessageFor(model => model.Fax)
+                </td>
+            </tr>
+        }
+        <tr>
+            <td class="adminTitle">
+                @Html.SpecterLabelFor(model => model.AdminComment)
+            </td>
+            <td class="adminData">
+                @Html.TextAreaFor(model => model.AdminComment, new { style = "Width: 243px; Height: 200px;" })
+                @Html.ValidationMessageFor(model => model.AdminComment)
+            </td>
+        </tr>
+        @if (Model.AllowUsersToSetTimeZone)
+        {
+            <tr>
+                <td class="adminTitle">
+                    @Html.SpecterLabelFor(model => model.TimeZoneId)
+                </td>
+                <td class="adminData">
+                    @Html.DropDownList("TimeZoneId", Model.AvailableTimeZones)
+                    @Html.ValidationMessageFor(model => model.TimeZoneId)
+                </td>
+            </tr>
+        }
+        <tr>
+            <td class="adminTitle">
+                @Html.SpecterLabelFor(model => model.Active)
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.Active)
+                @Html.ValidationMessageFor(model => model.Active)
+            </td>
+        </tr>
+        @if (Model.Id > 0)
+        {
+            <tr>
+                <td class="adminTitle">
+                    @Html.SpecterLabelFor(model => model.LastIpAddress)
+                </td>
+                <td class="adminData">
+                    @Html.DisplayFor(model => model.LastIpAddress)
+                </td>
+            </tr>
+        }
+        @if (Model.Id > 0)
+        {
+            <tr>
+                <td class="adminTitle">
+                    @Html.SpecterLabelFor(model => model.CreatedOn)
+                </td>
+                <td class="adminData">
+                    @Html.DisplayFor(model => model.CreatedOn)
+                </td>
+            </tr>
+        }
+        @if (Model.Id > 0)
+        {
+            <tr>
+                <td class="adminTitle">
+                    @Html.SpecterLabelFor(model => model.LastActivityDate)
+                </td>
+                <td class="adminData">
+                    @Html.DisplayFor(model => model.LastActivityDate)
+                </td>
+            </tr>
+        }
+        @if (Model.Id > 0 && !String.IsNullOrEmpty(Model.LastVisitedPage))
+        {
+            <tr>
+                <td class="adminTitle">
+                    @Html.SpecterLabelFor(model => model.LastVisitedPage)
+                </td>
+                <td class="adminData">
+                    @Html.DisplayFor(model => model.LastVisitedPage)
+                </td>
+            </tr>
+        }
+    </table>
+}
+@helper TabUserRoles()
+{
+    if (Model.AvailableUserRoles != null && Model.AvailableUserRoles.Count > 0)
+    {
+        <table class="adminContent">
+            @foreach (var userRole in Model.AvailableUserRoles)
+            {
+                <tr>
+                    <td class="adminTitle">
+                        @Html.SpecterLabel(userRole.Name)
+                    </td>
+                    <td class="adminData">
+                        <input type="checkbox" name="SelectedUserRoleIds" value="@userRole.Id"
+                            @if (Model.SelectedUserRoleIds != null && Model.SelectedUserRoleIds.Contains(userRole.Id)) { <text> checked="checked" </text>    }
+                            @if (!Model.AllowManagingUserRoles) { <text> disabled="disabled" </text> } />
+                        @*@Html.EditorFor(model => userRole.Active)*@
+                    </td>
+                </tr>
+                
+                @*<label class="checkbox">
+                    <input type="checkbox" name="SelectedUserRoleIds" value="@userRole.Id"
+                       @if (Model.SelectedUserRoleIds != null && Model.SelectedUserRoleIds.Contains(userRole.Id)) { <text> checked="checked" </text>   }
+                       @if (!Model.AllowManagingUserRoles) { <text> disabled="disabled" </text>   } />@userRole.Name
+                </label>*@
+            }
+        </table>
+    }
+    else
+    {
+        @T("Admin.Users.Fields.UserRoles.NoRoles")
+    }
+}
+@helper TabAddresses()
+{
+    @(Html.Kendo().Grid<AddressModel>()
+        .Name("user-addresses-grid")
+        .Columns(columns =>
+        {
+            //columns.Bound(x => x.Id);
+            columns.Bound(x => x.FirstName);
+            columns.Bound(x => x.LastName);
+            columns.Bound(x => x.Email);
+            columns.Bound(x => x.PhoneNumber);
+            columns.Bound(x => x.FaxNumber);
+            columns.Bound(x => x.Id)
+                //.Template(x => Html.ActionLink(T("Admin.Common.Edit").Text, "AddressEdit", new { id = x.Id, addressid = "#=Id#" }))
+                .ClientTemplate(
+                    "<a class='k-button k-button-icontext k-grid-edit' href='/Admin/User/AddressEdit?userId=" + @Model.Id + "&addressId=#=Id#'><span class='k-icon k-edit'></span>" + T("Admin.Common.Edit").Text + "</a>" +
+                    "<a class='k-button k-button-icontext k-grid-delete' onclick='deleteAddressRow(this, #=Id#)'><span class='k-icon k-delete'></span>" + T("Admin.Common.Delete").Text + "</a>")
+                .Title("");//T("Admin.Common.Edit").Text);
+        })
+        .DataSource(binding =>
+        {
+            binding.Ajax()
+                .Model(model => model.Id(x => x.Id))
+                .Destroy(destroy => destroy.Action("AddressDelete", "User"))
+                .Read(read => read.Action("AddressesList", "User", new { area = "Admin", userId = Model.Id }));
+        })
+    )
+    <br />
+    <button type="button" class="btn btn-primary btn-below" onclick="location.href='@Url.Action("AddressCreate", new { userId = Model.Id })'">
+        <i class="icon-plus"></i>&nbsp;@T("Admin.Users.Addresses.AddButton")
+    </button>
+    <script type="text/javascript">
+        function deleteAddressRow(element, addressId) {
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("AddressDelete", "User")",
+                data: JSON.stringify({
+                    userId: @Model.Id,
+                    addressId: addressId
+                }),
+                async: true,
+                dataType: "json",
+                contentType: "application/json",
+                traditional: true,
+                success: function (result) {
+                    var grid = $("#user-addresses-grid").data("kendoGrid");
+                    grid.removeRow($(element).closest("tr"));
+                },
+                error: function (xhr) {
+                    console.error("Error: " + xhr.error + ", Message: " + xhr.statusText +  ", @Url.Action("AddressDelete", "User")");
+                }
+            });
+        }
+    </script>
+}
+@helper TabDevices()
+{
+    @(Html.Kendo().Grid<DeviceModel>()
+        .Name("user-devices-grid")
+        .Columns(columns =>
+        {
+            //columns.Bound(x => x.Id);
+            columns.Bound(x => x.IMEI);
+            columns.Bound(x => x.Name);
+            columns.Bound(x => x.DeviceType);
+            columns.Bound(x => x.CreatedOn)
+                .Filterable(false)
+                .Format("{0:dd-MM-yyyy hh:mm}");
+            columns.Bound(x => x.LastConnection)
+                .Filterable(false)
+                .Format("{0:dd-MM-yyyy hh:mm}");
+            columns.Bound(x => x.UpdateOn)
+                .Filterable(false)
+                .Format("{0:dd-MM-yyyy hh:mm}");
+            columns.Bound(x => x.Active)
+                .Filterable(false)
+                .Template(item => @Html.SymbolForBool(item.Active))
+                .ClientTemplate(@Html.SymbolForBool("Active"))
+                .Centered();
+            columns.Bound(x => x.Id)
+                .Centered()
+                .ClientTemplate("<a class='k-button k-button-icontext' onclick='detachDevice(this, #=Id#)'><span class='k-icon k-chain-broken'></span>" + T("Admin.Common.Detach").Text + "</a>")
+                .Title("");//T("Admin.Common.Edit").Text);
+        })
+        .DataSource(binding =>
+        {
+            binding.Ajax()
+                .Model(model => model.Id(x => x.Id))
+                //.Destroy(destroy => destroy.Action("DetachDevice", "User"))
+                .Read(read => read.Action("DevicesList", "User", new { area = "Admin", userId = Model.Id }));
+        })
+    )
+    <br />
+    <button type="button" class="btn btn-primary btn-below" onclick="location.href='@Url.Action("AttachDetachDevice", "User", new { area = "Admin", userId = Model.Id })'">
+        <span class="k-icon k-chain"></span>&nbsp;@T("Admin.Users.Devices.AttachDevices").Text</button>
+    <script type="text/javascript">
+        function detachDevice(element, deviceId) {
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("AttachDetachDevice", "User")",
+                data: JSON.stringify({
+                    userId: @Model.Id,
+                    deviceId: deviceId,
+                    userAttached: false
+                }),
+                async: true,
+                dataType: "json",
+                contentType: "application/json",
+                traditional: true,
+                success: function (result) {
+                    if (result.Message != "") {
+                        console.debug("Error: " + result.Message);
+                    } else {
+                        var grid = $("#user-addresses-grid").data("kendoGrid");
+                        grid.removeRow($(element).closest("tr"));
+                    }
+                },
+                error: function (xhr) {
+                    console.debug("Error: " + xhr.statusText +  ", @Url.Action("detachDevice", "User")");
+                }
+            });
+        }
+    </script>
+}
+
+
+
+
+
+

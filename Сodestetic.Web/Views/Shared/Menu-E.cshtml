@@ -1,0 +1,79 @@
+﻿@model PermissionsMenu
+
+<ul>
+    @if (Request.IsAuthenticated && (Model.IsAdmin || Model.IsSuperAdmin))
+    {
+        <li>@Html.LinkTable("Menu.Admin.Dashboard", "Menu.Admin.Dashboard.Tooltip", "Index", "Dashboard", new { area = "Admin" }, null)</li>
+        <li>
+            @Html.LinkTable("Menu.Admin.User", "Menu.Admin.User.Tooltip", null, null)
+            <div>
+                <ul>
+                    <li>@Html.ActionLink("Menu.Admin.User.New", "Create", "User", new { area = "Admin" }, null)</li>
+                    <li>@Html.ActionLink("Menu.Admin.User.List", "List", "User", new { area = "Admin" }, null)</li>
+                </ul>
+            </div>
+        </li>
+        <li>
+            @Html.LinkTable("Menu.Admin.Device", "Menu.Admin.Device.Tooltip", null, null)
+            <div>
+                <ul>
+                    <li>@Html.ActionLink("Menu.Admin.Device.New", "Create", "Device", new { area = "Admin" }, null)</li>
+                    <li>@Html.ActionLink("Menu.Admin.Device.List", "List", "Device", new { area = "Admin" }, null)</li>
+                    <li class="divider"></li>
+                    <li>@Html.ActionLink("Menu.Admin.Device.Type.New", "Create", "DeviceType", new { area = "Admin" }, null)</li>
+                    <li>@Html.ActionLink("Menu.Admin.Device.Type.List", "List", "DeviceType", new { area = "Admin" }, null)</li>
+                </ul>
+            </div>
+        </li>
+        <li>
+            @Html.LinkTable("Menu.Admin.Report", "Menu.Admin.Report.Tooltip", null, null)
+        </li>
+        <li>
+            @Html.LinkTable("Menu.Admin.Configuration", "Menu.Admin.Configuration.Tooltip", null, null)
+            <div>
+                <ul>
+                    <li>
+                        @Html.LinkTable("Menu.Admin.Configuration.Settings", null, null, null)
+                        <ul class="sub-menu">
+                            <li>@Html.ActionLink("Menu.Admin.Configuration.Settings.GeneralMisc", "GeneralCommon", "Setting", new { area = "Admin" }, null)</li>
+                            <li>@Html.ActionLink("Menu.Admin.Configuration.Settings.All", "AllSettings", "Setting", new { area = "Admin" }, null)</li>
+                        </ul>
+                    </li>
+                    <li>@Html.ActionLink("Menu.Admin.Configuration.Languages", "List", "Language", new { area = "Admin" }, null)</li>
+                    <li>@Html.ActionLink("Menu.Admin.Configuration.EmailAccounts", "List", "EmailAccount", new { area = "Admin" }, null)</li>
+                    <li class="divider"></li>
+                    <li>@Html.ActionLink("Menu.Admin.Configuration.Plugins", "EditDevices", "Admin", new { area = "Admin" }, null)</li>
+                </ul>
+            </div>
+        </li>
+        <li>
+            @Html.LinkTable("Menu.Admin.System", "Menu.Admin.System.Tooltip", null, null)
+            <div>
+                <ul>
+                    <li>@Html.ActionLink("Menu.Admin.System.Log", "List", "Log", new { area = "Admin" }, null)</li>
+                    <li>@Html.ActionLink("Menu.Admin.System.QueuedEmail", "List", "QueuedEmail", new { area = "Admin" }, null)</li>
+                    <li>@Html.ActionLink("Menu.Admin.System.Maintenance", "Maintenance", "Common", new { area = "Admin" }, null)</li>
+                    <li>@Html.ActionLink("Menu.Admin.System.ScheduleTask", "List", "ScheduleTask", new { area = "Admin" }, null)</li>
+                    <li>@Html.ActionLink("Menu.Admin.System.Warning", "Warnings", "Common", new { area = "Admin" }, null)</li>
+                    <li>@Html.ActionLink("Menu.Admin.System.SystemInformation", "SystemInfo", "Common", new { area = "Admin" }, null)</li>
+                </ul>
+            </div>
+        </li>
+    }
+    else
+    {
+        <li><a href="/"><div>Menu.Home<span>Menu.Home.Tooltip</span></div></a></li>
+        @*if (Request.IsAuthenticated && Model.IsRegistered)
+        {
+            <li>@Html.LinkTable("Menu.Map", "Menu.Map.Tooltip", "Map", "Home")</li>
+        }*@
+        <li><a href="/About"><div>Menu.About<span>Menu.About.Tooltip</span></div></a></li>
+        <li><a href="/Contact"><div>Menu.Contact<span>Menu.Contact.Tooltip</span></div></a></li>
+        <li><a href="/Admin?action=TestPage&amp;controller=Common"><div>Test<span>test</span></div></a></li>
+    }
+    <ul>
+        <li><a href="/Admin?action=Register&amp;controller=Account" id="registerLink"><div>Register<span>for registering</span></div></a></li>
+        <li><a href="/Admin?action=Login&amp;controller=User" id="loginLink"><div>Log in<span>for loging</span></div></a></li>
+    </ul>
+</ul>
+

@@ -1,0 +1,8 @@
+SignalR.Transports.TransportHeartBeat Information: 0 : Connection 4acc1f1c-6d82-4121-bb7b-ea3c7164aa42 is New.
+SignalR.Transports.WebSocketTransport Information: 0 : CloseSocket(4acc1f1c-6d82-4121-bb7b-ea3c7164aa42)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : 4acc1f1c-6d82-4121-bb7b-ea3c7164aa42 is dead
+SignalR.Transports.WebSocketTransport Verbose: 0 : Cancel(4acc1f1c-6d82-4121-bb7b-ea3c7164aa42)
+SignalR.Transports.WebSocketTransport Verbose: 0 : DrainWrites(4acc1f1c-6d82-4121-bb7b-ea3c7164aa42)
+SignalR.Transports.TransportHeartBeat Information: 0 : Dispose(). Closing all connections
+SignalR.Transports.WebSocketTransport Information: 0 : End(4acc1f1c-6d82-4121-bb7b-ea3c7164aa42)
+SignalR.Transports.WebSocketTransport Information: 0 : CompleteRequest (4acc1f1c-6d82-4121-bb7b-ea3c7164aa42)

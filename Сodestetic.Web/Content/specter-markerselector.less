@@ -1,0 +1,100 @@
+﻿@import 'specter-varibles.less';
+@import 'mixins/specter-functions.less';
+@import 'mixins/prefixes.less';
+
+
+.ui-markerselector {
+    position: relative;
+    &:after {
+        content: '\f0d7';
+        color: @modal-title-color;
+        font-family: 'icon-specter';
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        margin: @padding-vertical-xl @padding-horizontal-base;
+        line-height: 0;
+    }
+}
+
+.markerselector[role='dropdown'] {
+    display: flex;
+    position: relative;
+    width: 64px;
+    height: 64px;
+    align-items: center;
+    justify-content: center;
+    background-image: url('Images/map-backrgound.png');
+    background-size: cover;
+    .border-flat-all();
+    .border-radius-all();
+    .box-sizing();
+    margin-bottom: @margin-base - 2px;
+
+    &:hover {
+        .hover();
+    }
+}
+.wrapper-scrollbar {
+    position: relative;
+    overflow: hidden;
+}
+.markerselector[role='container'] {
+    display: inline-flex;
+    width: initial;
+    left: 0;
+    background-color: @modal-bg;
+    padding: @padding-vertical-base 0 @padding-vertical-base @padding-horizontal-base;
+    .border-flat-all();
+    .border-radius-all();
+    z-index: 10;
+    &.expanded {
+        box-shadow: @border-shadow;
+    }
+
+    &:before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 15px;
+        left: 0;
+        top: -10px;
+        //background-color: coral;
+    }
+}
+.markerselector[role='list'] {
+    //position: absolute;
+    .display-flex(row, flex);
+    .flex-wrap(wrap);
+    background-color: @modal-bg;
+}
+.markerselector[role='item'] {
+    position: relative;
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .border-flat-all();
+    .border-radius-all();
+    .box-sizing(border-box);
+    background-image: url('Images/map-backrgound.png');
+    background-size: cover;
+    &:hover {
+        .hover();
+    }
+    &.actived {
+        .hover();
+    }
+}
+.markerselector[role='marker'] {
+    z-index: 1;
+}
+.markerselector[role='shadow'] {
+    position: absolute;
+}
+html.touch .markerselector[role='container'] {
+    box-shadow: none;
+    .border-flat-all(@modal-border-flat);
+    .border-radius-all(@border-radius-medium);
+}

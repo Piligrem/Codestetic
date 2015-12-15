@@ -1,0 +1,113 @@
+﻿@model long?
+@using Specter.Web.Core;
+@using Specter.Web.Framework.UI;
+@using Specter.Web.Utilities;
+@using Specter.Web.Core.Domain.Media;
+@using Kendo.Mvc.UI;
+@{
+    //other variables
+    var random = CommonHelper.GenerateRandomInteger();
+    var deviceId = "icon" + random;
+    var pictureService = EngineContext.Current.Resolve<Specter.Web.Services.Media.IPictureService>();
+    var iconId = Model.HasValue ? Model.Value : 0;
+}
+<div id="@deviceId" class="icon-slider" style="display: inline-block;">
+    @Html.HiddenFor(x => x, new { @class = "hidden icon-user" })
+    <div id="my-icon-select"></div>
+    <div id="icon-droplist"></div>
+    @*<div class="container">
+        <img src="@(pictureService.GetPictureUrl(iconId, 0, true, PictureType.Icon))" class="item-icon stick-none" />
+        <div class="iconbuttons">
+            <input type="button" id="nextIcon" class="fileinput-button" style="width: 100%;" value=@(((char)0x3e).ToString())>
+        </div>
+    </div>*@
+</div>
+@*<script src="~/Scripts/iconselect.js" type="text/javascript"></script>*@
+<script src="~/Scripts/iscroll.js" type="text/javascript"></script>
+<script src="~/Scripts/jquery.nicescroll.js" type="text/javascript"></script>
+<link rel="stylesheet" href="~/Content/iconselect.css" type="text/css" />
+<script>
+    //iconSelect = new IconSelect("my-icon-select", {
+    //    selectedIconWidth: 64,
+    //    selectedIconHeight: 64,
+    //    selectedBoxPadding: 1,
+    //    iconsWidth: 64,
+    //    boxIconSpace: 1,
+    //    vectoralIconNumber: 3,
+    //    horizontalIconNumber: 2
+    //});
+
+    //var icons = [];
+    //icons.push({ 'iconFilePath': '', 'iconValue': '0' });
+    //icons.push({ 'iconFilePath': '/Media/Icons/0000001-0.png', 'iconValue': '1' });
+    //icons.push({ 'iconFilePath': '/Media/Icons/0000003-0.png', 'iconValue': '3' });
+    //icons.push({ 'iconFilePath': '/Media/Icons/0000004-0.png', 'iconValue': '4' });
+    //icons.push({ 'iconFilePath': '/Media/Icons/0000005-0.png', 'iconValue': '5' });
+    //icons.push({ 'iconFilePath': '/Media/Icons/0000006-0.png', 'iconValue': '6' });
+    //icons.push({ 'iconFilePath': '/Media/Icons/0000007-0.png', 'iconValue': '7' });
+    //icons.push({ 'iconFilePath': '/Media/Icons/0000008-0.png', 'iconValue': '8' });
+    //icons.push({ 'iconFilePath': '/Media/Icons/0000009-0.png', 'iconValue': '9' });
+
+    //iconSelect.refresh(icons);
+
+    $("#icon-droplist").IconDropDown({
+        currentIndex: @iconId,
+        selectedIcon: {
+            width: 80,
+            height: 80,
+            padding: 5,
+        },
+        listIcon: {
+            width: 80,
+            margin: -1,
+            horizontalNumber: 2,
+            verticalNumber: 2
+        },
+        scroll: {
+            cursorColor: "#737066",
+            cursorBorder: "1px solid #C7C7C7",
+            cursorBorderRadius: 5,
+            cursorWidth: 4,
+            railOffset: {
+                top: 1,
+                left: 0,
+            },
+        },
+        data: {
+            key: "Id",
+            value: "Url"
+        }
+    }).ajaxLoad("GetIcons", "Media");
+
+    @*$("iconbuttons").button({
+        icons: {
+            primary: "ui-icon-pencil"
+        },
+        text: false
+    });
+    $("#nextIcon").bind("click", function () {
+        var el = $('#@deviceId'),
+            img = el.find('img'),
+            elIcon = el.find('.icon-user'),
+            elRemove = el.find('.remove');
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("GetNextSystemIcon", "Media", new { area = "" })',
+            data: JSON.stringify({
+                iconId: elIcon.val()
+            }),
+            async: true, // изменил - было false
+            dataType: "json",
+            contentType: "application/json",
+            traditional: true,
+            success: function (data) {
+                img.attr("src", data.src);
+                elIcon.val(data.iconId);
+            },
+            error: function (xhr) {
+                $.log("Error: {0}, Message: {1}".format(xhr.error, xhr.statusText), "/Media/GetNextSystemIcon");
+            }
+        });
+    });*@
+</script>

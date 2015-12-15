@@ -1,0 +1,24 @@
+SignalR.Transports.TransportHeartBeat Information: 0 : Connection ba30b03a-8112-48cb-bf88-96c3f18be5da is New.
+SignalR.Transports.WebSocketTransport Information: 0 : CloseSocket(ba30b03a-8112-48cb-bf88-96c3f18be5da)
+SignalR.Transports.WebSocketTransport Information: 0 : Abort(ba30b03a-8112-48cb-bf88-96c3f18be5da)
+SignalR.Transports.TransportHeartBeat Information: 0 : Removing connection ba30b03a-8112-48cb-bf88-96c3f18be5da
+SignalR.Transports.WebSocketTransport Information: 0 : End(ba30b03a-8112-48cb-bf88-96c3f18be5da)
+SignalR.Transports.WebSocketTransport Verbose: 0 : DrainWrites(ba30b03a-8112-48cb-bf88-96c3f18be5da)
+SignalR.Transports.WebSocketTransport Information: 0 : CompleteRequest (ba30b03a-8112-48cb-bf88-96c3f18be5da)
+SignalR.Transports.TransportHeartBeat Information: 0 : Connection 5ddb70e1-c555-4f38-a5bb-45a4eb9997cd is New.
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(5ddb70e1-c555-4f38-a5bb-45a4eb9997cd)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(5ddb70e1-c555-4f38-a5bb-45a4eb9997cd)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(5ddb70e1-c555-4f38-a5bb-45a4eb9997cd)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(5ddb70e1-c555-4f38-a5bb-45a4eb9997cd)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(5ddb70e1-c555-4f38-a5bb-45a4eb9997cd)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(5ddb70e1-c555-4f38-a5bb-45a4eb9997cd)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(5ddb70e1-c555-4f38-a5bb-45a4eb9997cd)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(5ddb70e1-c555-4f38-a5bb-45a4eb9997cd)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(5ddb70e1-c555-4f38-a5bb-45a4eb9997cd)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(5ddb70e1-c555-4f38-a5bb-45a4eb9997cd)
+SignalR.Transports.TransportHeartBeat Information: 0 : Dispose(). Closing all connections
+SignalR.Transports.WebSocketTransport Information: 0 : End(5ddb70e1-c555-4f38-a5bb-45a4eb9997cd)
+SignalR.Transports.WebSocketTransport Verbose: 0 : Cancel(5ddb70e1-c555-4f38-a5bb-45a4eb9997cd)
+SignalR.Transports.WebSocketTransport Verbose: 0 : DrainWrites(5ddb70e1-c555-4f38-a5bb-45a4eb9997cd)
+SignalR.Transports.WebSocketTransport Information: 0 : CompleteRequest (5ddb70e1-c555-4f38-a5bb-45a4eb9997cd)
+SignalR.Transports.WebSocketTransport Information: 0 : CloseSocket(5ddb70e1-c555-4f38-a5bb-45a4eb9997cd)

@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jquery-ui")
+    @Scripts.Render("~/bundles/jquery-nicescroll")
+    @Scripts.Render("~/bundles/jquery-notify")
+    <script>
+        $(document).ready(
+            function () {
+                $("#x-grid").niceScroll({ cursorcolor: "#232322", cursorborder: "1px solid #636262", cursorborderradius: 0, railoffset: { top: 0, left: 11 } });
+            }
+          );
+    </script>
+</head>
+<body class="page-map">
+    <div id="wrapper">
+        <div id="wrapper-container">
+            <section id="header" class="navbar-map navbar-fixed-top">
+                @*@Html.Action("ShopBar", "Common")*@
+                @Html.Action("Header", "Common", new { @class = "brand" })
+                @*@Html.Action("MegaMenu", "Catalog", new { currentCategoryId = this.CurrentCategoryId, currentProductId = this.CurrentProductId })*@
+            </section>
+            @RenderBody()
+            <section id="footer" class="footer-map title">
+                @Html.Partial("Footer", "Common")
+            </section>
+        </div>
+    </div>
+</body>
+</html>

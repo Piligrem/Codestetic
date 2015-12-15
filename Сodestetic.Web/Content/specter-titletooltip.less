@@ -1,0 +1,32 @@
+﻿@import 'specter-varibles.less';
+@import 'mixins/specter-functions.less';
+@import 'mixins/prefixes.less';
+
+/* Tooltip */
+#tooltip {
+	position: fixed;
+	z-index: 999999;
+	color: #fff;
+	font-size: 12px;
+    /*opacity: 0;*/
+	//width: 180px;
+    .border-flat-all();
+    .border-radius-all();
+    border-top-left-radius: 0;
+    .box-shadow(@modal-border-shadow);
+    overflow: hidden;
+}
+
+#tooltip .tip-header {
+	//height: 8px;
+	/*background: url(images/tip-header.gif) no-repeat;*/
+}
+#tooltip .tip-body {
+	background-color: @modal-bg;
+	padding: @padding-vertical-base @padding-vertical-base;
+    color: @btn-default-color;
+}
+#tooltip .tip-footer {
+	//height: 8px;
+	/*background: url(images/tip-footer.gif) no-repeat;*/
+}

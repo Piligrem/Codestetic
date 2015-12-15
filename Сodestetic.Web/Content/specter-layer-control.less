@@ -1,0 +1,268 @@
+@background-menu: rgba(255, 255, 255, @opacity);
+@background-select: rgba(0, 0, 0, 0.1);
+@foreground-select: rgba(0, 0, 0, @opacity-forecolor);
+@border-radius: 4px;
+@border-color: rgba(0, 0, 0, 0);
+@forecolor: rgba(0, 0, 0, @opacity-forecolor);
+@forecolor1: rgba(255, 255, 255, 1);
+@opacity: 1;
+@opacity-forecolor: 0.6;
+
+.layer-panel,
+.layer-panel ul {
+    background-color: @background-menu;
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+    border-radius: @border-radius;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.4);
+}
+.layer-panel {
+    float: right;
+    display: block;
+    position: relative;
+    border-top-right-radius: @border-radius;
+    -moz-perspective: 200px;
+    -ms-perspective: 200px;
+    -webkit-perspective: 200px;
+    -o-perspective: 200px;
+    perspective: 200px;
+}
+.layer-panel ul {
+    //left: -79px;
+    right: 100px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    top: -9999px;
+
+    -moz-transform: rotateY(-70deg);
+    -ms-transform: rotateY(-70deg);
+    -o-transform: rotateY(-70deg);
+    -webkit-transform: rotateY(-70deg);
+    transform: rotateY(-70deg);
+
+    -moz-transform-origin: 100% 0;
+    -ms-transform-origin: 100% 0;
+    -o-transform-origin: 100% 0;
+    -webkit-transform-origin: 100% 0;
+    transform-origin: 100% 0;
+
+    -moz-transition: -moz-transform 0.3s linear, opacity 0.3s linear;
+    -ms-transition: -ms-transform 0.3s linear, opacity 0.3s linear;
+    -o-transition: -o-transform 0.3s linear, opacity 0.3s linear;
+    -webkit-transition: -webkit-transform 0.3s linear, opacity 0.3s linear;
+    transition: transform 0.3s linear, opacity 0.3s linear;
+}
+.layer-panel li ul.subs:before {
+    content: "";
+    right: -7px;
+    position: fixed;
+    width: 10px;
+    height: 100%;
+}
+.layer-panel li {
+    position: relative;
+    font-family: "Open Sans", sans-serif;
+    font-size: 12px;
+    line-height: 16px;
+}
+.layer-panel > li {
+    -moz-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    -o-transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+}
+.layer-panel li span {
+    cursor: pointer;
+    color: @forecolor;
+    display: block;
+    padding: 10px 10px 10px 10px;
+    text-decoration: none;
+    -moz-transition: all 0.2s linear;
+    -ms-transition: all 0.2s linear;
+    -o-transition: all 0.2s linear;
+    -webkit-transition: all 0.2s linear;
+    transition: all 0.2s linear;
+}
+.layer-panel > li span a {
+    color: @forecolor;
+    text-decoration: none;
+}
+.layer-panel li.menuItem:hover > span {
+    background-color: @background-select;
+    border-color: @border-color;
+    color: @foreground-select;
+}
+.layer-panel > li:first-child > span {
+    border-radius: @border-radius @border-radius 0 0;
+}
+.layer-panel > li:last-child > span {
+    border-radius: 0 0 @border-radius @border-radius;
+}
+.menuItem:hover ul.subs,
+.layer-panel li:hover ul.subs {
+    opacity: 1;
+    top: 0;
+    -moz-transition-delay: 0.3s;
+    -o-transition-delay: 0.3s;
+    -webkit-transition-delay: 0.3s;
+    transition-delay: 0.3s;
+    -moz-transform: rotateY(0);
+    -ms-transform: rotateY(0);
+    -o-transform: rotateY(0);
+    -webkit-transform: rotateY(0);
+    transform: rotateY(0);
+}
+.layer-panel ul li {
+    width: 100%;
+}
+.layer-panel li ul {
+    padding: 0 0 5px 0;
+}
+.layer-panel > li ul li span.layer-menu-subitem {
+    display: flex;
+    -ms-flex-direction: column;
+    -webkit-flex-direction: column;
+    flex-direction: column;
+    align-items: center;
+    padding: 5px 5px 0 5px;
+    & img {
+        border-radius: 5px;
+    }
+    & a {
+        bottom: 5px;
+        position: absolute;
+        text-align: center;
+        width: 64px;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
+    }
+}
+.layer-panel li ul li {
+    & span {
+        padding: 0;
+    }
+    & span a {
+        color: @forecolor1;
+    }
+    &:hover span > img {
+        .hover();
+        filter: gray; // IE 6-9 
+    }
+}
+.menuItem-without-image:hover {
+    background-color: @background-select!important;
+    border-color: @border-color!important;
+    color: @foreground-select!important;
+}
+.menuItemName-without-image {
+    position: static!important;
+    text-align: left!important;
+    color: @forecolor!important;
+    text-shadow: none!important;
+    height: 27px!important;
+    padding: 5px 0 0 3px;
+}
+.leaflet-control-layers-menu {
+    background: none;
+}
+.leaflet-control-layers-transparent {
+    background: none;
+    box-shadow: none;
+    border: none;
+}
+
+/* Цвета */
+/*.colorScheme {
+    list-style: none outside none;
+    overflow: hidden;
+    width: 120px;
+}
+.colorScheme a {
+    cursor: pointer;
+    float: left;
+    height: 30px;
+    margin: 0 5px 5px;
+    width: 30px;
+}
+.colorScheme .clr1 {
+    background-color: #8899AA;
+}
+.colorScheme .clr2 {
+    background-color: #aa889e;
+}
+.colorScheme .clr3 {
+    background-color: #8f88aa;
+}
+.colorScheme .clr4 {
+    background-color: #88aaaa;
+}
+.colorScheme .clr5 {
+    background-color: #88aa8a;
+}
+.colorScheme .clr6 {
+    background-color: #aaa188;
+}
+
+#clr1:target ~ .layer-panel, #clr1:target ~ .layer-panel ul {
+    background-color: #8899AA;
+}
+#clr2:target ~ .layer-panel, #clr2:target ~ .layer-panel ul {
+    background-color: #aa889e;
+}
+#clr3:target ~ .layer-panel, #clr3:target ~ .layer-panel ul {
+    background-color: #8f88aa;
+}
+#clr4:target ~ .layer-panel, #clr4:target ~ .layer-panel ul {
+    background-color: #88aaaa;
+}
+#clr5:target ~ .layer-panel, #clr5:target ~ .layer-panel ul {
+    background-color: #88aa8a;
+}
+#clr6:target ~ .layer-panel, #clr6:target ~ .layer-panel ul {
+    background-color: #aaa188;
+}
+
+#clr1:target ~ .layer-panel li:hover > a {
+    background-color: #8899AA;
+    border-color: #8899AA;
+}
+#clr2:target ~ .layer-panel li:hover > a {
+    background-color: #aa889e;
+    border-color: #aa889e;
+}
+#clr3:target ~ .layer-panel li:hover > a {
+    background-color: #8f88aa;
+    border-color: #8f88aa;
+}
+#clr4:target ~ .layer-panel li:hover > a {
+    background-color: #88aaaa;
+    border-color: #88aaaa;
+}
+#clr5:target ~ .layer-panel li:hover > a {
+    background-color: #88aa8a;
+    border-color: #88aa8a;
+}
+#clr6:target ~ .layer-panel li:hover > a {
+    background-color: #aaa188;
+    border-color: #aaa188;
+}*/
+
+/*.layer-panel,
+ul.subs {
+    -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3)!important;
+       -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3)!important;
+            box-shadow:0 1px 4px rgba(0, 0, 0, 0.3)!important;//, 0 0 40px rgba(0, 0, 0, 0.1) inset;
+    -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3)!important; //, 0 0 40px rgba(0, 0, 0, 0.1) inset;
+       -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3)!important; //, 0 0 40px rgba(0, 0, 0, 0.1) inset;
+            box-shadow: 0 15px 10px -10px rgba(0, 0, 0, 0.5), 0 1px 4px rgba(0, 0, 0, 0.3)!important; //, 0 0 40px rgba(0, 0, 0, 0.1) inset;
+}
+.layer-panel:after,
+.layer-panel:before,
+ul.subs:before,
+ul.subs:after {
+    content:"";
+    position:absolute;
+    z-index:-2!important;
+}*/

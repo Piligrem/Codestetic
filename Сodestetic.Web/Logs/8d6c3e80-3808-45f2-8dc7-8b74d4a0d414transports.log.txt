@@ -1,0 +1,7 @@
+SignalR.Transports.TransportHeartBeat Information: 0 : Connection c206c06d-de44-47bb-8c1c-94f19afb07bb is New.
+SignalR.Transports.WebSocketTransport Verbose: 0 : Cancel(c206c06d-de44-47bb-8c1c-94f19afb07bb)
+SignalR.Transports.WebSocketTransport Verbose: 0 : DrainWrites(c206c06d-de44-47bb-8c1c-94f19afb07bb)
+SignalR.Transports.TransportHeartBeat Information: 0 : Dispose(). Closing all connections
+SignalR.Transports.WebSocketTransport Information: 0 : End(c206c06d-de44-47bb-8c1c-94f19afb07bb)
+SignalR.Transports.WebSocketTransport Information: 0 : CompleteRequest (c206c06d-de44-47bb-8c1c-94f19afb07bb)
+SignalR.Transports.WebSocketTransport Information: 0 : CloseSocket(c206c06d-de44-47bb-8c1c-94f19afb07bb)

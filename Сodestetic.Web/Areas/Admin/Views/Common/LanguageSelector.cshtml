@@ -1,0 +1,25 @@
+﻿@model LanguageSelectorModel
+@if (Model.AvailableLanguages.Count > 1)
+{
+    <li>
+        <a href="javascript:void(0)" data-target="#">
+            <div>
+                <img src='@Url.Content("~/Content/Images/flags/" + @Model.CurrentLanguage.FlagImageFileName)' alt="@Model.CurrentLanguage.Name" width="16" />
+                <span>@Model.CurrentLanguage.Name</span>
+            </div>
+        </a>
+        <div>
+            <ul>
+                @foreach (var language in Model.AvailableLanguages)
+                {
+                    <li @Html.Css("disabled", language.Id == Model.CurrentLanguage.Id)>
+                        <a href="@Url.Action("LanguageSelected", "Common", new { userlanguage = language.Id, previousUrl = Request.RawUrl, area = "Admin" })" data-lang-id='@language.Id' class="language-item">
+                            <img src='@Url.Content("~/Content/Images/flags/" + @language.FlagImageFileName)' alt="@language.Name" />
+                            @language.Name
+                        </a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </li>
+}

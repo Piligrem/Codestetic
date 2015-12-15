@@ -1,0 +1,84 @@
+SignalR.Transports.TransportHeartBeat Information: 0 : Connection 87807a06-aafa-4365-ae9b-d1b23218c6dc is New.
+SignalR.Transports.WebSocketTransport Verbose: 0 : DrainWrites(87807a06-aafa-4365-ae9b-d1b23218c6dc)
+SignalR.Transports.WebSocketTransport Error: 0 : CompleteRequest (87807a06-aafa-4365-ae9b-d1b23218c6dc) failed: System.NullReferenceException: Ссылка на объект не указывает на экземпляр объекта.
+   в Specter.Web.Services.SignalR.NotificationHub.OnReconnected() в e:\Projects\Specter.GPS.Server\Web\Libraries\Specter.Web.Services\SignalR\NotificationHub.cs:строка 106
+   в Microsoft.AspNet.SignalR.Hubs.HubDispatcher.Reconnect(IHub hub) в e:\Projects\Specter.GPS.Server\Web\Libraries\SignalR\Microsoft.AspNet.SignalR.Core\Hubs\HubDispatcher.cs:строка 294
+   в Microsoft.AspNet.SignalR.Hubs.HubPipelineModule.<>c__DisplayClasse.<BuildReconnect>b__c(IHub hub) в e:\Projects\Specter.GPS.Server\Web\Libraries\SignalR\Microsoft.AspNet.SignalR.Core\Hubs\Pipeline\HubPipelineModule.cs:строка 95
+   в Microsoft.AspNet.SignalR.Hubs.HubPipelineModule.<>c__DisplayClasse.<BuildReconnect>b__c(IHub hub) в e:\Projects\Specter.GPS.Server\Web\Libraries\SignalR\Microsoft.AspNet.SignalR.Core\Hubs\Pipeline\HubPipelineModule.cs:строка 95
+   в Microsoft.AspNet.SignalR.Hubs.HubPipeline.Reconnect(IHub hub) в e:\Projects\Specter.GPS.Server\Web\Libraries\SignalR\Microsoft.AspNet.SignalR.Core\Hubs\Pipeline\HubPipeline.cs:строка 49
+   в Microsoft.AspNet.SignalR.Hubs.HubDispatcher.<OnReconnected>b__1d(IHub hub) в e:\Projects\Specter.GPS.Server\Web\Libraries\SignalR\Microsoft.AspNet.SignalR.Core\Hubs\HubDispatcher.cs:строка 368
+   в Microsoft.AspNet.SignalR.Hubs.HubDispatcher.<>c__DisplayClass33.<ExecuteHubEvent>b__2f(IHub instance) в e:\Projects\Specter.GPS.Server\Web\Libraries\SignalR\Microsoft.AspNet.SignalR.Core\Hubs\HubDispatcher.cs:строка 421
+   в System.Linq.Enumerable.WhereSelectListIterator`2.MoveNext()
+   в System.Linq.Buffer`1..ctor(IEnumerable`1 source)
+   в System.Linq.Enumerable.ToArray[TSource](IEnumerable`1 source)
+   в Microsoft.AspNet.SignalR.Hubs.HubDispatcher.ExecuteHubEvent(IRequest request, String connectionId, Func`2 action) в e:\Projects\Specter.GPS.Server\Web\Libraries\SignalR\Microsoft.AspNet.SignalR.Core\Hubs\HubDispatcher.cs:строка 421
+   в Microsoft.AspNet.SignalR.Hubs.HubDispatcher.OnReconnected(IRequest request, String connectionId) в e:\Projects\Specter.GPS.Server\Web\Libraries\SignalR\Microsoft.AspNet.SignalR.Core\Hubs\HubDispatcher.cs:строка 368
+   в Microsoft.AspNet.SignalR.PersistentConnection.<>c__DisplayClass8.<ProcessRequest>b__3() в e:\Projects\Specter.GPS.Server\Web\Libraries\SignalR\Microsoft.AspNet.SignalR.Core\PersistentConnection.cs:строка 258
+   в Microsoft.AspNet.SignalR.TaskAsyncHelper.FromMethod(Func`1 func) в e:\Projects\Specter.GPS.Server\Web\Libraries\SignalR\Microsoft.AspNet.SignalR.Core\TaskAsyncHelper.cs:строка 680
+SignalR.Transports.WebSocketTransport Information: 0 : CloseSocket(87807a06-aafa-4365-ae9b-d1b23218c6dc)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : Connection 87807a06-aafa-4365-ae9b-d1b23218c6dc exists. Closing previous connection.
+SignalR.Transports.WebSocketTransport Information: 0 : End(87807a06-aafa-4365-ae9b-d1b23218c6dc)
+SignalR.Transports.WebSocketTransport Verbose: 0 : DrainWrites(87807a06-aafa-4365-ae9b-d1b23218c6dc)
+SignalR.Transports.WebSocketTransport Error: 0 : CompleteRequest (87807a06-aafa-4365-ae9b-d1b23218c6dc) failed: System.NullReferenceException: Ссылка на объект не указывает на экземпляр объекта.
+   в Specter.Web.Services.SignalR.NotificationHub.OnReconnected() в e:\Projects\Specter.GPS.Server\Web\Libraries\Specter.Web.Services\SignalR\NotificationHub.cs:строка 106
+   в Microsoft.AspNet.SignalR.Hubs.HubDispatcher.Reconnect(IHub hub) в e:\Projects\Specter.GPS.Server\Web\Libraries\SignalR\Microsoft.AspNet.SignalR.Core\Hubs\HubDispatcher.cs:строка 294
+   в Microsoft.AspNet.SignalR.Hubs.HubPipelineModule.<>c__DisplayClasse.<BuildReconnect>b__c(IHub hub) в e:\Projects\Specter.GPS.Server\Web\Libraries\SignalR\Microsoft.AspNet.SignalR.Core\Hubs\Pipeline\HubPipelineModule.cs:строка 95
+   в Microsoft.AspNet.SignalR.Hubs.HubPipelineModule.<>c__DisplayClasse.<BuildReconnect>b__c(IHub hub) в e:\Projects\Specter.GPS.Server\Web\Libraries\SignalR\Microsoft.AspNet.SignalR.Core\Hubs\Pipeline\HubPipelineModule.cs:строка 95
+   в Microsoft.AspNet.SignalR.Hubs.HubPipeline.Reconnect(IHub hub) в e:\Projects\Specter.GPS.Server\Web\Libraries\SignalR\Microsoft.AspNet.SignalR.Core\Hubs\Pipeline\HubPipeline.cs:строка 49
+   в Microsoft.AspNet.SignalR.Hubs.HubDispatcher.<OnReconnected>b__1d(IHub hub) в e:\Projects\Specter.GPS.Server\Web\Libraries\SignalR\Microsoft.AspNet.SignalR.Core\Hubs\HubDispatcher.cs:строка 368
+   в Microsoft.AspNet.SignalR.Hubs.HubDispatcher.<>c__DisplayClass33.<ExecuteHubEvent>b__2f(IHub instance) в e:\Projects\Specter.GPS.Server\Web\Libraries\SignalR\Microsoft.AspNet.SignalR.Core\Hubs\HubDispatcher.cs:строка 421
+   в System.Linq.Enumerable.WhereSelectListIterator`2.MoveNext()
+   в System.Linq.Buffer`1..ctor(IEnumerable`1 source)
+   в System.Linq.Enumerable.ToArray[TSource](IEnumerable`1 source)
+   в Microsoft.AspNet.SignalR.Hubs.HubDispatcher.ExecuteHubEvent(IRequest request, String connectionId, Func`2 action) в e:\Projects\Specter.GPS.Server\Web\Libraries\SignalR\Microsoft.AspNet.SignalR.Core\Hubs\HubDispatcher.cs:строка 421
+   в Microsoft.AspNet.SignalR.Hubs.HubDispatcher.OnReconnected(IRequest request, String connectionId) в e:\Projects\Specter.GPS.Server\Web\Libraries\SignalR\Microsoft.AspNet.SignalR.Core\Hubs\HubDispatcher.cs:строка 368
+   в Microsoft.AspNet.SignalR.PersistentConnection.<>c__DisplayClass8.<ProcessRequest>b__3() в e:\Projects\Specter.GPS.Server\Web\Libraries\SignalR\Microsoft.AspNet.SignalR.Core\PersistentConnection.cs:строка 258
+   в Microsoft.AspNet.SignalR.TaskAsyncHelper.FromMethod(Func`1 func) в e:\Projects\Specter.GPS.Server\Web\Libraries\SignalR\Microsoft.AspNet.SignalR.Core\TaskAsyncHelper.cs:строка 680
+SignalR.Transports.WebSocketTransport Information: 0 : CloseSocket(87807a06-aafa-4365-ae9b-d1b23218c6dc)
+SignalR.Transports.WebSocketTransport Information: 0 : Abort(87807a06-aafa-4365-ae9b-d1b23218c6dc)
+SignalR.Transports.WebSocketTransport Information: 0 : Abort(87807a06-aafa-4365-ae9b-d1b23218c6dc)
+SignalR.Transports.TransportHeartBeat Information: 0 : Removing connection 87807a06-aafa-4365-ae9b-d1b23218c6dc
+SignalR.Transports.WebSocketTransport Information: 0 : End(87807a06-aafa-4365-ae9b-d1b23218c6dc)
+SignalR.Transports.WebSocketTransport Verbose: 0 : DrainWrites(87807a06-aafa-4365-ae9b-d1b23218c6dc)
+SignalR.Transports.WebSocketTransport Verbose: 0 : DrainWrites(87807a06-aafa-4365-ae9b-d1b23218c6dc)
+SignalR.Transports.WebSocketTransport Information: 0 : CompleteRequest (87807a06-aafa-4365-ae9b-d1b23218c6dc)
+SignalR.Transports.WebSocketTransport Information: 0 : CompleteRequest (87807a06-aafa-4365-ae9b-d1b23218c6dc)
+SignalR.Transports.TransportHeartBeat Information: 0 : Connection 827c6273-d2c9-4ec9-b3c6-935e393502b0 is New.
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(827c6273-d2c9-4ec9-b3c6-935e393502b0)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(827c6273-d2c9-4ec9-b3c6-935e393502b0)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(827c6273-d2c9-4ec9-b3c6-935e393502b0)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(827c6273-d2c9-4ec9-b3c6-935e393502b0)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(827c6273-d2c9-4ec9-b3c6-935e393502b0)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(827c6273-d2c9-4ec9-b3c6-935e393502b0)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(827c6273-d2c9-4ec9-b3c6-935e393502b0)
+SignalR.Transports.WebSocketTransport Information: 0 : CloseSocket(827c6273-d2c9-4ec9-b3c6-935e393502b0)
+SignalR.Transports.WebSocketTransport Information: 0 : Abort(827c6273-d2c9-4ec9-b3c6-935e393502b0)
+SignalR.Transports.TransportHeartBeat Information: 0 : Removing connection 827c6273-d2c9-4ec9-b3c6-935e393502b0
+SignalR.Transports.WebSocketTransport Information: 0 : End(827c6273-d2c9-4ec9-b3c6-935e393502b0)
+SignalR.Transports.WebSocketTransport Verbose: 0 : DrainWrites(827c6273-d2c9-4ec9-b3c6-935e393502b0)
+SignalR.Transports.WebSocketTransport Information: 0 : CompleteRequest (827c6273-d2c9-4ec9-b3c6-935e393502b0)
+SignalR.Transports.TransportHeartBeat Information: 0 : Connection e8921570-74dd-40f0-91a4-a2a948744a35 is New.
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(e8921570-74dd-40f0-91a4-a2a948744a35)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(e8921570-74dd-40f0-91a4-a2a948744a35)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(e8921570-74dd-40f0-91a4-a2a948744a35)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(e8921570-74dd-40f0-91a4-a2a948744a35)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(e8921570-74dd-40f0-91a4-a2a948744a35)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(e8921570-74dd-40f0-91a4-a2a948744a35)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(e8921570-74dd-40f0-91a4-a2a948744a35)
+SignalR.Transports.WebSocketTransport Information: 0 : CloseSocket(e8921570-74dd-40f0-91a4-a2a948744a35)
+SignalR.Transports.WebSocketTransport Information: 0 : Abort(e8921570-74dd-40f0-91a4-a2a948744a35)
+SignalR.Transports.TransportHeartBeat Information: 0 : Removing connection e8921570-74dd-40f0-91a4-a2a948744a35
+SignalR.Transports.WebSocketTransport Information: 0 : End(e8921570-74dd-40f0-91a4-a2a948744a35)
+SignalR.Transports.WebSocketTransport Verbose: 0 : DrainWrites(e8921570-74dd-40f0-91a4-a2a948744a35)
+SignalR.Transports.WebSocketTransport Information: 0 : CompleteRequest (e8921570-74dd-40f0-91a4-a2a948744a35)
+SignalR.Transports.TransportHeartBeat Information: 0 : Connection f815b6e2-7da6-4e7d-b619-35c0ddf28d57 is New.
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(f815b6e2-7da6-4e7d-b619-35c0ddf28d57)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(f815b6e2-7da6-4e7d-b619-35c0ddf28d57)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(f815b6e2-7da6-4e7d-b619-35c0ddf28d57)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(f815b6e2-7da6-4e7d-b619-35c0ddf28d57)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(f815b6e2-7da6-4e7d-b619-35c0ddf28d57)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(f815b6e2-7da6-4e7d-b619-35c0ddf28d57)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(f815b6e2-7da6-4e7d-b619-35c0ddf28d57)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(f815b6e2-7da6-4e7d-b619-35c0ddf28d57)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(f815b6e2-7da6-4e7d-b619-35c0ddf28d57)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(f815b6e2-7da6-4e7d-b619-35c0ddf28d57)

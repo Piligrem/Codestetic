@@ -1,0 +1,37 @@
+﻿@model UserAddressEditModel
+@using Specter.Web.Models.User;
+@{
+    Layout = "~/Views/Shared/_ColumnsTwo.cshtml";
+
+    //title
+    Html.AddTitleParts(T("PageTitle.Account").Text);
+}
+@section left
+{
+    @Html.Partial("AccountNavigation", Model.NavigationModel, new ViewDataDictionary())
+}
+
+@using (Html.BeginForm())
+{
+    <div class="page-title">@T("Account.UserAddresses.Edit")</div>
+    <div class="page account-page address-edit-page">
+        <div class="page-body">
+            @{
+                var dataDictAddress = new ViewDataDictionary();
+                //Merge ModelState (required for validation)
+                dataDictAddress.ModelState.Merge(ViewData.ModelState);
+                dataDictAddress.TemplateInfo.HtmlFieldPrefix = "Address";
+                @Html.Partial("_CreateOrUpdateAddress", Model.Address, dataDictAddress)          
+            }
+            <div class="buttons form-horizontal">
+                <div class="control-group clear-padding">
+                    <div class="controls">
+                        <button type="submit" class="btn button-face btn-primary">
+                            <i class="icon icon-save"></i>@T("Common.Save")
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

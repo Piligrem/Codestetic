@@ -1,0 +1,26 @@
+SignalR.Transports.TransportHeartBeat Information: 0 : Connection fda5dda2-ac10-4785-8da6-459f850bee95 is New.
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(fda5dda2-ac10-4785-8da6-459f850bee95)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(fda5dda2-ac10-4785-8da6-459f850bee95)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(fda5dda2-ac10-4785-8da6-459f850bee95)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(fda5dda2-ac10-4785-8da6-459f850bee95)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(fda5dda2-ac10-4785-8da6-459f850bee95)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(fda5dda2-ac10-4785-8da6-459f850bee95)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(fda5dda2-ac10-4785-8da6-459f850bee95)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(fda5dda2-ac10-4785-8da6-459f850bee95)
+SignalR.Transports.WebSocketTransport Information: 0 : CloseSocket(fda5dda2-ac10-4785-8da6-459f850bee95)
+SignalR.Transports.WebSocketTransport Information: 0 : Abort(fda5dda2-ac10-4785-8da6-459f850bee95)
+SignalR.Transports.TransportHeartBeat Information: 0 : Removing connection fda5dda2-ac10-4785-8da6-459f850bee95
+SignalR.Transports.WebSocketTransport Information: 0 : End(fda5dda2-ac10-4785-8da6-459f850bee95)
+SignalR.Transports.WebSocketTransport Verbose: 0 : DrainWrites(fda5dda2-ac10-4785-8da6-459f850bee95)
+SignalR.Transports.WebSocketTransport Information: 0 : CompleteRequest (fda5dda2-ac10-4785-8da6-459f850bee95)
+SignalR.Transports.TransportHeartBeat Information: 0 : Connection 3b5d3f6a-32e8-4e10-b08e-7d98738dd9f3 is New.
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(3b5d3f6a-32e8-4e10-b08e-7d98738dd9f3)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(3b5d3f6a-32e8-4e10-b08e-7d98738dd9f3)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(3b5d3f6a-32e8-4e10-b08e-7d98738dd9f3)
+SignalR.Transports.TransportHeartBeat Verbose: 0 : KeepAlive(3b5d3f6a-32e8-4e10-b08e-7d98738dd9f3)
+SignalR.Transports.TransportHeartBeat Information: 0 : Dispose(). Closing all connections
+SignalR.Transports.WebSocketTransport Information: 0 : End(3b5d3f6a-32e8-4e10-b08e-7d98738dd9f3)
+SignalR.Transports.WebSocketTransport Verbose: 0 : Cancel(3b5d3f6a-32e8-4e10-b08e-7d98738dd9f3)
+SignalR.Transports.WebSocketTransport Verbose: 0 : DrainWrites(3b5d3f6a-32e8-4e10-b08e-7d98738dd9f3)
+SignalR.Transports.WebSocketTransport Information: 0 : CompleteRequest (3b5d3f6a-32e8-4e10-b08e-7d98738dd9f3)
+SignalR.Transports.WebSocketTransport Information: 0 : CloseSocket(3b5d3f6a-32e8-4e10-b08e-7d98738dd9f3)

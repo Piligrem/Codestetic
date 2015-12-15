@@ -1,0 +1,27 @@
+﻿@using Specter.Web.Models
+@model LoginViewModel
+
+@*<div>
+    <h2>@T("Admin.Dashboard.Title")</h2>
+    @if (!Request.IsAuthenticated)
+    {
+        @Html.Partial("Login")
+    }
+    else
+    {
+        <p>Добро пожаловать @Html.DisplayFor(u => u.Username)!</p>
+    }
+</div>*@
+<div class="section-header">
+    <div class="title"><i class="icon icon-stats"></i>@T("Admin.Dashboard.Title")</div>
+</div>
+<div class="admin-content align-right">
+    <div class="admin-content-left" style="padding-left:195px;">
+        @Html.Action("ReportRegisteredUsers", "User")
+    </div>
+    <div class="admin-content-right">
+        @Html.Action("TodayReport", "User")
+    </div>
+</div>
+
+

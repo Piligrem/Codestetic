@@ -1,0 +1,13 @@
+@model System.DateTime
+
+<script type="text/javascript">
+    //$(function () {
+    //    $(".date-field").datetimepicker({
+    //        format: "d.m.Y H:i"
+    //    });
+    //});
+</script>
+
+@Html.TextBox("", Model.ToString("dd.MM.yyyy HH:00"), new { @class = "date-field settings-field" })
+
+

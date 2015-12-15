@@ -1,0 +1,81 @@
+﻿@using Specter.Web.Core.Logging;
+@using Kendo.Mvc.UI;
+
+@{
+    var notifyDelay = EngineContext.Current.Resolve<Specter.Web.Services.Configuration.ISettingService>().GetSettingByKey<int>("Notify.Delay", 0);
+}
+
+@(Html.Kendo().Notification()
+    .Name("notification")
+    .Position(p => p.Pinned(true).Bottom(40).Right(10))
+    .Stacking(NotificationStackingSettings.Up)
+    .Templates(t =>
+    {
+        t.Add().Type("success").ClientTemplateID("successTemplate");
+        t.Add().Type("info").ClientTemplateID("infoTemplate");
+        t.Add().Type("warning").ClientTemplateID("warningTemplate");
+        t.Add().Type("error").ClientTemplateID("errorTemplate");
+    })
+    .Animation(a => a.Open(x =>
+    {
+        x.Fade(FadeDirection.In);
+        x.Duration(AnimationDuration.Slow);
+    }))
+            .Events(events =>
+            {
+                events.Hide("$(this).clearMessage");
+            })
+    .AutoHideAfter(notifyDelay)
+)
+
+<script src="~/Areas/Admin/Scripts/specter.notifications.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $(this).initNotificationHeders('@T("Common.Note").Text', '@T("Common.Notification").Text', '@T("Common.Warning").Text', '@T("Common.Error").Text');
+</script>
+@if (this.HasMessages)
+{
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $(this).showNotifications();
+        });
+    </script>
+}
+
+<div id="notification-list" style="display:none; position:absolute; left:-9999px">
+    @if (this.HasMessages)
+    {
+        foreach (var message in this.GetMessages(NotifyType.Error)) { <div class="msg" data-type="error">@Html.Raw(message)</div> }
+        foreach (var message in this.GetMessages(NotifyType.Success)) { <div class="msg" data-type="success">@Html.Raw(message)</div> }
+        foreach (var message in this.GetMessages(NotifyType.Info)) { <div class="msg" data-type="info">@Html.Raw(message)</div> }
+        foreach (var message in this.GetMessages(NotifyType.Warning)) { <div class="msg" data-type="warning">@Html.Raw(message)</div> }
+    }
+</div>
+<script id="successTemplate" type="text/x-kendo-template">
+    <div class="notify-success">
+        <div class="icon-notify"><span class="icon-check-circle"></span></div>
+        <h3 class="notify-title">#=title#</h3><br />
+        <div class="notify-text">#=message#</div>
+    </div>
+</script>
+<script id="infoTemplate" type="text/x-kendo-template">
+    <div class="notify-info">
+        <div class="icon-notify"><span class="icon-info-circle"></span></div>
+        <h3 class="notify-title">#=title#</h3><br />
+        <div class="notify-text">#=message#</div>
+    </div>
+</script>
+<script id="warningTemplate" type="text/x-kendo-template">
+    <div class="notify-warning">
+        <div class="icon-notify"><span class="icon-exclamation-circle"></span></div>
+        <h3 class="notify-title">#=title#</h3><br />
+        <div class="notify-text">#=message#</div>
+    </div>
+</script>
+<script id="errorTemplate" type="text/x-kendo-template">
+    <div class="notify-error">
+        <div class="icon-notify"><span class="icon-times-circle"></span></div>
+        <h3 class="notify-title">#=title#</h3><br />
+        <div class="notify-text">#=message#</div>
+    </div>
+</script>
+

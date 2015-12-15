@@ -1,0 +1,141 @@
+﻿@import '../specter-varibles.less';
+@import 'prefixes.less';
+
+.position(@left: 0, @top: 0) {
+    left: @left;
+    top: @top;
+}
+
+// --- Display and cliping ---
+.display-flex(@direction, @display: inherit) {
+    display: @display;
+        -ms-flex-direction: @direction;
+    -webkit-flex-direction: @direction;
+            flex-direction: @direction;
+}
+.background-clip(@value) {
+       -moz-background-clip: @value;
+    -webkit-background-clip: @value;
+            background-clip: @value;
+}
+// --- end Display ---
+
+// *** Styles panel ***
+// --- Border ---
+.border-flat-top(@border) {
+    border-top: @border;
+}
+.border-flat-right(@border) {
+    border-right: @border;
+}
+.border-flat-bottom(@border) {
+    border-bottom: @border;
+}
+.border-flat-left(@border) {
+    border-left: @border;
+}
+.border-flat-all(@border: @btn-default-border) {
+    border: @border;
+}
+// --- Border ---
+
+// --- Title ---
+.form-modal-title() {
+    color: @modal-title-color;
+    background-color: @modal-title-bg;
+    display: inherit;
+    .display-flex(row);
+    align-items: center;
+    justify-content: space-between;
+    .background-clip(padding-box);
+    padding: 0 @padding-base;
+    cursor: pointer;
+}
+// --- end Title ---
+// *** end Styles panel ***
+
+// --- WebKit-style focus ---
+.tab-focus() {
+    // Default
+    outline: thin dotted;
+    // WebKit
+    outline: 5px auto -webkit-focus-ring-color;
+    outline-offset: -2px;
+}
+// --- end WebKit-style focus ---
+
+// --- Opacity ---
+.opacity(@opacity) {
+    opacity: @opacity;
+    // IE8 filter
+    @opacity-ie: (@opacity * 100);
+    filter: ~"alpha(opacity=@{opacity-ie})";
+}
+// --- end Opacity ---
+
+// --- Animation ---
+.animation-panel() {
+    .rotateX(90deg);
+    .transition(all 0.3s ease-in-out);
+    &.show {
+        .rotateX(0deg);
+    }
+}
+
+.border-style(@style) when not (@style=flat) {
+    box-shadow: @border-shadow;
+    .border-radius-all(@border-radius);
+}
+.border-style(@style) when (@style=flat) {
+    border: @border-flat;
+    .border-radius-all(@border-radius);
+}
+.border-style-top(@style) when not (@style=flat) {
+    box-shadow: @border-shadow;
+    .border-radius-top(@border-radius);
+}
+.border-style-top(@style) when (@style=flat) {
+    border-bottom: @border-flat;
+}
+
+.panel-style() {
+    .border-style(normal);
+    & .form-title {
+        .border-style-top(normal)
+    }
+    &.ui-touch {
+        .border-style(flat);
+        & .form-title {
+            .border-style-top(flat)
+        }
+    }
+}
+
+/*.panel-style-top(@style) {
+    .border-top-radius(@border-radius-content);
+    .border-style-top(@style)
+}*/
+
+.border-radius-top(@radius) {
+    border-top-right-radius: @radius;
+    border-top-left-radius: @radius;
+}
+.border-radius-right(@radius) {
+    border-bottom-right-radius: @radius;
+    border-top-right-radius: @radius;
+}
+.border-radius-bottom(@radius) {
+    border-bottom-right-radius: @radius;
+    border-bottom-left-radius: @radius;
+}
+.border-radius-left(@radius) {
+    border-bottom-left-radius: @radius;
+    border-top-left-radius: @radius;
+}
+.border-radius-all(@radius: @border-radius-base) {
+    border-radius: @radius;
+}
+
+.hover(@grayscale: @filter-grayscale-base, @brightness: @filter-brightness-base) {
+    .filter-grayscale-brightness(@grayscale, @brightness);
+}
