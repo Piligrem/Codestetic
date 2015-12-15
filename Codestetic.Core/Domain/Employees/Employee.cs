@@ -153,6 +153,7 @@ namespace Codestetic.Core.Domain.Employees
             var rewardPointsHistory = new RewardPointsHistory()
             {
                 Employee = this,
+                TypeUserId = TypeUser.Employee,
                 Amount = usedAmount,
                 Message = message,
                 CreatedOnUtc = DateTime.UtcNow;

@@ -3,6 +3,7 @@
     public enum TypeUser
     {
         Employee = 1,
-        User = 2,
+        RegionalRepresentative = 2,
+        User = 3,
     }
 }

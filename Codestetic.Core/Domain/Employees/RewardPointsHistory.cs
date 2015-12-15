@@ -1,5 +1,6 @@
 ﻿using System;
 using Codestetic.Core.Domain.Document;
+using Codestetic.Core.Domain.Common;
 
 namespace Codestetic.Core.Domain.Employees
 {
@@ -28,6 +29,10 @@ namespace Codestetic.Core.Domain.Employees
         /// </summary>
         public DateTime CreatedOnUtc { get; set; }
 
+        /// <summary>
+        /// Gets or sets type of user id
+        /// </summary>
+        public TypeUser TypeUserId { get; set; }
         /// <summary>
         /// Gets or sets the order for which points were redeemed as a payment
         /// </summary>

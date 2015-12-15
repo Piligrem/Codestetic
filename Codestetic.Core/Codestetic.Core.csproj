@@ -73,6 +73,7 @@
     <Compile Include="Domain\Employees\EmployeeRole.cs" />
     <Compile Include="Domain\Employees\Employee.cs" />
     <Compile Include="Domain\Employees\EmployeeSettings.cs" />
+    <Compile Include="Domain\Employees\RegionalRepresentative.cs" />
     <Compile Include="Domain\Employees\RewardPointsHistory.cs" />
     <Compile Include="Domain\Employees\RewardPointsSetting.cs" />
     <Compile Include="Domain\Employees\SystemEmployeeAttributeNames.cs" />
