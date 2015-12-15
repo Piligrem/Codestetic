@@ -1,6 +1,5 @@
 ﻿using System;
 using Codestetic.Core.Configuration;
-using Codestetic.Core.Domain.Document;
 
 namespace Codestetic.Core.Domain.Employees
 {
