@@ -78,6 +78,10 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Linq.Dynamic, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Linq.Dynamic.1.0.4\lib\net40\System.Linq.Dynamic.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web" />
@@ -114,6 +118,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseEntity.cs" />
+    <Compile Include="CodesteticVersion.cs" />
     <Compile Include="Collections\TreeNode.cs" />
     <Compile Include="Collections\ThreadSafeList.cs" />
     <Compile Include="Collections\QueryString.cs" />
@@ -141,6 +146,7 @@
     <Compile Include="Domain\Common\CompanyInformationSettings.cs" />
     <Compile Include="Domain\Common\ContactDataSettings.cs" />
     <Compile Include="Domain\Common\FulltextSearchMode.cs" />
+    <Compile Include="Domain\Configuration\Setting.cs" />
     <Compile Include="Domain\Customers\Customer.cs" />
     <Compile Include="Domain\Directory\Country.cs" />
     <Compile Include="Domain\Directory\StateProvince.cs" />
@@ -225,6 +231,14 @@
     <Compile Include="Infrastructure\DependencyManagement\ComponentLifeStyle.cs" />
     <Compile Include="Infrastructure\IEngine.cs" />
     <Compile Include="Infrastructure\Singleton.cs" />
+    <Compile Include="Linq\PredicateBuilder.cs" />
+    <Compile Include="Linq\Expanders\StringPathExpander.cs" />
+    <Compile Include="Linq\Expanders\LambdaPathExpander.cs" />
+    <Compile Include="Linq\Expanders\IPathExpander.cs" />
+    <Compile Include="Linq\Expressions\ExpressionVisitor.cs" />
+    <Compile Include="Linq\Expressions\MemberAccessPathVisitor.cs" />
+    <Compile Include="Linq\Expressions\MemberAccessPropertyInfoVisitor.cs" />
+    <Compile Include="Linq\LinqContainsPredicateBuilder.cs" />
     <Compile Include="Plugins\BasePlugin.cs" />
     <Compile Include="Plugins\IPreApplicationStart.cs" />
     <Compile Include="Plugins\PluginDescriptor.cs" />

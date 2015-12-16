@@ -285,19 +285,19 @@ namespace Codestetic.Core.Plugins
         /// <returns><c>true</c> when the plugin is assumed to be compatible</returns>
         public static bool IsAssumedCompatible(PluginDescriptor descriptor)
         {
-            if (SmartStoreVersion.FullVersion == descriptor.MinAppVersion)
+            if (CodesteticVersion.FullVersion == descriptor.MinAppVersion)
             {
                 return true;
             }
 
-            if (SmartStoreVersion.FullVersion < descriptor.MinAppVersion)
+            if (CodesteticVersion.FullVersion < descriptor.MinAppVersion)
             {
                 return false;
             }
 
             bool compatible = true;
 
-            foreach (var version in SmartStoreVersion.BreakingChangesHistory)
+            foreach (var version in CodesteticVersion.BreakingChangesHistory)
             {
                 if (version > descriptor.MinAppVersion)
                 {

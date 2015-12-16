@@ -30,7 +30,7 @@ namespace Codestetic.Core.Infrastructure
 
 		public CodesteticEngine(EventBroker broker, ContainerConfigurer configurer)
 		{
-            var config = ConfigurationManager.GetSection("SmartStoreConfig") as SmartStoreConfig;
+            var config = ConfigurationManager.GetSection("CodesteticConfig") as CodesteticConfig;
             InitializeContainer(configurer, broker, config);
 		}
         
