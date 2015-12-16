@@ -129,6 +129,28 @@
     <Compile Include="Configuration\JsonPersistAttribute.cs" />
     <Compile Include="Configuration\ISettingService.cs" />
     <Compile Include="Configuration\ISettings.cs" />
+    <Compile Include="Data\BaseDataProviderManager.cs" />
+    <Compile Include="Data\Hooks\PreUpdateHook.cs" />
+    <Compile Include="Data\Hooks\PreInsertHook.cs" />
+    <Compile Include="Data\Hooks\PreDeleteHook.cs" />
+    <Compile Include="Data\Hooks\PreActionHook.cs" />
+    <Compile Include="Data\Hooks\PostUpdateHook.cs" />
+    <Compile Include="Data\Hooks\PostInsertHook.cs" />
+    <Compile Include="Data\Hooks\PostDeleteHook.cs" />
+    <Compile Include="Data\Hooks\PostActionHook.cs" />
+    <Compile Include="Data\Hooks\HookEntityMetadata.cs" />
+    <Compile Include="Data\Hooks\HookedEntityEntry.cs" />
+    <Compile Include="Data\Hooks\IHook.cs" />
+    <Compile Include="Data\Hooks\IPreActionHook.cs" />
+    <Compile Include="Data\Hooks\IPostActionHook.cs" />
+    <Compile Include="Data\RepositoryExtensions.cs" />
+    <Compile Include="Data\IRepository.cs" />
+    <Compile Include="Data\EntityState.cs" />
+    <Compile Include="Data\DataSettingsManager.cs" />
+    <Compile Include="Data\DataSettingsHelper.cs" />
+    <Compile Include="Data\DataSettings.cs" />
+    <Compile Include="Data\IDataProvider.cs" />
+    <Compile Include="Data\IDbContext.cs" />
     <Compile Include="Domain\Catalog\Brand.cs" />
     <Compile Include="Domain\Catalog\MotionProduct.cs" />
     <Compile Include="Domain\Catalog\ProductQuality.cs" />
@@ -269,6 +291,7 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

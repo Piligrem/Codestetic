@@ -14,6 +14,7 @@ namespace Codestetic.Core.Domain.Catalog
     [DataContract]
 	public partial class Nomenclature : BaseEntity, ILocalizedEntity, IAclSupported
 {
+        private ICollection<Product> _product;
     /// <summary>
     /// Gets or sets the name
     /// </summary>
@@ -36,6 +37,19 @@ namespace Codestetic.Core.Domain.Catalog
     /// Gets or sets a value indicating whether the entity has been deleted
     /// </summary>
 
-    public bool Deleted { get; set; }  
+    public bool Deleted { get; set; }
+
+    #region Navigation properties
+
+    /// <summary>
+    /// Gets or sets the product
+    /// </summary>
+    public virtual ICollection<Product> Products
+    {
+        get { return _product ?? (_product = new List<Product>()); }
+        protected set { _product = value; }
     }
+    #endregion
+}
+   
 }
