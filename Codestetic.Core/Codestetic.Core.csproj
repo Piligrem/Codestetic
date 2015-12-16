@@ -118,6 +118,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseEntity.cs" />
+    <Compile Include="XmlHelper.cs" />
+    <Compile Include="PersistentCollection.cs" />
+    <Compile Include="PagedList.cs" />
+    <Compile Include="IWorkContext.cs" />
+    <Compile Include="PageableBase.cs" />
+    <Compile Include="IHideObjectMembers.cs" />
+    <Compile Include="HttpSecurityMode.cs" />
+    <Compile Include="IPersistentCollection.cs" />
+    <Compile Include="IPageable.cs" />
+    <Compile Include="IPagedList.cs" />
+    <Compile Include="IWebHelper.cs" />
     <Compile Include="CodesteticVersion.cs" />
     <Compile Include="Collections\TreeNode.cs" />
     <Compile Include="Collections\ThreadSafeList.cs" />
@@ -253,6 +264,12 @@
     <Compile Include="Infrastructure\DependencyManagement\ComponentLifeStyle.cs" />
     <Compile Include="Infrastructure\IEngine.cs" />
     <Compile Include="Infrastructure\Singleton.cs" />
+    <Compile Include="IO\MimeTypes.cs" />
+    <Compile Include="IO\IStorageProvider.cs" />
+    <Compile Include="IO\FileSystemStorageProvider.cs" />
+    <Compile Include="IO\FileSystemSettings.cs" />
+    <Compile Include="IO\IStorageFolder.cs" />
+    <Compile Include="IO\IStorageFile.cs" />
     <Compile Include="Linq\PredicateBuilder.cs" />
     <Compile Include="Linq\Expanders\StringPathExpander.cs" />
     <Compile Include="Linq\Expanders\LambdaPathExpander.cs" />

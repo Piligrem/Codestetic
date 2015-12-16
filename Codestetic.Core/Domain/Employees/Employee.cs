@@ -106,7 +106,7 @@ namespace Codestetic.Core.Domain.Employees
         #region Navigation properties
 
         /// <summary>
-        /// Gets or sets the customer roles
+        /// Gets or sets the employee roles
         /// </summary>
         public virtual ICollection<EmployeeRole> EmployeeRoles
         {
@@ -133,7 +133,7 @@ namespace Codestetic.Core.Domain.Employees
         }
 
         /// <summary>
-        /// Gets or sets customer addresses
+        /// Gets or sets employee addresses
         /// </summary>
         public virtual ICollection<Address> Addresses
         {

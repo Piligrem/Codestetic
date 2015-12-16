@@ -9,6 +9,7 @@ namespace Codestetic.Core.Domain.Customers
     [DataContract]
     public partial class Customer : BaseEntity
     {
+        private ICollection<Address> _addresses;
         /// <summary>
         /// Gets or sets Name
         /// </summary>
@@ -36,5 +37,17 @@ namespace Codestetic.Core.Domain.Customers
         /// </summary>
         public DateTime CreatedOnUtc { get; set; }
 
+        #region Navigation properties
+
+        /// <summary>
+        /// Gets or sets customer addresses
+        /// </summary>
+        public virtual ICollection<Address> Addresses
+        {
+            get { return _addresses ?? (_addresses = new List<Address>()); }
+            protected set { _addresses = value; }
+        }
+
+        #endregion
     }
 }

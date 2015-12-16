@@ -80,7 +80,8 @@ namespace Codestetic.Core.Domain.Catalog
         /// </summary>
         [DataMember]
         public WarrantyPeriod warrantyPeriod { get; set; }
-        
+
+        #region Navigation properties
         /// <summary>
         /// Gets or sets the collection of ProductCategory
         /// </summary>
@@ -99,6 +100,7 @@ namespace Codestetic.Core.Domain.Catalog
             get { return _productPictures ?? (_productPictures = new List<ProductPicture>()); }
             protected set { _productPictures = value; }
         }
+        #endregion
     }
 }
 
