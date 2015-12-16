@@ -294,7 +294,7 @@
     </ProjectReference>
     <ProjectReference Include="..\Сodestetic.Data\Сodestetic.Data.csproj">
       <Project>{5c7965ef-8369-4788-9334-86840e4d30fb}</Project>
-      <Name>Specter.Web.Datasss</Name>
+      <Name>Сodestetic.Data</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

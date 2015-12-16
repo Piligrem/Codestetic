@@ -267,11 +267,11 @@
     </ProjectReference>
     <ProjectReference Include="..\Сodestetic.Data\Сodestetic.Data.csproj">
       <Project>{5c7965ef-8369-4788-9334-86840e4d30fb}</Project>
-      <Name>Specter.Web.Datasss</Name>
+      <Name>Сodestetic.Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\Codestetic.Services\Сodestetic.Service.csproj">
       <Project>{00eb0f30-6259-4ae7-a41a-a539c5e7d26d}</Project>
-      <Name>Specter.Web.Services</Name>
+      <Name>Сodestetic.Service</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

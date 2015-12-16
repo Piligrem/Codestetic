@@ -114,6 +114,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseEntity.cs" />
+    <Compile Include="Collections\TreeNode.cs" />
+    <Compile Include="Collections\ThreadSafeList.cs" />
+    <Compile Include="Collections\QueryString.cs" />
+    <Compile Include="Collections\Multimap.cs" />
     <Compile Include="CommonHelper.cs" />
     <Compile Include="ComponentModel\GenericListTypeConverter.cs" />
     <Compile Include="Configuration\CodesteticConfig.cs" />
@@ -177,6 +181,22 @@
     <Compile Include="Domain\User\UserNameFormat.cs" />
     <Compile Include="Domain\User\UserSettings.cs" />
     <Compile Include="Domain\Warehouse\Warehouse.cs" />
+    <Compile Include="Extensions\XmlWriterExtensions.cs" />
+    <Compile Include="Extensions\XmlNodeExtensions.cs" />
+    <Compile Include="Extensions\TypeExtensions.cs" />
+    <Compile Include="Extensions\TypeDescriptorExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Extensions\StreamExtensions.cs" />
+    <Compile Include="Extensions\MiscExtensions.cs" />
+    <Compile Include="Extensions\ListExtensions.cs" />
+    <Compile Include="Extensions\LinqExtensions.cs" />
+    <Compile Include="Extensions\HttpExtensions.cs" />
+    <Compile Include="Extensions\HtmlTextWriterExtensions.cs" />
+    <Compile Include="Extensions\EnumExtensions.cs" />
+    <Compile Include="Extensions\EnumerableExtensions.cs" />
+    <Compile Include="Extensions\DictionaryExtensions.cs" />
+    <Compile Include="Extensions\ConversionExtensions.cs" />
+    <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\CollectionExtensions.cs" />
     <Compile Include="GenericComparer.cs" />
     <Compile Include="Infrastructure\AppDomainTypeFinder.cs" />
