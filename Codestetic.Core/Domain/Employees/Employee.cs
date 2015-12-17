@@ -12,22 +12,26 @@ namespace Codestetic.Core.Domain.Employees
     /// Represents a employee
     /// </summary>
     [DataContract]
-    public partial class Employee : BaseEntity
+    public partial class Employee : BaseEntity, ISoftDeletable
     {
+        #region Fields
         private ICollection<EmployeeRole> _employeeRoles;
-        private ICollection<Document> _document;
+        private ICollection<Document> _documents;
         private ICollection<RewardPointsHistory> _rewardPointsHistory;
         private ICollection<Address> _addresses;
-       // private ICollection<ForumTopic> _forumTopics;
-       // private ICollection<ForumPost> _forumPosts;
+        // private ICollection<ForumTopic> _forumTopics;
+        // private ICollection<ForumPost> _forumPosts;
+        #endregion Fields
 
-		/// <summary>
+        #region Constructors
+        /// <summary>
 		/// Ctor
 		/// </summary>
         public Employee()
         {
             this.EmployeeGuid = Guid.NewGuid();
         }
+        #endregion Constructors
 
         /// <summary>
         /// Gets or sets the employee Guid
@@ -104,7 +108,6 @@ namespace Codestetic.Core.Domain.Employees
         public DateTime LastActivityDateUtc { get; set; }
         
         #region Navigation properties
-
         /// <summary>
         /// Gets or sets the employee roles
         /// </summary>
@@ -119,8 +122,8 @@ namespace Codestetic.Core.Domain.Employees
         /// </summary>
         public virtual ICollection<Document> Documents
         {
-            get { return _document ?? (_document = new List<Document>()); }
-            protected set { _document = value; }            
+            get { return _documents ?? (_documents = new List<Document>()); }
+            protected set { _documents = value; }            
         }
 
         /// <summary>
@@ -140,18 +143,16 @@ namespace Codestetic.Core.Domain.Employees
             get { return _addresses ?? (_addresses = new List<Address>()); }
             protected set { _addresses = value; }            
         }
-        
-        #endregion
+        #endregion Navigation properties
 
+        // ??? Перенести в Service
         #region Reward points
-
-        public void AddRewardPointsHistoryEntry(string message = "",
-            Document documentId = null, decimal usedAmount = 0M)
+        public void AddRewardPointsHistoryEntry(string message = "", Document documentId = null, decimal usedAmount = 0M)
         {
             var rewardPointsHistory = new RewardPointsHistory()
             {
                 Employee = this,
-                TypeUserId = TypeUser.Employee,
+                TypeUserId = UserType.Employee,
                 Amount = usedAmount,
                 Message = message,
                 CreatedOnUtc = DateTime.UtcNow,
@@ -171,7 +172,6 @@ namespace Codestetic.Core.Domain.Employees
                 result = this.RewardPointsHistory.OrderByDescending(rph => rph.CreatedOnUtc).ThenByDescending(rph => rph.Id).FirstOrDefault().PointsBalance;
             return result;
         }
-
-        #endregion
+        #endregion Reward points
     }
 }

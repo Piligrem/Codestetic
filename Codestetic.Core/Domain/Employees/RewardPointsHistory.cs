@@ -9,6 +9,7 @@ namespace Codestetic.Core.Domain.Employees
     /// </summary>
     public partial class RewardPointsHistory : BaseEntity
     {
+        #region Properties
         /// <summary>
         /// Gets or sets the employee identifier
         /// </summary>
@@ -32,15 +33,21 @@ namespace Codestetic.Core.Domain.Employees
         /// <summary>
         /// Gets or sets type of user id
         /// </summary>
-        public TypeUser TypeUserId { get; set; }
+        public int TypeUserId { get; set; }
+
         /// <summary>
         /// Gets or sets the order for which points were redeemed as a payment
         /// </summary>
-        public virtual Document DocumentId { get; set; }
+        public virtual int DocumentId { get; set; }
+        #endregion Properties
 
+        #region Navigation properties
         /// <summary>
         /// Gets or sets the customer
         /// </summary>
         public virtual Employee Employee { get; set; }
+        public virtual UserType TypeUser { get; set; }
+        public virtual Document Document { get; set; }
+        #endregion Navigation properties
     }
 }

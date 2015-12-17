@@ -14,10 +14,13 @@ namespace Codestetic.Core.Domain.Catalog
     [DataContract]
 	public partial class Product : BaseEntity, ILocalizedEntity, IAclSupported
     {
+        #region Fields
         private ICollection<ObjectProperty> _productProperty;
         private ICollection<ProductGroup> _productGroup;
-        private ICollection<ProductPicture> _productPictures;
+        private ICollection<Customer> _customers;
+        #endregion Fields
 
+        #region Properties
         /// <summary>
         /// Gets or sets the name
         /// </summary>
@@ -61,7 +64,6 @@ namespace Codestetic.Core.Domain.Catalog
         /// </summary>
         public DateTime? UpdatedOnUtc { get; set; }
 
-
         /// <summary>
         /// Gets or sets the customer
         /// </summary>
@@ -73,13 +75,7 @@ namespace Codestetic.Core.Domain.Catalog
         /// </summary>
         [DataMember]
         public int BrandId { get; set; }
-
-
-        /// <summary>
-        /// Gets or sets the warranty period
-        /// </summary>
-        [DataMember]
-        public int warrantyPeriodId { get; set; }
+        #endregion Properties
 
         #region Navigation properties
         /// <summary>
@@ -94,10 +90,16 @@ namespace Codestetic.Core.Domain.Catalog
         /// <summary>
         /// Gets or sets the collection of ProductPicture
         /// </summary>
-        public virtual ICollection<ProductPicture> ProductPictures
+        public virtual ICollection<Customer> Customers
         {
-            get { return _productPictures ?? (_productPictures = new List<ProductPicture>()); }
-            protected set { _productPictures = value; }
+            get { return _customers ?? (_customers = new List<Customer>()); }
+            protected set { _customers = value; }
+        }
+        public virtual Brand Brand { get; set; }
+        public virtual ICollection<ObjectProperty> ProductProperty
+        {
+            get { return _productProperty ?? (_productProperty = new List<ObjectProperty>()); }
+            protected set { _productProperty = value; }
         }
         #endregion
     }

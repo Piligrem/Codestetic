@@ -118,6 +118,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseEntity.cs" />
+    <Compile Include="Domain\Common\UserType.cs" />
     <Compile Include="Events\AppBeginRequestEvent.cs" />
     <Compile Include="Events\AppEndRequestEvent.cs" />
     <Compile Include="Events\AppInitScheduledTasksEvent.cs" />
@@ -188,13 +189,11 @@
     <Compile Include="Domain\Catalog\MotionProduct.cs" />
     <Compile Include="Domain\Catalog\ProductQuality.cs" />
     <Compile Include="Domain\Catalog\RemainsProduct.cs" />
-    <Compile Include="Domain\Common\TypeUser.cs" />
     <Compile Include="Domain\Common\ObjectProperty.cs" />
     <Compile Include="Domain\Catalog\Product.cs" />
     <Compile Include="Domain\Catalog\ProductGroup.cs" />
     <Compile Include="Domain\Catalog\ProductPicture.cs" />
     <Compile Include="Domain\Common\Property.cs" />
-    <Compile Include="Domain\Common\WarrantyPeriod.cs" />
     <Compile Include="Domain\Common\Address.cs" />
     <Compile Include="Domain\Common\AddressSettings.cs" />
     <Compile Include="Domain\Common\CommonSettings.cs" />

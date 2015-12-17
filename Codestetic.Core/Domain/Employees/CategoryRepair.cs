@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using Codestetic.Core.Domain.Common;
+﻿using System.Runtime.Serialization;
 using Codestetic.Core.Domain.Catalog;
 
 namespace Codestetic.Core.Domain.Employees
 {
-     [DataContract]
+    [DataContract]
     class CategoryRepair : BaseEntity
     {
         /// <summary>
@@ -20,6 +16,10 @@ namespace Codestetic.Core.Domain.Employees
         /// Gets or sets the brand
         /// </summary>
         [DataMember]
-        public Brand BrandId { get; set; }
+        public int BrandId { get; set; }
+
+        #region Navigation properties
+        public Brand Brand { get; set; }
+        #endregion Navigation properties
     }
 }

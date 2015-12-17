@@ -7,16 +7,22 @@ namespace Codestetic.Core.Domain.Catalog
     [DataContract]
     class ProductGroup : BaseEntity
     {
-
+        #region Fields
         private ICollection<Product> _product;
+        #endregion Fields
+
+        #region Properties
         /// <summary>
         /// Gets or sets the name
         /// </summary>
         [DataMember]
         public string Name { get; set; }
 
-        #region Navigation properties
+        [DataMember]
+        public string Description { get; set; }
+        #endregion Properties
 
+        #region Navigation properties
         /// <summary>
         /// Gets or sets the product
         /// </summary>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Codestetic.Core.Domain.Warehouses;
+using System;
 
 namespace Codestetic.Core.Domain.Catalog
 {
@@ -7,6 +8,7 @@ namespace Codestetic.Core.Domain.Catalog
     /// </summary>
     public partial class RemainsProduct : BaseEntity
     {
+        #region Properties
         /// <summary>
         /// Gets or sets the employee identifier
         /// </summary>
@@ -17,7 +19,6 @@ namespace Codestetic.Core.Domain.Catalog
         /// </summary>
         public int WarehouseId { get; set; }
 
-
         /// <summary>
         /// Gets or sets an product quantity
         /// </summary>
@@ -27,10 +28,19 @@ namespace Codestetic.Core.Domain.Catalog
         /// Gets or sets an product quality identifier
         /// </summary>
         public int QualityId { get; set; }
+        public ProductQuality Quality
+        {
+            get { return (ProductQuality)QualityId; }
+            set { QualityId = (int)value; }
+        }
+        #endregion Properties
 
-         /// <summary>
+        #region Navigation propeties
+        /// <summary>
         /// Gets or sets the product
         /// </summary>
         public virtual Product Product { get; set; }
+        public virtual Warehouse Warehouse { get; set; }
+        #endregion Navigation propeties
     }
 }

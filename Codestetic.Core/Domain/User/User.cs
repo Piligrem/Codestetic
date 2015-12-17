@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Serialization;
 using Codestetic.Core.Domain.Common;
-using Codestetic.Core.Domain.Document;
+using Codestetic.Core.Domain.Documents;
 //using Codestetic.Core.Domain.Forums;
 
 namespace Codestetic.Core.Domain.User
@@ -14,19 +13,24 @@ namespace Codestetic.Core.Domain.User
     [DataContract]
     public partial class User : BaseEntity
     {
+        #region Fields
         private ICollection<Document> _document;
         private ICollection<Address> _addresses;
-       // private ICollection<ForumTopic> _forumTopics;
-       // private ICollection<ForumPost> _forumPosts;
+        // private ICollection<ForumTopic> _forumTopics;
+        // private ICollection<ForumPost> _forumPosts;
+        #endregion Fields
 
-		/// <summary>
+        #region Constructors
+        /// <summary>
 		/// Ctor
 		/// </summary>
         public User()
         {
             this.UserGuid = Guid.NewGuid();
         }
+        #endregion Constructors
 
+        #region Properties
         /// <summary>
         /// Gets or sets the employee Guid
         /// </summary>
@@ -85,10 +89,11 @@ namespace Codestetic.Core.Domain.User
         /// Gets or sets the date and time of last activity
         /// </summary>
         public DateTime LastActivityDateUtc { get; set; }
-        
+        #endregion Properties
+
         #region Navigation properties
 
-   
+
         /// <summary>
         /// Gets or sets orders
         /// </summary>

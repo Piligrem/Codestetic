@@ -1,6 +1,6 @@
 ﻿namespace Codestetic.Core.Domain.Common
 {
-    public enum TypeUser
+    public enum UserType
     {
         Employee = 1,
         RegionalRepresentative = 2,

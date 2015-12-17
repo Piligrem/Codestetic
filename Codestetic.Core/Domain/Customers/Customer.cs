@@ -1,15 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Serialization;
 using Codestetic.Core.Domain.Common;
+using Codestetic.Core.Domain.Catalog;
 
 namespace Codestetic.Core.Domain.Customers
 {
     [DataContract]
-    public partial class Customer : BaseEntity
+    public partial class Customer : BaseEntity, ISoftDeletable
     {
+        #region Fields
         private ICollection<Address> _addresses;
+        #endregion Fields
+
+        #region Properties
         /// <summary>
         /// Gets or sets Name
         /// </summary>
@@ -35,10 +39,10 @@ namespace Codestetic.Core.Domain.Customers
         /// <summary>
         /// Gets or sets the date and time of entity creation
         /// </summary>
-        public DateTime CreatedOnUtc { get; set; }
+        public DateTime? CreatedOnUtc { get; set; }
+        #endregion Properties
 
         #region Navigation properties
-
         /// <summary>
         /// Gets or sets customer addresses
         /// </summary>
@@ -47,7 +51,7 @@ namespace Codestetic.Core.Domain.Customers
             get { return _addresses ?? (_addresses = new List<Address>()); }
             protected set { _addresses = value; }
         }
-
+        public virtual Brand Brand { get; set; }
         #endregion
     }
 }
