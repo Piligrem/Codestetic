@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Codestetic.Core.Domain.Customers;
 
 namespace Codestetic.Core.Domain.Catalog
 {
     [DataContract]
-    class Brand : BaseEntity
+    public class Brand : BaseEntity
     {
 
         private ICollection<Customer> _customer;
@@ -14,7 +13,7 @@ namespace Codestetic.Core.Domain.Catalog
         /// Gets or sets name
         /// </summary>
         [DataMember]
-        public DateTime Name { get; set; }
+        public string Name { get; set; }
      
         #region Navigation properties
         public virtual ICollection<Customer> Customers

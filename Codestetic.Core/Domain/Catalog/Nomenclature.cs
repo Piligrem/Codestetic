@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Runtime.Serialization;
 using Codestetic.Core.Domain.Localization;
 using Codestetic.Core.Domain.Security;
-using Codestetic.Core.Domain.Common;
-using Codestetic.Core.Domain.Customers;
 
 namespace Codestetic.Core.Domain.Catalog
 {

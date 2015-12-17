@@ -14,7 +14,7 @@ namespace Codestetic.Core.Domain.Catalog
     [DataContract]
 	public partial class Product : BaseEntity, ILocalizedEntity, IAclSupported
     {
-        private ICollection<Property> _productProperty;
+        private ICollection<ObjectProperty> _productProperty;
         private ICollection<ProductGroup> _productGroup;
         private ICollection<ProductPicture> _productPictures;
 
@@ -59,33 +59,32 @@ namespace Codestetic.Core.Domain.Catalog
         /// <summary>
         /// Gets or sets the date and time of product update
         /// </summary>
-        public DateTime UpdatedOnUtc { get; set; }
+        public DateTime? UpdatedOnUtc { get; set; }
 
 
         /// <summary>
         /// Gets or sets the customer
         /// </summary>
         [DataMember]
-        public Customer CustomerId { get; set; }
+        public int CustomerId { get; set; }
 
         /// <summary>
         /// Gets or sets the brand
         /// </summary>
         [DataMember]
-        public Brand BrandId { get; set; }
+        public int BrandId { get; set; }
 
 
         /// <summary>
         /// Gets or sets the warranty period
         /// </summary>
         [DataMember]
-        public WarrantyPeriod warrantyPeriod { get; set; }
+        public int warrantyPeriodId { get; set; }
 
         #region Navigation properties
         /// <summary>
         /// Gets or sets the collection of ProductCategory
         /// </summary>
-        [DataMember]
         public virtual ICollection<ProductGroup> ProductGroups
         {
             get { return _productGroup ?? (_productGroup = new List<ProductGroup>()); }
