@@ -38,7 +38,7 @@ namespace Codestetic.Core.Domain.Documents
         /// <summary>
         /// Gets or sets the document type id 
         /// </summary>
-        public int BaseDocumentId { get; set; }
+        public int? BaseDocumentId { get; set; }
 
         /// <summary>
         /// Gets or sets a value Region identifier (City, Provance)
@@ -72,7 +72,7 @@ namespace Codestetic.Core.Domain.Documents
         /// <summary>
         /// Gets or sets a value base document
         /// </summary>
-        public virtual object BaseDocument { get; set; } // ???
+        public virtual Document BaseDocument { get; set; } // ???
 
         /// <summary>
         /// Gets or sets value DocumentDetails
